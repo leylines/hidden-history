@@ -1,2 +1,2 @@
 # agensgraph
-Agensgraph-Scripts
+Agensgraph-Scripts for different purposes
