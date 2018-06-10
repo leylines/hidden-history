@@ -26,23 +26,23 @@ MATCH  (s:country {name: 'Vatican City'}),(d:juridical_entity{name: 'Holy See'})
 -- Node
 CREATE VLABEL city;
 -- Relations
-CREATE ELABEL is_city_of;
+CREATE ELABEL is_situated_in;
 -- Data
 CREATE (n:city {name:'Geneva'});
-MATCH  (s:city {name:'Geneva'}),(d:country{name:'Switzerland'}) CREATE (s)-[:is_city_of]->(d);
+MATCH  (s:city {name:'Geneva'}),(d:country{name:'Switzerland'}) CREATE (s)-[:is_situated_in]->(d);
 CREATE (n:city {name:'Rome'});
-MATCH  (s:city {name:'Rome'}),(d:country{name:'Italy'}) CREATE (s)-[:is_city_of]->(d);
+MATCH  (s:city {name:'Rome'}),(d:country{name:'Italy'}) CREATE (s)-[:is_situated_in]->(d);
 CREATE (n:city {name:'London'});
-MATCH  (s:city {name:'London'}),(d:country{name:'England'}) CREATE (s)-[:is_city_of]->(d);
+MATCH  (s:city {name:'London'}),(d:country{name:'England'}) CREATE (s)-[:is_situated_in]->(d);
 
 -- Place
 -- Node
 CREATE VLABEL place;
 -- Relations
-CREATE ELABEL located_in;
+-- CREATE ELABEL is_situated_in;
 -- Data
 CREATE (n:place {name:'City of London'});
-MATCH  (s:place {name:'City of London'}),(d:city{name:'London'}) CREATE (s)-[:located_in]->(d);
+MATCH  (s:place {name:'City of London'}),(d:city{name:'London'}) CREATE (s)-[:is_situated_in]->(d);
 
 -- Forces
 -- Node
@@ -60,10 +60,13 @@ MATCH  (s:force {name:'Pontifical Swiss Guard'}),(d:juridical_entity{name: 'Holy
 CREATE VLABEL community;
 -- Relations
 CREATE ELABEL under_control_of;
+-- CREATE ELABEL is_situated_in;
 -- Data
 CREATE (n:community {name:'Knights Templar', other_name:'Order of Solomon''s Temple', fromdate:'1118', todate:'1312-03-22'});
 MATCH  (s:community {name:'Knights Templar'}),(d:juridical_entity{name: 'Holy See'}) CREATE (s)-[:under_control_of]->(d);
 CREATE (n:community {name:'Freemasonry', fromdate:'1717-06-24'});
+MATCH  (s:community {name:'Freemasonry'}),(d:country{name: 'England'}) CREATE (s)-[:is_situated_in]->(d);
+MATCH  (s:community {name:'Freemasonry'}),(d:country{name: 'USA'}) CREATE (s)-[:is_situated_in]->(d);
 
 -- Persons
 -- Node
@@ -71,6 +74,7 @@ CREATE VLABEL person;
 -- Relations
 CREATE ELABEL member_of;
 CREATE ELABEL related;
+CREATE ELABEL knows;
 -- Data
 CREATE (n:person {name:'Benjamin Franklin', fromdate:'1706-01-17', todate:'1790-01-17'});
 MATCH  (s:person {name:'Benjamin Franklin'}),(d:community{name: 'Freemasonry'}) CREATE (s)-[:member_of]->(d);
