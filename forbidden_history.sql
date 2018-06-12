@@ -30,7 +30,7 @@ CREATE (n:continent {name: 'Asia'});
 -- Node
 CREATE VLABEL country;
 -- Relations
-CREATE ELABEL "follows";
+CREATE ELABEL follows;
 -- Data
 CREATE (n:country {name: 'England'});
 MATCH  (s:country {name: 'England'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
