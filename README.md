@@ -20,11 +20,11 @@ When contributing to this repository, please first discuss the change you wish t
 #### Attributes
 
 |attribute-name|type|
+|---|---|
 |name|string|
 |fromdate|YYYY, YYYY-MM, YYYY-MM-DD, YYYY BC|
 |todate|YYYY, YYYY-MM, YYYY-MM-DD, YYYY BC|
 |status|proven\|unproven|
-
 
 #### Node-Types
 
