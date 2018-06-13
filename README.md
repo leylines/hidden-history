@@ -117,13 +117,17 @@ When contributing to this repository, please first discuss the change you wish t
 
 #### Rothschilds
 
-#### Windsor-Dynastiy and relations to germany
+#### Windsor-Dynasty and relations to germany
 
-#### History of Temple Mountain and Jerusalam
+#### History of Temple Mountain and Jerusalem
 
 #### Merovingian Dynasty and relations to Mary Magdalene
 
 #### Exodus (Moses, Ark of coventant)
+
+#### Holy Grail, King Arthur, Avalon
+
+#### Priory of Sion
 
 ### Authors
 
