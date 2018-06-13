@@ -22,6 +22,7 @@ When contributing to this repository, please first discuss the change you wish t
 |attribute-name|type|
 |---|---|
 |name|string|
+|other_name|string|
 |fromdate|YYYY, YYYY-MM, YYYY-MM-DD, YYYY BC|
 |todate|YYYY, YYYY-MM, YYYY-MM-DD, YYYY BC|
 |status|proven\|unproven|
@@ -30,16 +31,16 @@ When contributing to this repository, please first discuss the change you wish t
 
 |name|description|attributes|
 |---|---|---|
-|sovereign_entity|sovereign entity but not a county|name, fromdate, todate|
+|sovereign_entity|sovereign entity but not a county|name, other_name, fromdate, todate|
 |continent|continent|name|
-|country|country as a sovereign entity|name, fromdate, todate|
-|town|city, village etc.|name, fromdate, todate|
-|place|churches, mountains etc.|name, fromdate, todate|
-|force|force|name, fromdate, todate|
-|order|order|name, fromdate, todate|
-|dynasty|dynasty|name, fromdate, todate|
-|family|family|name, fromdate, todate|
-|person|person|name, fromdate, todate|
+|country|country as a sovereign entity|name, other_name, fromdate, todate|
+|town|city, village etc.|name, other_name, fromdate, todate|
+|place|churches, mountains etc.|name, other_name, fromdate, todate|
+|force|force|name, other_name, fromdate, todate|
+|order|order|name, other_name, fromdate, todate|
+|dynasty|dynasty|name, other_name, fromdate, todate|
+|family|family|name, other_name, fromdate, todate|
+|person|person|name, other_name, fromdate, todate|
 
 #### Edge-Types
 
