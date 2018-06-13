@@ -41,6 +41,20 @@ When contributing to this repository, please first discuss the change you wish t
 |family|family|name, fromdate, todate|
 |person|person|name, fromdate, todate|
 
+#### Edge-Types
+
+|name|description|attributes|
+|---|---|---|
+|located|geographic allocation|name, fromdate, todate, status|
+|serves|serves|name, fromdate, todate, status|
+|belongs_to|belongs to|name, fromdate, todate, status|
+|follows|follows|name, fromdate, todate, status|
+|controls|controls|name, fromdate, todate, status|
+|lives_in|lives in|name, fromdate, todate, status|
+|member_of|member of|name, fromdate, todate, status|
+|related|related (personal)|name, fromdate, todate, status|
+|knows|knows|name, fromdate, todate, status|
+
 ### Authors
 
 * **Joerg Roth** - *Initial work* - [Leylines](https://github.com/leylines)
