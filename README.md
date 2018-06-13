@@ -11,6 +11,22 @@ A Graph-Database to visualize the hidden/forbidden history
 
 * [agensgraph](https://github.com/bitnine-oss/agensgraph) - The web framework used
 
+### Node-Tpyes
+
+|node-types|
+|---|
+|sovereign_entity|
+|continent|
+|country|
+|town|
+|place|
+|force|
+|order|
+|dynasty|
+|family|
+|person|
+
+
 ### Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
