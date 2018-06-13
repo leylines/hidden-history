@@ -74,10 +74,10 @@ When contributing to this repository, please first discuss the change you wish t
 ##### Knights of Columbus
 * https://ahuwahzeus583992924.wordpress.com/2018/02/13/vatican-death-squad-of-columbus/
 
-##### Jesuits
+##### Jesuits
 * https://ahuwahzeus583992924.wordpress.com/2018/02/04/jesuit-order-of-liars-terrorists-and-infiltrators/
 
-##### mafia clans
+##### Mafia clans
 * https://ahuwahzeus583992924.wordpress.com/2018/02/21/made-men-of-rome/
 
 ##### Massimo (Maximus) family
