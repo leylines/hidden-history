@@ -41,6 +41,7 @@ When contributing to this repository, please first discuss the change you wish t
 |dynasty|dynasty|name, other_name, fromdate, todate|
 |family|family|name, other_name, fromdate, todate|
 |person|person|name, other_name, fromdate, todate|
+|company|company|name, other_name, fromdate, todate|
 
 #### Edge-Types
 
@@ -58,76 +59,12 @@ When contributing to this repository, please first discuss the change you wish t
 
 ### ToDo-List
 
-#### Pharaohs
+* Visit the Link and fill in missing links and take a task if you want to.
 
-#### Black Noblesse
+https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing
 
-##### Maupeou and Thales Group
-* https://ahuwahzeus583992924.wordpress.com/2018/02/28/maupeou-and-thales-group/
-
-##### Black Nobility (aristocrazia nera)
-* https://ahuwahzeus583992924.wordpress.com/2018/02/23/nero-aristocrazia/
-
-##### Knights of Malta (SMOM)
-* https://ahuwahzeus583992924.wordpress.com/2018/02/03/engineers-of-war-knights-of-malta/
-
-##### Knights of Columbus
-* https://ahuwahzeus583992924.wordpress.com/2018/02/13/vatican-death-squad-of-columbus/
-
-##### Jesuits
-* https://ahuwahzeus583992924.wordpress.com/2018/02/04/jesuit-order-of-liars-terrorists-and-infiltrators/
-
-##### Mafia clans
-* https://ahuwahzeus583992924.wordpress.com/2018/02/21/made-men-of-rome/
-
-##### Massimo (Maximus) family
-* https://ahuwahzeus583992924.wordpress.com/2018/01/31/massimo-crime-family/
-* http://ltvfye.blogspot.com/2018/03/massimo-mafia-of-london.html
-* https://www.roguemoney.net/blog/2018/5/16/the-chair-serves-the-master
-
-##### Breakspear (Lancelotti) family
-* https://ahuwahzeus583992924.wordpress.com/2018/02/08/house-of-the-magicians/
-
-##### Orsini (Ursus) family
-* https://ahuwahzeus583992924.wordpress.com/2018/02/04/orsini-and-rosenberg-alchemical-mafia/
-
-##### Aldobrandini / Brandolini family
-* https://ahuwahzeus583992924.wordpress.com/2018/02/05/tomb-of-aldobrandini/
-* https://ahuwahzeus583992924.wordpress.com/2018/04/24/vatican-accountants-and-bankers/
-
-##### Colonna (Columna) family
-* https://ahuwahzeus583992924.wordpress.com/2018/02/04/colonna-crime-corporation/
-
-##### Borgia (Borja) family
-* https://ahuwahzeus583992924.wordpress.com/2018/03/15/borgia-mafia/
-
-##### Pallavicini (Palatinus) family
-* https://ahuwahzeus583992924.wordpress.com/2018/01/31/pallavicini-crime-syndicate/
-
-##### Torlonia family (controllers of BIS)
-* https://ahuwahzeus583992924.wordpress.com/2018/01/31/torlonia-banking-mafia/
-
-##### Theodoli (Theodosius) family (Theodosius 1st was an Archon who ordered the destruction of Goddess mysteries in 391 CE)
-* https://ahuwahzeus583992924.wordpress.com/2018/02/07/devilish-tricksters/
-
-#### King David, King Solomon and Pharaohs
-
-* http://www.ancient-origins.net/opinion-guest-authors/king-solomon-s-mines-discovered-kings-and-pharaohs-part-i-005500
-* http://www.ancient-origins.net/opinion-guest-authors/king-solomon-s-mines-discovered-ancient-treasures-part-ii-005506
-
-#### Rothschilds
-
-#### Windsor-Dynasty and relations to germany
-
-#### History of Temple Mountain and Jerusalem
-
-#### Merovingian Dynasty and relations to Mary Magdalene
-
-#### Exodus (Moses, Ark of coventant)
-
-#### Holy Grail, King Arthur, Avalon
-
-#### Priory of Sion
+* Open forbidden_history.ods in https://docs.google.com or LibreOffice (maybe other Applications also work)
+* Fill out the nessesary information in Nodes and Edges and send results to info@leylines.ch, i will then add the results to the graph
 
 ### Authors
 
