@@ -17,6 +17,8 @@ When contributing to this repository, please first discuss the change you wish t
 
 ### Layout
 
+Please let me know about additional attributes, node-types or edge-type, but i think we should keep it as simple as possible :-)
+
 #### Attributes
 
 |attribute-name|type|
