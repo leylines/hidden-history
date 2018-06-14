@@ -63,7 +63,7 @@ When contributing to this repository, please first discuss the change you wish t
 
 https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing
 
-* DOwnload and open forbidden_history.ods in https://docs.google.com or LibreOffice (maybe other Applications also work)
+* Download and open forbidden_history.ods in https://docs.google.com or LibreOffice (maybe other Applications also work)
 * Fill out the nessesary information in (first) Nodes and (then) Edges and send results to info@leylines.ch, i will then add the results to the graph
 
 ### Authors
