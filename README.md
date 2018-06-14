@@ -59,7 +59,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |related|related (personal)|name, fromdate, todate, status|
 |knows|knows|name, fromdate, todate, status|
 
-### ToDo-List
+### ToDo-List and workflow
 
 * Visit the Link and fill in missing links and take a task if you want to.
 
