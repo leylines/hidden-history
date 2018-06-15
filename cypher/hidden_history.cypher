@@ -14,6 +14,7 @@ SET graph_path = hidden_history;
 \i ./order.cypher
 \i ./dynasties.cypher
 \i ./persons.cypher
+\i ./events.cypher
 
 -- Sovereign Entities
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
