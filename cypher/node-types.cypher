@@ -9,3 +9,4 @@ CREATE VLABEL "order";
 -- CREATE VLABEL endowment;
 CREATE VLABEL dynasty;
 CREATE VLABEL person;
+CREATE VLABEL event;

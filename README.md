@@ -40,6 +40,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |family|family|name, other_name, fromdate, todate|
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
+|event|event|name, other_name, fromdate, todate|
 
 ### Edge-Types
 
@@ -54,6 +55,10 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |member_of|member of|name, status, fromdate, todate|
 |related|related (personal)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
+|take part|take part|name, status, fromdate, todate|
+|from|from location|name, status, fromdate, todate|
+|to|to location|name, status, fromdate, todate|
+
 
 ## ToDo-list and workflow
 

@@ -8,3 +8,6 @@ CREATE ELABEL lives_in;
 CREATE ELABEL member_of;
 CREATE ELABEL related;
 CREATE ELABEL knows;
+CREATE ELABEL take_part;
+CREATE ELABEL from;
+CREATE ELABEL to;
