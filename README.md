@@ -1,25 +1,21 @@
-# agensgraph
-Agensgraph-Scripts for different purposes
+# Hidden History
+A Graph-Database to visualize the hidden/forbidden history
 
 ![first impression](./hidden_history.png)
 
-## Forbidden History
-
-A Graph-Database to visualize the hidden/forbidden history
-
-### Prerequisites
+## Prerequisites
 
 * [agensgraph](https://github.com/bitnine-oss/agensgraph) - a transactional graph database based on PostgreSQL (http://www.agensgraph.com)
 
-### Contributing
+## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-### Layout
+## Layout
 
 Please let me know about additional attributes, node-types or edge-type, but i think we should keep it as simple as possible :-)
 
-#### Attributes
+### Attributes
 
 |attribute-name|type|
 |---|---|
@@ -29,7 +25,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |todate|YYYY, YYYY-MM, YYYY-MM-DD, YYYY BC|
 |status|proven\|unproven|
 
-#### Node-Types
+### Node-Types
 
 |name|description|attributes|
 |---|---|---|
@@ -45,7 +41,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
 
-#### Edge-Types
+### Edge-Types
 
 |name|description|attributes|
 |---|---|---|
@@ -59,7 +55,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |related|related (personal)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
 
-### ToDo-list and workflow
+## ToDo-list and workflow
 
 * Visit the Link and fill in missing links, new topics and take a task if you want to.
 
@@ -68,13 +64,13 @@ https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQ
 * Download and open collect.ods in https://docs.google.com or LibreOffice (maybe other Applications also work)
 * Fill out the nessesary information in (first) Nodes and (then) Edges and send results to info@leylines.ch, i will then add the results to the graph
 
-### Authors
+## Authors
 
 * **Joerg Roth** - *Initial work* - [Leylines](https://github.com/leylines)
 
 See also the list of [contributors](https://github.com/leylines/agensgraph/contributors) who participated in this project.
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
