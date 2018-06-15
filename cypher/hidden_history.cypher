@@ -20,6 +20,7 @@ SET graph_path = hidden_history;
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
 
 -- Countries
+MATCH  (s:country {name: 'Germany'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:country {name: 'England'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:country {name: 'France'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:country {name: 'Greece'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
