@@ -66,7 +66,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 
 https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing
 
-* Download and open [collect-spreadsheet](https://github.com/leylines/hidden-history/raw/master/collect.ods) in https://docs.google.com or LibreOffice (maybe other Applications also work)
+* Download and open [collect-spreadsheet](https://docs.google.com/spreadsheets/d/1ljMg0AUaoAC6PbjDi8zu4YvlDD24SFq865eXMssdCxs/edit?usp=sharing) in https://docs.google.com or LibreOffice (maybe other Applications also work)
 * Fill out the nessesary information in (first) Nodes and (then) Edges and send results to info@leylines.ch, i will then add the results to the graph
 
 ## Authors
