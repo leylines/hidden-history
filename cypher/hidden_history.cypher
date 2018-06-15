@@ -59,7 +59,7 @@ MATCH  (s:"order" {name: 'Knights Templar'}),(d:sovereign_entity {name: 'Holy Se
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:place {name: 'Rosslyn Chapel'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:follows {status: 'unproven'}]->(d);
-MATCH  (s:"order" {name: 'Knights Templar'}),(d:event, {name: '1. Crusade'}) CREATE (s)-[:take_part {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Knights Templar'}),(d:event {name: '1. Crusade'}) CREATE (s)-[:take_part {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'London'}) CREATE (s)-[:located {fromdate: '1717', status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'Geneva'}) CREATE (s)-[:located {fromdate: '1791', status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'Edinburgh'}) CREATE (s)-[:located {fromdate: '1599', status: 'proven'}]->(d);
@@ -83,5 +83,5 @@ MATCH  (s:person {name: 'Plato'}),(d:town {name: 'Athens'}) CREATE (s)-[:lives_i
 MATCH  (s:person {name: 'Plato'}),(d:country {name: 'Egypt'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 
 -- Events
-MATCH  (s:event {name: '1. Crusade'}),(d:country, {name: 'France'}) CREATE (s)-[:from { status: 'proven'}]->(d);
-MATCH  (s:event {name: '1. Crusade'}),(d:place, {name: 'Temple Mountain'}) CREATE (s)-[:to { status: 'proven'}]->(d);
+MATCH  (s:event {name: '1. Crusade'}),(d:country {name: 'France'}) CREATE (s)-[:"from" { status: 'proven'}]->(d);
+MATCH  (s:event {name: '1. Crusade'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" { status: 'proven'}]->(d);
