@@ -49,19 +49,19 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 
 |name|description|attributes|
 |---|---|---|
-|located|geographic allocation|name, fromdate, todate, status|
-|serves|serves|name, fromdate, todate, status|
-|belongs_to|belongs to|name, fromdate, todate, status|
-|follows|follows|name, fromdate, todate, status|
-|controls|controls|name, fromdate, todate, status|
-|lives_in|lives in|name, fromdate, todate, status|
-|member_of|member of|name, fromdate, todate, status|
-|related|related (personal)|name, fromdate, todate, status|
-|knows|knows|name, fromdate, todate, status|
+|located|geographic allocation|name, status, fromdate, todate|
+|serves|serves|name, status, fromdate, todate|
+|belongs_to|belongs to|name, status, fromdate, todate|
+|follows|follows|name, status, fromdate, todate|
+|controls|controls|name, status, fromdate, todate|
+|lives_in|lives in|name, status, fromdate, todate|
+|member_of|member of|name, status, fromdate, todate|
+|related|related (personal)|name, status, fromdate, todate|
+|knows|knows|name, status, fromdate, todate|
 
-### ToDo-List and workflow
+### ToDo-list and workflow
 
-* Visit the Link and fill in missing links and take a task if you want to.
+* Visit the Link and fill in missing links, new topics and take a task if you want to.
 
 https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing
 
@@ -77,6 +77,4 @@ See also the list of [contributors](https://github.com/leylines/agensgraph/contr
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-
 
