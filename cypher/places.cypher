@@ -1,4 +1,4 @@
-- Places
+-- Places
 CREATE (n:place {name: 'City of London'});
 CREATE (n:place {name: 'Temple Mountain'});
 CREATE (n:place {name: 'Solomon''s Temple'});
