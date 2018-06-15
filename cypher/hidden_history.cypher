@@ -83,8 +83,7 @@ MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynast
 MATCH  (s:person {name: 'Plato'}),(d:town {name: 'Athens'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:country {name: 'Egypt'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Illuminati'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:person {name: 'Adam Weishaupt'}),(d:country {name: 'Germany'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
-MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Loge Zur Behutsamkeit'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 
 -- Events
 MATCH  (s:event {name: '1. Crusade'}),(d:country {name: 'France'}) CREATE (s)-[:"from" { status: 'proven'}]->(d);
