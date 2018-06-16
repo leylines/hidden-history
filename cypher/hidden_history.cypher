@@ -15,6 +15,7 @@ SET graph_path = hidden_history;
 \i ./dynasties.cypher
 \i ./persons.cypher
 \i ./events.cypher
+\i ./tools.cypher
 
 -- Sovereign Entities
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
@@ -50,6 +51,7 @@ MATCH  (s:town {name: 'Edinburgh'}),(d:country {name: 'Scotland'}) CREATE (s)-[:
 MATCH  (s:place {name: 'City of London'}),(d:town {name: 'London'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Solomon''s Temple'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Rosslyn Chapel'}),(d:country {name: 'Scotland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Mount Sinai'}),(d:country {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Forces
 MATCH  (s:force {name: 'Pontifical Swiss Guard'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
@@ -90,3 +92,7 @@ MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Loge Zur Behutsamk
 -- Events
 MATCH  (s:event {name: '1. Crusade'}),(d:country {name: 'France'}) CREATE (s)-[:"from" { status: 'proven'}]->(d);
 MATCH  (s:event {name: '1. Crusade'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" { status: 'proven'}]->(d);
+
+-- Tools
+MATCH  (s:tool {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
+MATCH  (s:tool {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
