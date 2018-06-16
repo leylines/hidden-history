@@ -41,7 +41,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
 |event|event|name, other_name, fromdate, todate|
-|tool|relic and misc things|name, other_name, fromdate, todate|
+|tool|relics and misc things|name, other_name, fromdate, todate|
 
 ### Edge-Types
 
