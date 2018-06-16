@@ -62,12 +62,9 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 
 ## ToDo-list and workflow
 
-* Visit the Link and fill in missing links, new topics and take a task if you want to.
-
-https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing
-
-* Download and open [collect-spreadsheet](https://docs.google.com/spreadsheets/d/1ljMg0AUaoAC6PbjDi8zu4YvlDD24SFq865eXMssdCxs/edit?usp=sharing) in https://docs.google.com or LibreOffice (maybe other Applications also work)
-* Fill out the nessesary information in (first) Nodes and (then) Edges and send results to info@leylines.ch, i will then add the results to the graph
+* Visit the [Hidden History ToDo-List](https://docs.google.com/spreadsheets/d/1mxp-V6d-WcvtinwX8Zugc_vSUqaF4xwCecwaCOMQqM4/edit?usp=sharing) and fill in missing links, new topics and take a task if you want to.
+* Download and open [Hidden History Collect-Spreadsheet](https://docs.google.com/spreadsheets/d/1ljMg0AUaoAC6PbjDi8zu4YvlDD24SFq865eXMssdCxs/edit?usp=sharing) in https://docs.google.com or LibreOffice (maybe other Applications also work)
+* Fill out the nessesary information in (first) Nodes and (then) Edges and add the results to [Hidden History Results](https://docs.google.com/document/d/1TGEeabOw8hLYfBXsnya3pb4_Ad0Qm03qLQPpzbXHqSY/edit?usp=sharing), i will then add the results to the graph
 
 ## Authors
 
