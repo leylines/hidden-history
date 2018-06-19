@@ -54,7 +54,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |controls|controls|name, status, fromdate, todate|
 |lives_in|lives in|name, status, fromdate, todate|
 |member_of|member of|name, status, fromdate, todate|
-|related|related (personal)|name, status, fromdate, todate|
+|related|related (personal and to events not directly involved)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
 |take part|take part|name, status, fromdate, todate|
 |from|from location|name, status, fromdate, todate|
