@@ -41,7 +41,8 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
 |event|event|name, other_name, fromdate, todate|
-|tool|relics and misc things|name, other_name, fromdate, todate|
+|artifact|relics and misc things|name, other_name, fromdate, todate|
+|book|book|name, other_name, fromdate, todate|
 
 ### Edge-Types
 
@@ -59,6 +60,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |take part|take part|name, status, fromdate, todate|
 |from|from location|name, status, fromdate, todate|
 |to|to location|name, status, fromdate, todate|
+|by|by|name, status, fromdate, todate|
 
 
 ## ToDo-list and workflow

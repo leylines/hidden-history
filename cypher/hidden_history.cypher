@@ -15,7 +15,8 @@ SET graph_path = hidden_history;
 \i ./dynasties.cypher
 \i ./persons.cypher
 \i ./events.cypher
-\i ./tools.cypher
+\i ./artifacts.cypher
+\i ./books.cypher
 
 -- Sovereign Entities
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
@@ -72,6 +73,10 @@ MATCH  (s:"order" {name: 'Les Neuf Sœurs'}),(d:town {name: 'Paris'}) CREATE (s)
 MATCH  (s:"order" {name: 'Les Neuf Sœurs'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Loge Zur Behutsamkeit'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Loge Zur Behutsamkeit'}),(d:country {name: 'Germany'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Federal Lodge No. 1'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Federal Lodge No. 1'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Ionic Lodge No. 28'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Ionic Lodge No. 28'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Dynasty
 MATCH  (s:dynasty {name: 'Rothschild Dynasty'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:controls {fromdate: '1822', status: 'unproven'}]->(d);
@@ -86,13 +91,26 @@ MATCH  (s:person {name: 'Mary Magdalene'}),(d:town {name: 'Saintes-Maries-de-la-
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:belongs_to {status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:town {name: 'Athens'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:country {name: 'Egypt'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
-MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Illuminati'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Loge Zur Behutsamkeit'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Illuminati'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Loge Zur Behutsamkeit'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:"order" {name: 'Federal Lodge No. 1'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:event {name: 'Operation Highjump'}) CREATE (s)-[:take_part {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:event {name: 'German Antarctic Expedition'}) CREATE (s)-[:related {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Whipple Van Buren Phillips'}),(d:person {name: 'Howard Phillips Lovecraft'}) CREATE (s)-[:related {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Whipple Van Buren Phillips'}),(d:"order" {name: 'Ionic Lodge No. 28'}) CREATE (s)-[:member_of {status: 'member_of'}]->(d);
 
 -- Events
 MATCH  (s:event {name: '1. Crusade'}),(d:country {name: 'France'}) CREATE (s)-[:"from" { status: 'proven'}]->(d);
 MATCH  (s:event {name: '1. Crusade'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" { status: 'proven'}]->(d);
+MATCH  (s:event {name: 'Operation Highjump'}),(d:country {name: 'USA'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
+MATCH  (s:event {name: 'Operation Highjump'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
+MATCH  (s:event {name: 'German Antarctic Expedition'}),(d:country {name: 'Germany'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
+MATCH  (s:event {name: 'German Antarctic Expedition'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
 
--- Tools
-MATCH  (s:tool {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
-MATCH  (s:tool {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
+-- Artifacts
+MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
+
+-- Books
+MATCH  (d:book {name: 'At the Mountains of Madness'}),(s:person {name: 'Howard Phillips Lovecraft'}) CREATE (s)-[:by {status: 'proven'}]->(d);
+MATCH  (s:book {name: 'At the Mountains of Madness'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:located {status: 'proven'}]->(d);

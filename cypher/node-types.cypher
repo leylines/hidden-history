@@ -10,3 +10,5 @@ CREATE VLABEL "order";
 CREATE VLABEL dynasty;
 CREATE VLABEL person;
 CREATE VLABEL event;
+CREATE VLABEL artifact;
+CREATE VLABEL book;
