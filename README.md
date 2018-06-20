@@ -60,7 +60,7 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |take part|take part|name, status, fromdate, todate|
 |from|from location|name, status, fromdate, todate|
 |to|to location|name, status, fromdate, todate|
-|by|by|name, status, fromdate, todate|
+|author|by|name, status, fromdate, todate|
 
 
 ## ToDo-list and workflow

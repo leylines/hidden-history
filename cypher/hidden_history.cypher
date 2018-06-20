@@ -22,18 +22,18 @@ SET graph_path = hidden_history;
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
 
 -- Countries
-MATCH  (s:country {name: 'Germany'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'England'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'France'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Greece'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Italy'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Scotland'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Switzerland'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Vatican City'}),(d:continent {name: 'Europe'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Germany'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'England'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'France'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Greece'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Italy'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Scotland'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Switzerland'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Vatican City'}),(d:continent {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:country {name: 'Vatican City'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Egypt'}),(d:continent {name: 'Africa'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'Egypt'}),(d:continent {name: 'Asia'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:country {name: 'USA'}),(d:continent {name: 'North America'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Egypt'}),(d:continent {name: 'Africa'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'Egypt'}),(d:continent {name: 'Asia'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:country {name: 'USA'}),(d:continent {name: 'North America'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:country {name: 'Altlantis'}),(d:country {name: 'Egypt'}) CREATE (s)-[:follows {status: 'unproven'}]->(d);
 
 -- Towns
@@ -88,7 +88,7 @@ MATCH  (s:dynasty {name: '22. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (
 MATCH  (s:person {name: 'Benjamin Franklin'}),(d:"order" {name: 'Grand Lodge of Pennsylvania'}) CREATE (s)-[:member_of {status: 'proven', fromdate: '7130'}]->(d);
 MATCH  (s:person {name: 'Benjamin Franklin'}),(d:"order" {name: 'Les Neuf Sœurs'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:town {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:lives_in {fromdate: '45', status: 'unproven'}]->(d);
-MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:belongs_to {status: 'unproven'}]->(d);
+MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:member_of {status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:town {name: 'Athens'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:country {name: 'Egypt'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Illuminati'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
@@ -98,6 +98,7 @@ MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:event {name: 'Operation Highj
 MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:event {name: 'German Antarctic Expedition'}) CREATE (s)-[:related {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Whipple Van Buren Phillips'}),(d:person {name: 'Howard Phillips Lovecraft'}) CREATE (s)-[:related {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Whipple Van Buren Phillips'}),(d:"order" {name: 'Ionic Lodge No. 28'}) CREATE (s)-[:member_of {status: 'member_of'}]->(d);
+MATCH  (s:person {name: 'Howard Phillips Lovecraft'}),(d:book {name: 'At the Mountains of Madness'}) CREATE (s)-[:author {status: 'proven'}]->(d);
 
 -- Events
 MATCH  (s:event {name: '1. Crusade'}),(d:country {name: 'France'}) CREATE (s)-[:"from" { status: 'proven'}]->(d);
@@ -112,5 +113,4 @@ MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
 
 -- Books
-MATCH  (d:book {name: 'At the Mountains of Madness'}),(s:person {name: 'Howard Phillips Lovecraft'}) CREATE (s)-[:by {status: 'proven'}]->(d);
 MATCH  (s:book {name: 'At the Mountains of Madness'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:located {status: 'proven'}]->(d);
