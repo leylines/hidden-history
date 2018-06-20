@@ -12,3 +12,4 @@ CREATE ELABEL take_part;
 CREATE ELABEL "from";
 CREATE ELABEL "to";
 CREATE ELABEL author;
+CREATE ELABEL believes;

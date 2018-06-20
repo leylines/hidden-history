@@ -17,6 +17,7 @@ SET graph_path = hidden_history;
 \i ./events.cypher
 \i ./artifacts.cypher
 \i ./books.cypher
+\i ./philosophies.cypher
 
 -- Sovereign Entities
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
@@ -81,15 +82,15 @@ MATCH  (s:"order" {name: 'Ionic Lodge No. 28'}),(d:country {name: 'USA'}) CREATE
 -- Dynasty
 MATCH  (s:dynasty {name: 'Rothschild Dynasty'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:controls {fromdate: '1822', status: 'unproven'}]->(d);
 MATCH  (s:dynasty {name: 'Pharaohs'}),(d:country {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:dynasty {name: '21. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:dynasty {name: '22. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:dynasty {name: '21. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:dynasty {name: '22. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 
 -- Persons
 MATCH  (s:person {name: 'Benjamin Franklin'}),(d:"order" {name: 'Grand Lodge of Pennsylvania'}) CREATE (s)-[:member_of {status: 'proven', fromdate: '7130'}]->(d);
 MATCH  (s:person {name: 'Benjamin Franklin'}),(d:"order" {name: 'Les Neuf Sœurs'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:town {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:lives_in {fromdate: '45', status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:member_of {status: 'unproven'}]->(d);
-MATCH  (s:person {name: 'Plato'}),(d:town {name: 'Athens'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Plato'}),(d:philosophy {name: 'Classical Greek philosophy'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:country {name: 'Egypt'}) CREATE (s)-[:lives_in {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Illuminati'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:"order" {name: 'Loge Zur Behutsamkeit'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
@@ -114,3 +115,6 @@ MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mounta
 
 -- Books
 MATCH  (s:book {name: 'At the Mountains of Madness'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+
+-- Philosophy
+MATCH  (s:philosophy {name: 'Classical Greek philosophy'}),(d:town {name: 'Athens'}) CREATE (s)-[:located {status: 'proven'}]->(d);
