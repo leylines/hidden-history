@@ -50,11 +50,11 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |---|---|---|
 |located|geographic allocation|name, status, fromdate, todate|
 |serves|serves|name, status, fromdate, todate|
-|belongs_to|belongs to|name, status, fromdate, todate|
+|belongs_to|belongs to (not persons)|name, status, fromdate, todate|
 |follows|follows|name, status, fromdate, todate|
 |controls|controls|name, status, fromdate, todate|
 |lives_in|lives in|name, status, fromdate, todate|
-|member_of|member of|name, status, fromdate, todate|
+|member_of|member of (persons)|name, status, fromdate, todate|
 |related|related (personal and to events not directly involved)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
 |take part|take part|name, status, fromdate, todate|
