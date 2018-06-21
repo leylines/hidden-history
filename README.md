@@ -55,8 +55,8 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |knows|knows|name, status, fromdate, todate|
 |participate||name, status, fromdate, todate|
 |creator||name, status, fromdate, todate|
-|about||name|status, fromdate, todate|
-|succesor||name|status, fromdate, todate|
+|about||name, status, fromdate, todate|
+|succesor||name, status, fromdate, todate|
 
 ## ToDo-list and workflow
 
