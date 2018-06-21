@@ -53,10 +53,10 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |member_of|member of (persons)|name, status, fromdate, todate|
 |related|related (personal, events)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
-|participate||name, status, fromdate, todate|
-|creator||name, status, fromdate, todate|
-|about||name, status, fromdate, todate|
-|succesor||name, status, fromdate, todate|
+|participate|participate|name, status, fromdate, todate|
+|creator|creator|name, status, fromdate, todate|
+|about|about|name, status, fromdate, todate|
+|succesor|succesor|name, status, fromdate, todate|
 
 ## ToDo-list and workflow
 
