@@ -1,10 +1,3 @@
--- Political Entities
-MATCH  (s:political_entity {name: 'Holy See'}),(d:place {name: 'Rome'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Holy See'}),(d:organisation {name: 'Pontifical Swiss Guard'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Holy See'}),(d:organisation {name: 'Knights Templar'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Holy See'}),(d:political_entity {name: 'Knights of Malta'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Knights of Malta'}),(d:place {name: 'Rome'}) CREATE (s)-[:located {fromdate: '1834', status: 'proven'}]->(d);
-
 -- Countries
 MATCH  (s:political_entity {name: 'Germany'}),(d:place {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'England'}),(d:place {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
@@ -14,11 +7,11 @@ MATCH  (s:political_entity {name: 'Italy'}),(d:place {name: 'Europe'}) CREATE (s
 MATCH  (s:political_entity {name: 'Scotland'}),(d:place {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'Switzerland'}),(d:place {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'Vatican City'}),(d:place {name: 'Europe'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Vatican City'}),(d:political_entity {name: 'Holy See'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:political_entity {name: 'Vatican City'}),(d:organisation {name: 'Holy See'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'Egypt'}),(d:place {name: 'Africa'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'Egypt'}),(d:place {name: 'Asia'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:political_entity {name: 'USA'}),(d:place {name: 'North America'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:political_entity {name: 'Altlantis'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:follows {status: 'unproven'}]->(d);
+MATCH  (s:political_entity {name: 'Altlantis'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:succesor {status: 'unproven'}]->(d);
 
 -- Towns
 MATCH  (s:place {name: 'Athens'}),(d:political_entity {name: 'Greece'}) CREATE (s)-[:located {status: 'proven'}]->(d);
@@ -33,6 +26,7 @@ MATCH  (s:place {name: 'Edinburgh'}),(d:political_entity {name: 'Scotland'}) CRE
 MATCH  (s:place {name: 'Washington, D.C.'}),(d:political_entity {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Philadelphia'}),(d:political_entity {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Chartres'}),(d:political_entity {name: 'France'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Alexandria'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Place
 MATCH  (s:place {name: 'City of London'}),(d:place {name: 'London'}) CREATE (s)-[:located {status: 'proven'}]->(d);
@@ -40,10 +34,20 @@ MATCH  (s:place {name: 'Solomon''s Temple'}),(d:place {name: 'Temple Mountain'})
 MATCH  (s:place {name: 'Rosslyn Chapel'}),(d:political_entity {name: 'Scotland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Mount Sinai'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Einsiedeln Abbey'}),(d:place {name: 'Einsiedeln'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Einsiedeln Abbey'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Chartres Cathedral'}),(d:place {name: 'Chartres'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Chartres Cathedral'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Forces
 MATCH  (s:organisation {name: 'Pontifical Swiss Guard'}),(d:political_entity {name: 'Switzerland'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+
+-- Political Entities
+MATCH  (s:organisation {name: 'Holy See'}),(d:place {name: 'Rome'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Holy See'}),(d:organisation {name: 'Pontifical Swiss Guard'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Holy See'}),(d:organisation {name: 'Knights Templar'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Holy See'}),(d:organisation {name: 'Knights of Malta'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Holy See'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:controls {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Knights of Malta'}),(d:place {name: 'Rome'}) CREATE (s)-[:located {fromdate: '1834', status: 'proven'}]->(d);
 
 -- Orders
 MATCH  (s:organisation {name: 'Knights Templar'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
@@ -58,7 +62,7 @@ MATCH  (s:organisation {name: 'Freemasonry'}),(d:place {name: 'Edinburgh'}) CREA
 MATCH  (s:organisation {name: 'Grand Lodge of Pennsylvania'}),(d:organisation {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:organisation {name: 'Grand Lodge of Pennsylvania'}),(d:place {name: 'Philadelphia'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:organisation {name: 'Les Neuf Sœurs'}),(d:place {name: 'Paris'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:organisation {name: 'Les Neuf Sœurs'}),(d:organisation {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:organisation {name: 'Les Neuf Sœurs'}),(d:organisation {nameFrance: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:organisation {name: 'Loge Zur Behutsamkeit'}),(d:organisation {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:organisation {name: 'Loge Zur Behutsamkeit'}),(d:political_entity {name: 'Germany'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:organisation {name: 'Federal Lodge No. 1'}),(d:organisation {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
@@ -67,18 +71,28 @@ MATCH  (s:organisation {name: 'Ionic Lodge No. 28'}),(d:organisation {name: 'Fre
 MATCH  (s:organisation {name: 'Ionic Lodge No. 28'}),(d:political_entity {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Dynasty
-MATCH  (s:dynasty {name: 'Rothschild Dynasty'}),(d:political_entity {name: 'Holy See'}) CREATE (s)-[:controls {fromdate: '1822', status: 'unproven'}]->(d);
+MATCH  (s:dynasty {name: 'Rothschild Dynasty'}),(d:organisation {name: 'Holy See'}) CREATE (s)-[:controls {fromdate: '1822', status: 'unproven'}]->(d);
 MATCH  (s:dynasty {name: 'Pharaohs'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:dynasty {name: '21. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:dynasty {name: '21. Dynasty'}),(d:dynasty {name: 'Kingdom of Israel'}) CREATE (s)-[:equal {status: 'proven'}]->(d);
 MATCH  (s:dynasty {name: '22. Dynasty'}),(d:dynasty {name: 'Pharaohs'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:dynasty {name: 'Kingdom of Israel'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 
 -- Persons
-MATCH  (s:person {name: 'Benjamin Franklin'}),(d:organisation {name: 'Grand Lodge of Pennsylvania'}) CREATE (s)-[:member_of {status: 'proven', fromdate: '7130'}]->(d);
-MATCH  (s:person {name: 'Benjamin Franklin'}),(d:organisation {name: 'Les Neuf Sœurs'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Psusennes II.'}),(d:dynasty {name: '21. Dynasty'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Psusennes II.'}),(d:person {name: 'David'}) CREATE (s)-[:equal {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'David'}),(d:dynasty {name: 'Kingdom of Israel'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'David'}),(d:person {name: 'Salomon'}) CREATE (s)-[:related {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Salomon'}),(d:dynasty {name: 'Kingdom of Israel'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Salomon'}),(d:person {name: 'Jesus'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Jesus'}),(d:person {name: 'Mary Magdalene'}) CREATE (s)-[:related {status: 'unproven'}]->(d);
+MATCH  (s:person {name: 'Jesus'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:member_of {status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:place {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:located {fromdate: '45', status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Mary Magdalene'}),(d:dynasty {name: 'Merovingian Dynasty'}) CREATE (s)-[:member_of {status: 'unproven'}]->(d);
+MATCH  (s:person {name: 'Benjamin Franklin'}),(d:organisation {name: 'Grand Lodge of Pennsylvania'}) CREATE (s)-[:member_of {status: 'proven', fromdate: '7130'}]->(d);
+MATCH  (s:person {name: 'Benjamin Franklin'}),(d:organisation {name: 'Les Neuf Sœurs'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Plato'}),(d:belief {name: 'Classical Greek philosophy'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
-MATCH  (s:person {name: 'Plato'}),(d:political_entity {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:person {name: 'Plato'}),(d:knowledge {name: 'Library of Alexandria'}) CREATE (s)-[:located {status: 'unproven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:organisation {name: 'Illuminati'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Adam Weishaupt'}),(d:organisation {name: 'Loge Zur Behutsamkeit'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
 MATCH  (s:person {name: 'Richard Evelyn Byrd'}),(d:organisation {name: 'Federal Lodge No. 1'}) CREATE (s)-[:member_of {status: 'proven'}]->(d);
@@ -99,12 +113,17 @@ MATCH  (s:event {name: 'German Antarctic Expedition'}),(d:place {name: 'Antarcti
 -- Artifacts
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Holy Grail'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Holy Grail'}),(d:person {name: 'Jesus'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Einsiedeln Abbey'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Chartres Cathedral'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Black Madonna'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 
--- Books
+-- Knowledge
 MATCH  (s:knowledge {name: 'At the Mountains of Madness'}),(d:place {name: 'Antarctica'}) CREATE (s)-[:about {status: 'proven'}]->(d);
+MATCH  (s:knowledge {name: 'Library of Alexandria'}),(d:place {name: 'Alexandria'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
--- Philosophy
+-- Belief
 MATCH  (s:belief {name: 'Classical Greek philosophy'}),(d:place {name: 'Athens'}) CREATE (s)-[:located {status: 'proven'}]->(d);

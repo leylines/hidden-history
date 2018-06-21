@@ -19,6 +19,7 @@ CREATE (n:place {name: 'Edinburgh'});
 CREATE (n:place {name: 'Washington, D.C.'});
 CREATE (n:place {name: 'Philadelphia'});
 CREATE (n:place {name: 'Einsiedeln'});
+CREATE (n:place {name: 'Alexandria'});
 -- Places
 CREATE (n:place {name: 'City of London'});
 CREATE (n:place {name: 'Temple Mountain'});

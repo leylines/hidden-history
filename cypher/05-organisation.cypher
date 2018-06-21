@@ -1,4 +1,7 @@
--- Order
+-- Sovereign Entities
+CREATE (n:organisation {name: 'Holy See', fromdate:'325'});
+CREATE (n:organisation {name: 'Knights of Malta', other_name: 'Sovereign Military Order of Malta', fromdate: '1099'});
+-- Orders
 CREATE (n:organisation {name: 'Knights Templar', other_name:'Order of Solomon''s Temple', fromdate: '1118', todate: '1312-03-22'});
 CREATE (n:organisation {name: 'Freemasonry', fromdate:'1717-06-24'});
 CREATE (n:organisation {name: 'Grand Lodge of Pennsylvania', fromdate:'1731'});

@@ -10,3 +10,4 @@ CREATE ELABEL participate;
 CREATE ELABEL creator;
 CREATE ELABEL about;
 CREATE ELABEL succesor;
+CREATE ELABEL equal;

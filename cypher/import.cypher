@@ -10,7 +10,7 @@ SET graph_path = hidden_history;
 \i 06-dynasty.cypher
 \i 07-person.cypher
 \i 08-belief.cypher
-\i 09-artifact.cypher
 \i 09-event.cypher
 \i 10-knowledge.cypher
+\i 11-artifact.cypher
 \i 99-hidden_history.cypher
