@@ -29,20 +29,18 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 
 |name|description|attributes|
 |---|---|---|
-|sovereign_entity|sovereign entity but not a county|name, other_name, fromdate, todate|
-|continent|continent|name|
-|country|country as a sovereign entity|name, other_name, fromdate, todate|
-|town|city, village etc.|name, other_name, fromdate, todate|
-|place|churches, mountains etc.|name, other_name, fromdate, todate|
-|force|force|name, other_name, fromdate, todate|
-|order|order|name, other_name, fromdate, todate|
+|political_entity|sovereign entity, country|name, other_name, fromdate, todate|
+|place|continent, city, town, village etc.|name, other_name, fromdate, todate|
+|organisation|order, force etc.|name, other_name, fromdate, todate|
 |dynasty|dynasty|name, other_name, fromdate, todate|
 |family|family|name, other_name, fromdate, todate|
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
-|event|event|name, other_name, fromdate, todate|
-|artifact|relics and misc things|name, other_name, fromdate, todate|
-|book|book|name, other_name, fromdate, todate|
+|event|point in time|name, other_name, fromdate, todate|
+|artifact|relics and other moveable things|name, other_name, fromdate, todate|
+|religion|christianity|name, other_name, fromdate, todate|
+|philosophy|anceint greek etc.|name, other_name, fromdate, todate|
+|knowledge_base|book etc.|name, other_name, fromdate, todate|
 
 ### Edge-Types
 
@@ -57,10 +55,10 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |member_of|member of (persons)|name, status, fromdate, todate|
 |related|related (personal and to events not directly involved)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
-|take part|take part|name, status, fromdate, todate|
+|take_part|take part|name, status, fromdate, todate|
 |from|from location|name, status, fromdate, todate|
 |to|to location|name, status, fromdate, todate|
-|author|by|name, status, fromdate, todate|
+|creator|by|name, status, fromdate, todate|
 
 
 ## ToDo-list and workflow

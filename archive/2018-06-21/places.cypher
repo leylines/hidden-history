@@ -4,3 +4,5 @@ CREATE (n:place {name: 'Temple Mountain'});
 CREATE (n:place {name: 'Solomon''s Temple'});
 CREATE (n:place {name: 'Rosslyn Chapel', fromdate: '1456-09-20'});
 CREATE (n:place {name: 'Mount Sinai', other_name: 'Mount Horeb'});
+CREATE (n:place {name: 'Einsiedeln Abbey'});
+CREATE (n:place {name: 'Chartres Cathedral'});

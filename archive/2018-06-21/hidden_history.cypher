@@ -40,6 +40,7 @@ MATCH  (s:country {name: 'Altlantis'}),(d:country {name: 'Egypt'}) CREATE (s)-[:
 -- Towns
 MATCH  (s:town {name: 'Athens'}),(d:country {name: 'Greece'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:town {name: 'Geneva'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:town {name: 'Einsiedeln'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:town {name: 'Rome'}),(d:country {name: 'Italy'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:sovereign_entity {name: 'Holy See'}),(d:town {name: 'Rome'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:sovereign_entity {name: 'Knights of Malta'}),(d:town {name: 'Rome'}) CREATE (s)-[:located {fromdate: '1834', status: 'proven'}]->(d);
@@ -48,12 +49,17 @@ MATCH  (s:town {name: 'Paris'}),(d:country {name: 'France'}) CREATE (s)-[:locate
 MATCH  (s:town {name: 'Saintes-Maries-de-la-Mer'}),(d:country {name: 'France'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:town {name: 'Rennes-le-Château'}),(d:country {name: 'France'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:town {name: 'Edinburgh'}),(d:country {name: 'Scotland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:town {name: 'Washington, D.C.'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:town {name: 'Philadelphia'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:town {name: 'Chartres'}),(d:country {name: 'France'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Place
 MATCH  (s:place {name: 'City of London'}),(d:town {name: 'London'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Solomon''s Temple'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Rosslyn Chapel'}),(d:country {name: 'Scotland'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:place {name: 'Mount Sinai'}),(d:country {name: 'Egypt'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Einsiedeln Abbey'}),(d:town {name: 'Einsiedeln'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:place {name: 'Chartres Cathedral'}),(d:town {name: 'Chartres'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Forces
 MATCH  (s:force {name: 'Pontifical Swiss Guard'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
@@ -63,19 +69,21 @@ MATCH  (s:force {name: 'Pontifical Swiss Guard'}),(d:sovereign_entity {name: 'Ho
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:sovereign_entity {name: 'Holy See'}) CREATE (s)-[:serves {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:place {name: 'Rosslyn Chapel'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Knights Templar'}),(d:town {name: 'Chartres'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:country {name: 'Switzerland'}) CREATE (s)-[:follows {status: 'unproven'}]->(d);
 MATCH  (s:"order" {name: 'Knights Templar'}),(d:event {name: '1. Crusade'}) CREATE (s)-[:take_part {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Knights Templar'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:follows {status: 'unproven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'London'}) CREATE (s)-[:located {fromdate: '1717', status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'Geneva'}) CREATE (s)-[:located {fromdate: '1791', status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Freemasonry'}),(d:town {name: 'Edinburgh'}) CREATE (s)-[:located {fromdate: '1599', status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Grand Lodge of Pennsylvania'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:"order" {name: 'Grand Lodge of Pennsylvania'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Grand Lodge of Pennsylvania'}),(d:town {name: 'Philadelphia'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Les Neuf Sœurs'}),(d:town {name: 'Paris'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Les Neuf Sœurs'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Loge Zur Behutsamkeit'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Loge Zur Behutsamkeit'}),(d:country {name: 'Germany'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Federal Lodge No. 1'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
-MATCH  (s:"order" {name: 'Federal Lodge No. 1'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:"order" {name: 'Federal Lodge No. 1'}),(d:town {name: 'Washington, D.C.'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Ionic Lodge No. 28'}),(d:"order" {name: 'Freemasonry'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:"order" {name: 'Ionic Lodge No. 28'}),(d:country {name: 'USA'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
@@ -112,6 +120,9 @@ MATCH  (s:event {name: 'German Antarctic Expedition'}),(d:continent {name: 'Anta
 -- Artifacts
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:"from" {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Temple Mountain'}) CREATE (s)-[:"to" {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Black Madonna'}),(d:town {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Einsiedeln Abbey'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Chartres Cathedral'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Books
 MATCH  (s:book {name: 'At the Mountains of Madness'}),(d:continent {name: 'Antarctica'}) CREATE (s)-[:located {status: 'proven'}]->(d);
