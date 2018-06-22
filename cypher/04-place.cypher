@@ -18,8 +18,8 @@ CREATE (n:place {name: 'Vatican City', fromdate: '1929'});
 CREATE (n:place {name: 'Egypt'});
 CREATE (n:place {name: 'USA', fromdate: '1776-07-04'});
 CREATE (n:place {name: 'Canada'});
-CREATE (n:place {name: 'Altlantis'});
 -- Cities/Towns
+CREATE (n:place {name: 'Giza'});
 CREATE (n:place {name: 'Athens'});
 CREATE (n:place {name: 'Geneva'});
 CREATE (n:place {name: 'Rome'});
@@ -43,6 +43,7 @@ CREATE (n:place {name: 'Einsiedeln Abbey'});
 CREATE (n:place {name: 'Chartres Cathedral'});
 CREATE (n:place {name: 'Nova Scotia'});
 CREATE (n:place {name: 'Oak Island'});
+CREATE (n:place {name: 'Library of Alexandria', todate: '30'});
 
 -- Sovereign entities
 -- CREATE (n:place {name: 'ICRC', other_name: 'International Red Cross and Red Crescent Movement', fromdate: '1863'});

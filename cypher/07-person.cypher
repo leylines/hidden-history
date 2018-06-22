@@ -1,7 +1,8 @@
 -- Persons
 CREATE (n:person {name: 'Benjamin Franklin', fromdate: '1706-01-17', todate: '1790-01-17'});
+CREATE (n:person {name: 'Moses'});
 CREATE (n:person {name: 'David'});
-CREATE (n:person {name: 'Salomon'});
+CREATE (n:person {name: 'Solomon'});
 CREATE (n:person {name: 'Jesus'});
 CREATE (n:person {name: 'Mary Magdalene'});
 CREATE (n:person {name: 'Psusennes II.'});
