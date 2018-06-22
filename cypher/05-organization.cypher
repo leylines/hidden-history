@@ -11,5 +11,6 @@ CREATE (n:organization {name: 'Federal Lodge No. 1', fromdate: '1793-09-12'});
 CREATE (n:organization {name: 'Ionic Lodge No. 28', fromdate: '1970-05-16'});
 CREATE (n:organization {name: 'Les Neuf Sœurs', fromdate:'1776'});
 CREATE (n:organization {name: 'Illuminati', fromdate: '1776-05-01'});
+CREATE (n:organization {name: 'Cathars', fromdate: '1163', todate: '1342'});
 -- Forces
 CREATE (n:organization {name: 'Pontifical Swiss Guard', fromdate: '1506-01-22'});

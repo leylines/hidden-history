@@ -81,6 +81,7 @@ MATCH  (s:organization {name: 'Knights Templar'}),(d:place {name: 'Switzerland'}
 MATCH  (s:organization {name: 'Knights Templar'}),(d:event {name: '1. Crusade'}) CREATE (s)-[:participate {status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Knights Templar'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Knights Templar'}),(d:organization {name: 'Freemasonry'}) CREATE (s)-[:succesor {status: 'unproven'}]->(d);
+MATCH  (s:organization {name: 'Cathars'}),(d:belief {name: 'Catharism'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'London'}) CREATE (s)-[:located {fromdate: '1717', status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'Geneva'}) CREATE (s)-[:located {fromdate: '1791', status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'Edinburgh'}) CREATE (s)-[:located {fromdate: '1599', status: 'proven'}]->(d);
