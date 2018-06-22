@@ -45,6 +45,7 @@ MATCH  (s:artificial {name: 'Chartres Cathedral'}),(d:place {name: 'Chartres'}) 
 MATCH  (s:artificial {name: 'Chartres Cathedral'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
 MATCH  (s:artificial {name: 'Library of Alexandria'}),(d:place {name: 'Alexandria'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artificial {name: 'Great Sphinx of Giza'}),(d:place {name: 'Giza'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artificial {name: 'Château de Montségur'}),(d:place {name: 'France'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 
 -- Empire
 MATCH  (s:empire {name: 'Roman Empire'}),(d:empire {name: 'Western Roman Empire'}) CREATE (s)-[:succesor {status: 'proven'}]->(d);
@@ -82,6 +83,7 @@ MATCH  (s:organization {name: 'Knights Templar'}),(d:event {name: '1. Crusade'})
 MATCH  (s:organization {name: 'Knights Templar'}),(d:belief {name: 'Christianity'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Knights Templar'}),(d:organization {name: 'Freemasonry'}) CREATE (s)-[:succesor {status: 'unproven'}]->(d);
 MATCH  (s:organization {name: 'Cathars'}),(d:belief {name: 'Catharism'}) CREATE (s)-[:follows {status: 'proven'}]->(d);
+MATCH  (s:organization {name: 'Cathars'}),(d:artificial {name: 'Château de Montségur'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'London'}) CREATE (s)-[:located {fromdate: '1717', status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'Geneva'}) CREATE (s)-[:located {fromdate: '1791', status: 'proven'}]->(d);
 MATCH  (s:organization {name: 'Freemasonry'}),(d:place {name: 'Edinburgh'}) CREATE (s)-[:located {fromdate: '1599', status: 'proven'}]->(d);
@@ -143,9 +145,10 @@ MATCH  (s:event {name: 'German Antarctic Expedition'}),(d:place {name: 'Antarcti
 
 -- Artifacts
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Mount Sinai'}) CREATE (s)-[:located {status: 'proven'}]->(d);
-MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:place {name: 'Solomon''s Temple'}) CREATE (s)-[:located {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:artificial {name: 'Solomon''s Temple'}) CREATE (s)-[:located {status: 'unproven'}]->(d);
 MATCH  (s:artifact {name: 'Ark of the Covenant'}),(d:person {name: 'Moses'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Holy Grail'}),(d:person {name: 'Jesus'}) CREATE (s)-[:belongs_to {status: 'proven'}]->(d);
+MATCH  (s:artifact {name: 'Holy Grail'}),(d:artificial {name: 'Château de Montségur'}) CREATE (s)-[:located {status: 'unproven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:place {name: 'Saintes-Maries-de-la-Mer'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:artificial {name: 'Einsiedeln Abbey'}) CREATE (s)-[:located {status: 'proven'}]->(d);
 MATCH  (s:artifact {name: 'Black Madonna'}),(d:artificial {name: 'Chartres Cathedral'}) CREATE (s)-[:located {status: 'proven'}]->(d);
