@@ -1,6 +1,6 @@
 -- Node-Types
-CREATE VLABEL political_entity;
 CREATE VLABEL place;
+CREATE VLABEL empire;
 CREATE VLABEL organisation;
 CREATE VLABEL dynasty;
 CREATE VLABEL person;

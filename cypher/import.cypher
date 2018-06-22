@@ -4,7 +4,7 @@ SET graph_path = hidden_history;
 
 \i 01-node-types.cypher
 \i 02-edge-types.cypher
-\i 03-political_entity.cypher
+\i 03-empire.cypher
 \i 04-place.cypher
 \i 05-organisation.cypher
 \i 06-dynasty.cypher
