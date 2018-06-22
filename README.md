@@ -36,11 +36,10 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |hierarchy|priests, slaves|name, other_name, fromdate, todate|
 |person|person|name, other_name, fromdate, todate|
 |company|company|name, other_name, fromdate, todate|
-|event|point in time|name, other_name, fromdate, todate|
+|event|event|name, other_name, fromdate, todate|
 |artifact|relics and other moveable things|name, other_name, fromdate, todate|
 |belief|religion, philosophy|name, other_name, fromdate, todate|
-|philosophy|ancient greek etc.|name, other_name, fromdate, todate|
-|knowledge|book etc.|name, other_name, fromdate, todate|
+|knowledge|book, library etc.|name, other_name, fromdate, todate|
 
 ### Edge-Types
 
@@ -53,10 +52,10 @@ Please let me know about additional attributes, node-types or edge-type, but i t
 |member_of|member of (persons)|name, status, fromdate, todate|
 |related|related (personal, events)|name, status, fromdate, todate|
 |knows|knows|name, status, fromdate, todate|
-|participate||name, status, fromdate, todate|
-|creator||name, status, fromdate, todate|
-|about||name, status, fromdate, todate|
-|succesor||name, status, fromdate, todate|
+|participate|participate|name, status, fromdate, todate|
+|creator|creator|name, status, fromdate, todate|
+|about|about|name, status, fromdate, todate|
+|succesor|succesor|name, status, fromdate, todate|
 
 ## ToDo-list and workflow
 
