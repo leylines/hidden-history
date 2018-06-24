@@ -11,3 +11,4 @@ CREATE (n:person {name: 'Adam Weishaupt', fromdate: '1748-02-06', todate: '1830-
 CREATE (n:person {name: 'Richard Evelyn Byrd', fromdate: '1888-10-25', todate: '1957-03-11'});
 CREATE (n:person {name: 'Howard Phillips Lovecraft', fromdate: '1890-08-20', todate: '1937-03-15'});
 CREATE (n:person {name: 'Whipple Van Buren Phillips', fromdate: '1833-11-22', todate: '1904-03-28'});
+CREATE (n:person {name: 'John Edgar Hoover', fromdate: '1895-01-01', todate: '1972-05-02'});

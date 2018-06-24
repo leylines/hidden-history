@@ -1,11 +1,11 @@
 -- Continents
 CREATE (n:place {name: 'Antarctica'});
-CREATE (n:place {name: 'Australia'});
+-- CREATE (n:place {name: 'Australia'});
 CREATE (n:place {name: 'Europe'});
 CREATE (n:place {name: 'North America'});
-CREATE (n:place {name: 'South America'});
-CREATE (n:place {name: 'Africa'});
-CREATE (n:place {name: 'Asia'});
+-- CREATE (n:place {name: 'South America'});
+-- CREATE (n:place {name: 'Africa'});
+-- CREATE (n:place {name: 'Asia'});
 -- Countries
 CREATE (n:place {name: 'England'});
 CREATE (n:place {name: 'France', fromdate: '481'});
@@ -31,19 +31,14 @@ CREATE (n:place {name: 'Rennes-le-Château'});
 CREATE (n:place {name: 'Edinburgh'});
 CREATE (n:place {name: 'Washington, D.C.'});
 CREATE (n:place {name: 'Philadelphia'});
-CREATE (n:place {name: 'Einsiedeln'});
+-- CREATE (n:place {name: 'Einsiedeln'});
 CREATE (n:place {name: 'Alexandria'});
 -- Places
 CREATE (n:place {name: 'City of London'});
 CREATE (n:place {name: 'Temple Mountain'});
-CREATE (n:place {name: 'Solomon''s Temple'});
-CREATE (n:place {name: 'Rosslyn Chapel', fromdate: '1456-09-20'});
 CREATE (n:place {name: 'Mount Sinai', other_name: 'Mount Horeb'});
-CREATE (n:place {name: 'Einsiedeln Abbey'});
-CREATE (n:place {name: 'Chartres Cathedral'});
 CREATE (n:place {name: 'Nova Scotia'});
 CREATE (n:place {name: 'Oak Island'});
-CREATE (n:place {name: 'Library of Alexandria', todate: '30'});
 
 -- Sovereign entities
 -- CREATE (n:place {name: 'ICRC', other_name: 'International Red Cross and Red Crescent Movement', fromdate: '1863'});
