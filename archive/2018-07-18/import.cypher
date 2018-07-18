@@ -1,6 +1,6 @@
-DROP GRAPH hidden_history CASCADE;
-CREATE GRAPH hidden_history;
-SET graph_path = hidden_history;
+DROP GRAPH hidden_graph CASCADE;
+CREATE GRAPH hidden_graph;
+SET graph_path = hidden_graph;
 
 \i 01-node-types.cypher
 \i 02-edge-types.cypher
