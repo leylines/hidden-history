@@ -1,0 +1,48 @@
+  <div class="container-fluid">
+    <div class="table-responsive text-left">
+      <table class="edgesTable table table-sm table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>id</th>
+            <th>Source-Type</th>
+            <th>Source</th>
+            <th>Relation-Type</th>
+            <th>Destination-Type</th>
+            <th>Destination</th>
+            <th>From</th>
+            <th>Era</th>
+            <th>To</th>
+            <th>Era</th>
+            <th>Fact</th>
+            <th>Link</th>
+            {{#if req.user}}
+            <th>Contributor</th>
+            <th>Approved</th>
+            {{/if}}
+          </tr>
+        </thead>
+        <tbody>
+        {{#each edges}}
+          <tr>
+            <td>{{this.edgeId}}</td>
+            <td>{{this.sourceId.nodetype.name}}</td>
+            <td>{{this.sourceId.name}}</td>
+            <td>{{this.edgetype.name}}</td>
+            <td>{{this.destinationId.nodetype.name}}</td>
+            <td>{{this.destinationId.name}}</td>
+            <td>{{dateToLocale this.fromDate}}</td>
+            <td>{{this.fromDateEra}}</td>
+            <td>{{dateToLocale this.toDate}}</td>
+            <td>{{this.toDateEra}}</td>
+            <td>{{this.fact}}</td>
+            <td>{{this.link}}</td>
+            {{#if ../req.user}}
+            <td>{{this.contributor}}</td>
+            <td>{{this.checked}}</td>
+            {{/if}}
+          </tr>
+        {{/each}}
+        <tbody>
+      </table>
+    </div>
+  </div>

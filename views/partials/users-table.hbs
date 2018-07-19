@@ -1,0 +1,36 @@
+  <div class="container-fluid">
+    <div class="table-responsive text-left">
+      <table class="usersTable table table-sm table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Last Login</th>
+            <th>Status</th>
+            <th>Provider</th>
+            <th>Created</th>
+            <th>Modified</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+          <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.firstname}}</td>
+            <td>{{this.lastname}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.role}}</td>
+            <td>{{dateToLocale this.last_login}}</td>
+            <td>{{this.status}}</td>
+            <td>{{this.strategy}}</td>
+            <td>{{dateToLocale this.createdAt}}</td>
+            <td>{{dateToLocale this.updatedAt}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>

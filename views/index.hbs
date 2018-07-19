@@ -1,0 +1,45 @@
+  <p>Welcome to {{title}}</p>
+
+  <p>You have to login to be able to add new content</p>
+  <p><a href="/signup"><button class="btn btn-primary">Register</button></a></p>
+
+  <p><button class="btn btn-primary signin">Login</button></p>
+  <div class="signin-form display-none">
+    <form method="post" action="/signin">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input name="email" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input name="password" type="password" class="form-control">
+      </div>
+      <input class="btn btn-primary btn-block" type="submit" value="Sign In">
+    </form>
+    <div class="btn-group btn-social">
+      <a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:16px"></i></a>
+      <a class='btn btn-primary' href='/auth/facebook' style="width:13em;"> Sign in with Facebook</a>
+    </div>	
+    <br />
+    <div class="btn-group btn-social">
+      <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:16px"></i></a>
+      <a class='btn btn-danger' href='/auth/google' style="width:13em;"> Sign in with Google</a>
+    </div>
+    <!-- <br />
+    <div class="btn-group btn-social">
+      <a class='btn btn-info disabled'><i class="fa fa-twitter" style="width:16px; height:20px"></i></a>
+      <a class='btn btn-info ' href='' style="width:12em"> Sign in with Twitter</a>
+    </div> -->
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href;
+      $('.signin').featherlight($(".signin-form"), {
+        afterOpen: function(event){
+          $(".signin-form").eq(1).show();
+        }
+      });
+    });
+  </script>
+

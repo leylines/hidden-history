@@ -1,0 +1,42 @@
+  <div class="container-fluid">
+    <div class="table-responsive text-left">
+      <table class="nodesTable table table-sm table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Other Name</th>
+            <th>From</th>
+            <th>Era</th>
+            <th>To</th>
+            <th>Era</th>
+            <th>Type</th>
+            <th>Link</th>
+            {{#if req.user}}
+            <th>Contributor</th>
+            <th>Approved</th>
+            {{/if}}
+          </tr>
+        </thead>
+        <tbody>
+        {{#each nodes}}
+          <tr>
+            <td>{{this.nodeId}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.otherName}}</td>
+            <td>{{dateToLocale this.fromDate}}</td>
+            <td>{{this.fromDateEra}}</td>
+            <td>{{dateToLocale this.toDate}}</td>
+            <td>{{this.toDateEra}}</td>
+            <td>{{this.nodetype.name}}</td>
+            <td>{{this.link}}</td>
+            {{#if ../req.user}}
+            <td>{{this.contributor}}</td>
+            <td>{{this.checked}}</td>
+            {{/if}}
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>

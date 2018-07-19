@@ -1,0 +1,108 @@
+  <div class="{{mode}}-form display-none">
+    <form method="post" action="/edges/{{mode}}">
+      {{#ifCond mode '==' 'update'}}
+      <input type="hidden" name="edgeId" class="edgeId-{{mode}}"/>
+      <input type="hidden" name="contributor" class="contributor-{{mode}}">
+      {{/ifCond}}
+      <fieldset class="form-group">
+        <label for="sourceNodeType">Node-Type</label>
+        <select type="number" name="sourceNodeType" class="form-control sourceNodeType-{{mode}}">
+          <option value="">Select Node-Type</option>
+          {{#each nodetypes}}
+            <option value="{{this.nodeTypeId}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="sourceNodeId">Source</label>
+        {{#ifCond mode '==' 'update'}}
+        <select type="number" name="sourceNodeId" class="form-control sourceNodeId-{{mode}}">
+        {{/ifCond}}
+        {{#ifCond mode '==' 'add'}}
+        <select type="number" name="sourceNodeId" class="form-control sourceNodeId-{{mode}}" disabled=true>
+        {{/ifCond}}
+          <option value="">Select Node</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="typeId">Relation</label>
+        <select type="number" name="typeId" class="form-control typeId-{{mode}}">
+          {{#each edgetypes}}
+            <option value="{{this.edgeTypeId}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="destinationNodeType">Node-Type</label>
+        <select type="number" name="destinationNodeType" class="form-control destinationNodeType-{{mode}}">
+          <option value="">Select Node-Type</option>
+          {{#each nodetypes}}
+            <option value="{{this.nodeTypeId}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="destinationNodeId">Destination</label>
+        {{#ifCond mode '==' 'update'}}
+        <select type="number" name="destinationNodeId" class="form-control destinationNodeId-{{mode}}">
+        {{/ifCond}}
+        {{#ifCond mode '==' 'add'}}
+        <select type="number" name="destinationNodeId" class="form-control destinationNodeId-{{mode}}" disabled=true>
+        {{/ifCond}}
+          <option value="">Select Node</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-row">
+        <fieldset class="form-group col-md-8">
+          <label for="fromDate">From</label>
+          <input type="date" name="fromDate" class="form-control fromDate-{{mode}}">
+        </fieldset>
+        <fieldset class="form-group col-md-4">
+          <label for="fromDateEra">Era</label>
+          <select type="string" name="fromDateEra" class="form-control fromDateEra-{{mode}}">
+            <option value="AD">AD</option>
+            <option value="BC">BC</option>
+          </select>
+        </fieldset>
+      </fieldset>
+      <fieldset class="form-row">
+        <fieldset class="form-group col-md-8">
+          <label for="toDate">To</label>
+          <input type="date" name="toDate" class="form-control toDate-{{mode}}">
+        </fieldset>
+        <fieldset class="form-group col-md-4">
+          <label for="toDateEra">Era</label>
+          <select type="string" name="toDateEra" class="form-control toDateEra-{{mode}}">
+            <option value="AD">AD</option>
+            <option value="BC">BC</option>
+          </select>
+        </fieldset>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="fact">Fact</label>
+        <select type="string" name="fact" class="form-control fact-{{mode}}">
+          <option value="fact">Fact</option>
+          <option value="fiction">Fiction</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="link">Link</label>
+        <input type="text" name="link" class="form-control link-{{mode}}">
+      </fieldset>
+      <fieldset class="form-check"{{#ifCond req.user.role '==' 'user'}} disabled{{/ifCond}}>
+        <input type="checkbox" name="checked" class="form-check-input checked-{{mode}}">
+        <label class="form-check-label" for="checked">Approved</label>
+      </fieldset>
+      {{#ifCond mode '==' 'update'}}
+      <button type="submit" class="btn btn-primary btn-block">Update</button>
+      {{/ifCond}}
+      {{#ifCond mode '==' 'add'}}
+      <button type="submit" class="btn btn-primary btn-block">Add</button>
+      {{/ifCond}}
+    </form>
+    {{#ifCond mode '==' 'update'}}
+      {{#ifCond req.user.role '==' 'admin'}}
+      <a class="delete-{{mode}}" href="/edges/delete?edgeId=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
+      {{/ifCond}}
+    {{/ifCond}}
+  </div>

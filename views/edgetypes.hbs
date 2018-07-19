@@ -1,0 +1,89 @@
+  <div class="container-fluid">
+    <div class="table-responsive text-left">
+      <table class="edgeTypesTable table table-sm table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Modified</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each edgetypes}}
+          <tr>
+            <td>{{this.edgeTypeId}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{dateToLocale this.createdAt}}</td>
+            <td>{{dateToLocale this.updatedAt}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {{#ifCond req.user.role '==' 'admin'}}
+  <button class="btn btn-primary add">Add Edge-Type</button>
+  <div class="update-form display-none">
+    <form method="post" action="/edgetypes/update">
+      <input type="hidden" name="edgeTypeId" class="edgeTypeId-u"/>
+      <fieldset class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control name-u">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="description">Description</label>
+        <textarea type="text" name="description" class="form-control description-u"></textarea>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">Update</button>
+    </form>
+    <a class="delete-u" href="/edgetypes/delete?edgeTypeId=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
+  </div>
+  <div class="add-form display-none">
+    <form method="post" action="/edgetypes/add">
+      <fieldset class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="description">Description</label>
+        <textarea type="text" name="description" class="form-control"></textarea>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">Add</button>
+    </form>
+  </div>
+  {{/ifCond}}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href;
+      $(".edgeTypesTable").DataTable({
+        pageLength: 20,
+        paging: true,
+        dom: 'frtip'
+      });
+      {{#ifCond req.user.role '==' 'admin'}}
+      $(".add").featherlight($(".add-form"), {
+        afterOpen: function(event){
+          $(".add-form").eq(1).show();
+        }
+      });
+      $(".edgeTypesTable tbody").featherlight($(".update-form"), {
+        afterOpen: function(event){
+          $(".update-form").eq(1).show();
+        }
+      });
+      var table = $(".edgeTypesTable").DataTable();
+      $(".edgeTypesTable tbody").on( 'click', 'tr', function () {
+        var data = table.row( this ).data();
+        $(".edgeTypeId-u").val(data[0]);
+        $(".delete-u").attr("href", function(i, origLink) {
+          return origLink.replace(/#/, data[0]);
+        });
+        $(".name-u").val(data[1]);
+        $(".description-u").val(data[2]);
+      });
+      {{/ifCond}}
+    });
+  </script>

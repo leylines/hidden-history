@@ -1,0 +1,84 @@
+
+  {{>nodes-table}}
+
+  {{#if req.user}}
+  <button class="btn btn-primary add">Add Node</button>
+  {{/if}}
+
+  {{#if req.user}}
+  {{>nodes-form mode='update'}}
+  {{>nodes-form mode='add'}}
+  {{/if}}
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href;
+      $(".nodesTable").DataTable({
+        pageLength: 30,
+        bStateSave: true,
+        paging: true,
+        dom: 'Bfrtip',
+        buttons: [
+          'colvis',
+          'copy',
+          {
+            extend: 'excel',
+            title: 'nodes'
+          },
+          {
+            extend: 'csv',
+            title: 'nodes'
+          }
+        ]
+      });
+      {{#if req.user}}
+      $(".add").featherlight($(".add-form"), {
+        afterOpen: function(event){
+          $(".add-form").eq(1).show();
+        },
+        afterClose: function(event){
+          $('.typeId-add').find('option').attr('selected',false);
+          $('.fromDateEra-add').find('option').attr('selected',false);
+          $('.toDateEra-add').find('option').attr('selected',false);
+        }
+      });
+      $(".nodesTable tbody").featherlight($(".update-form"), {
+        afterOpen: function(event){
+          $(".update-form").eq(1).show();
+        },
+        afterClose: function(event){
+          $('.typeId-update').find('option').attr('selected',false);
+          $('.fromDateEra-update').find('option').attr('selected',false);
+          $('.toDateEra-update').find('option').attr('selected',false);
+        }
+      });
+      var table = $(".nodesTable").DataTable();
+      $(".nodesTable tbody").on( 'click', 'tr', function () {
+        var data = table.row( this ).data();
+        $(".nodeId-update").val(data[0]);
+        $(".delete-update").attr("href", function(i, origLink) {
+          return origLink.replace(/#/, data[0]);
+        });
+        $(".name-update").val(data[1]);
+        $(".otherName-update").val(data[2]);
+        $(".fromDate-update").val(data[3]);
+        $(".fromDateEra-update").find('option').attr("selected",false) ;
+        if (data[4] != "") {
+          $(".fromDateEra-update").find('option:contains(' + data[4] + ')').attr("selected",true);
+        }
+        $(".toDate-update").val(data[5]);
+        $(".toDateEra-update").find('option').attr("selected",false) ;
+        if (data[6] != "") {
+          $(".toDateEra-update").find('option:contains(' + data[6] + ')').attr("selected",true);
+        }
+        $(".typeId-update").find('option').attr("selected",false) ;
+        $(".typeId-update").find('option:contains(' + data[7] + ')').attr("selected",true);
+        $(".link-update").val(data[8]);
+        $(".contributor-update").val(data[9]);
+        {{#ifCond req.user.role '==' 'admin'}}
+        $(".checked-update").prop("checked", (data[10] == 'true'));
+        {{/ifCond}}
+      });
+      {{/if}}
+    });
+  </script>

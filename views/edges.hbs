@@ -1,0 +1,143 @@
+
+  {{>edges-table}}
+
+  {{#if req.user}}
+  <button class="btn btn-primary add">Add Relation</button>
+  {{/if}}
+
+  {{#if req.user}}
+  {{>edges-form mode='update'}}
+  {{>edges-form mode='add'}}
+  {{/if}}
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href;
+      $(".edgesTable").DataTable({
+        pageLength: 30,
+        bStateSave: true,
+        paging: true,
+        dom: 'Bfrtip',
+        buttons: [
+          'colvis',
+          'copy',
+          {
+            extend: 'excel',
+            title: 'nodes'
+          },
+          {
+            extend: 'csv',
+            title: 'nodes'
+          }
+        ]
+      });
+      {{#if req.user}}
+      $(".add").featherlight($(".add-form"), {
+        afterOpen: function(event){
+          $(".add-form").eq(1).show();
+        },
+        afterClose: function(event){
+          $('.sourceNodeType-add').prepend($('<option>').val("").text("Select Node-Type"));
+          $('.sourceNodeType-add').find('option').attr('selected',false);
+          $('.sourceNodeId-add').prepend($('<option>').val("").text("Select Node"));
+          $('.sourceNodeId-add').find('option').attr('selected',false);
+          $('.sourceNodeId-add').attr('disabled',true);
+          $('.typeId-add').find('option').attr("selected",false);
+          $('.destinationNodeType-add').prepend($('<option>').val("").text("Select Node-Type"));
+          $('.destinationNodeType-add').find('option').attr('selected',false);
+          $('.destinationNodeId-add').prepend($('<option>').val("").text("Select Node"));
+          $('.destinationNodeId-add').find('option').attr('selected',false);
+          $('.destinationNodeId-add').attr('disabled',true);
+          $('.fromDateEra-add').find('option').attr('selected',false);
+          $('.toDateEra-add').find('option').attr('selected',false);
+          $('.fact-add').find('option').attr('selected',false);
+        }
+      });
+      $(".edgesTable tbody").featherlight($(".update-form"), {
+        afterOpen: function(event){
+          $(".update-form").eq(1).show();
+        },
+        afterClose: function(event){
+          $('.sourceNodeType-update').find('option').attr('selected',false);
+          $('.sourceNodeId-update').find('option').attr('selected',false);
+          $('.typeId-update').find('option').attr("selected",false);
+          $('.destinationNodeType-update').find('option').attr('selected',false);
+          $('.destinationNodeId-update').find('option').attr('selected',false);
+          $('.fromDateEra-update').find('option').attr('selected',false);
+          $('.toDateEra-update').find('option').attr('selected',false);
+          $('.fact-update').find('option').attr('selected',false);
+        }
+      });
+
+      var table = $(".edgesTable").DataTable();
+      $(".edgesTable tbody").on( 'click', 'tr', function () {
+        var data = table.row( this ).data();
+        $(".edgeId-update").val(data[0]);
+        $(".delete-update").attr("href", function(i, origLink) {
+          return origLink.replace(/#/, data[0]);
+        });
+        $('.sourceNodeType-update').find('option:contains(' + data[1] + ')').attr('selected',true);
+        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', $('.sourceNodeType-update').val());
+        $(document).ajaxStop(function() {
+          $('.sourceNodeId-update').find('option:contains(' + data[2] + ')').attr('selected',true);
+        });
+        $('.typeId-update').find('option:contains(' + data[3] + ')').attr('selected',true);
+        $('.destinationNodeType-update').find('option:contains(' + data[4] + ')').attr('selected',true);
+        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update', $('.destinationNodeType-update').val());
+        $(document).ajaxStop(function() {
+          $('.destinationNodeId-update').find('option:contains(' + data[5] + ')').attr('selected',true);
+        });
+        $('.fromDate-update').val(data[6]);
+        if (data[7] != "") {
+          $('.fromDateEra-update').find('option:contains(' + data[7] + ')').attr('selected',true);
+        };
+        $('.toDate-update').val(data[8]);
+        if (data[9] != "") {
+          $('.toDateEra-update').find('option:contains(' + data[9] + ')').attr('selected',true);
+        };
+        $('.fact-update').find('option[value=' + data[10] + ']').attr("selected",true);
+        $('.contributor-update').val(data[12]);
+        {{#ifCond req.user.role '==' 'admin'}}
+        $('.checked-update').prop('checked', (data[13] == 'true'));
+        {{/ifCond}}
+      });
+      $('.sourceNodeType-add').change(function(){
+        var selectedTypeid = $(this).val();
+        updateDropDown('.sourceNodeType-add', '.sourceNodeId-add', selectedTypeid);
+      });
+      $('.sourceNodeType-update').change(function(){
+        var selectedTypeid = $(this).val();
+        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', selectedTypeid);
+      });
+      $('.destinationNodeType-add').change(function(){
+        var selectedTypeid = $(this).val();
+        updateDropDown('.destinationNodeType-add', '.destinationNodeId-add', selectedTypeid);
+      });
+      $('.destinationNodeType-update').change(function(){
+        var selectedTypeid = $(this).val();
+        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update', selectedTypeid);
+      });
+      {{/if}}
+    });
+
+    {{#if req.user}}
+    function updateDropDown(sdropdown, ddropdown, selection) {
+      $.ajax({
+        type: 'GET',
+        url : 'select/getnodesbyid/?nodeTypeId=' + selection,
+        success: function(result) {
+          $(ddropdown).empty();
+          for (row in result) {
+            $(ddropdown).append($("<option>").val(result[row].nodeId).text(result[row].name));
+          }
+          $(ddropdown).attr("disabled", false);
+          $(sdropdown  + ' option[value=""]').remove();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + ":" + textStatus + ":" + errorThrown);
+        }
+      });
+    }
+    {{/if}}
+         
+  </script>
