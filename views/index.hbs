@@ -1,8 +1,20 @@
-  <p>Welcome to {{title}}</p>
+<div class="container">
+  <h4>Welcome to {{context.title}}</h4>
 
+  <p>Hidden-History tries to capture and break down the hidden story using a graph database.</p>
+
+  <h5>Graph-Database</h5>
+
+  <p>In computing, a graph database is a database that uses graph structures for semantic queries with nodes, edges and properties to represent and store data. A key concept of the system is the graph (or edge or relationship), which directly relates data items in the store. The relationships allow data in the store to be linked together directly, and in many cases retrieved with one operation.</p>
+
+  <h5>Intention</h5>
+
+  <p>The intention of this project is to build a community based database where the result of the addition are directly visible in the <a href="/vis">graphical representation</a>. Everyone is welcome to contribute knowledge and help building an alternative view of our history. The focus of the database is <strong>not</strong> to just represent the generally accepted history but also to include potential relations and so called conspiracy theories.</p>
+ 
   <p>You have to login to be able to add new content. You can use your Facebook or Google-Account to login</p>
   <p><button class="btn btn-primary signin">Login</button></p>
   <p><a href="/signup"><button class="btn btn-primary">Register</button></a></p>
+</div>
 
   <div class="signin-form display-none">
     <form method="post" action="/signin">
