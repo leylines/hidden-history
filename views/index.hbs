@@ -12,37 +12,50 @@
   <p>The intention of this project is to build a community based database where the result of the addition are directly visible in the <a href="/vis">graphical representation</a>. Everyone is welcome to contribute knowledge and help building an alternative view of our history. The focus of the database is <strong>not</strong> to just represent the generally accepted history but also to include potential relations and so called conspiracy theories.</p>
  
   <p>You have to login to be able to add new content. You can use your Facebook or Google-Account to login</p>
-  <p><button class="btn btn-primary signin">Login</button></p>
+  <p><button class="btn btn-primary" data-toggle="modal" data-target=".signin-form">Add Relation</button></p>
   <p><a href="/signup"><button class="btn btn-primary">Register</button></a></p>
 </div>
 
-  <div class="signin-form display-none">
-    <form method="post" action="/signin">
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input name="email" type="text" class="form-control">
+<div class="signin-form modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input name="password" type="password" class="form-control">
+      <div class="modal-body">
+
+        <form method="post" action="/signin">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input name="email" type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input name="password" type="password" class="form-control">
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" value="Sign In">
+        </form>
+        <div class="btn-group btn-social">
+          <a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:16px"></i></a>
+          <a class='btn btn-primary' href='/auth/facebook' style="width:13em;"> Sign in with Facebook</a>
+        </div>	
+        <br />
+        <div class="btn-group btn-social">
+          <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:16px"></i></a>
+          <a class='btn btn-danger' href='/auth/google' style="width:13em;"> Sign in with Google</a>
+        </div>
+        <!-- <br />
+        <div class="btn-group btn-social">
+          <a class='btn btn-info disabled'><i class="fa fa-twitter" style="width:16px; height:20px"></i></a>
+          <a class='btn btn-info ' href='' style="width:12em"> Sign in with Twitter</a>
+        </div> -->
       </div>
-      <input class="btn btn-primary btn-block" type="submit" value="Sign In">
-    </form>
-    <div class="btn-group btn-social">
-      <a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:16px"></i></a>
-      <a class='btn btn-primary' href='/auth/facebook' style="width:13em;"> Sign in with Facebook</a>
-    </div>	
-    <br />
-    <div class="btn-group btn-social">
-      <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:16px"></i></a>
-      <a class='btn btn-danger' href='/auth/google' style="width:13em;"> Sign in with Google</a>
     </div>
-    <!-- <br />
-    <div class="btn-group btn-social">
-      <a class='btn btn-info disabled'><i class="fa fa-twitter" style="width:16px; height:20px"></i></a>
-      <a class='btn btn-info ' href='' style="width:12em"> Sign in with Twitter</a>
-    </div> -->
   </div>
+</div>
 
   <script type="text/javascript">
     $(document).ready(function(){
