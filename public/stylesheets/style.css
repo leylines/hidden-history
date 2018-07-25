@@ -32,16 +32,11 @@ label {
   margin: 0 auto;
 }
 
-
-.display-none {
-  display: none;
-}
-
 .btn {
   font-size: 0.875rem;
 }
 
-.btn-delete, .btn-social {
+.btn-delete, .btn-social, .btn-discard {
   margin-top: 0.5rem;
 }
 
@@ -70,9 +65,8 @@ label {
   padding: .1rem .4rem .1rem .4rem;
 }
 
-.featherlight .featherlight-content {
-  padding: 15px 15px 0;
-  border-radius: 3px;
+.modal {
+  text-align: left;	
 }
 
 .mynetwork {
@@ -87,3 +81,10 @@ label {
   height: 600px;
 }
 
+.vis-configuration {
+  float: right;
+}
+
+.vis-configuration-wrapper {
+  width: 200px;
+}

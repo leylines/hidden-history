@@ -2,7 +2,7 @@
   {{>edges-table}}
 
   {{#if req.user}}
-  <button class="btn btn-primary add">Add Relation</button>
+  <button class="btn btn-primary" data-toggle="modal" data-target=".add-form">Add Relation</button>
   {{/if}}
 
   {{#if req.user}}
@@ -32,43 +32,16 @@
         ]
       });
       {{#if req.user}}
-      $(".add").featherlight($(".add-form"), {
-        afterOpen: function(event){
-          $(".add-form").eq(1).show();
-        },
-        afterClose: function(event){
-          $('.sourceNodeType-add').prepend($('<option>').val("").text("Select Node-Type"));
-          $('.sourceNodeType-add').find('option').attr('selected',false);
-          $('.sourceNodeId-add').prepend($('<option>').val("").text("Select Node"));
-          $('.sourceNodeId-add').find('option').attr('selected',false);
-          $('.sourceNodeId-add').attr('disabled',true);
-          $('.typeId-add').find('option').attr("selected",false);
-          $('.destinationNodeType-add').prepend($('<option>').val("").text("Select Node-Type"));
-          $('.destinationNodeType-add').find('option').attr('selected',false);
-          $('.destinationNodeId-add').prepend($('<option>').val("").text("Select Node"));
-          $('.destinationNodeId-add').find('option').attr('selected',false);
-          $('.destinationNodeId-add').attr('disabled',true);
-          $('.fromDateEra-add').find('option').attr('selected',false);
-          $('.toDateEra-add').find('option').attr('selected',false);
-          $('.fact-add').find('option').attr('selected',false);
-        }
+      $('.update-form').on('hidden.bs.modal', function(event) {
+        $('.sourceNodeType-update').find('option').attr('selected',false);
+        $('.sourceNodeId-update').find('option').attr('selected',false);
+        $('.typeId-update').find('option').attr("selected",false);
+        $('.destinationNodeType-update').find('option').attr('selected',false);
+        $('.destinationNodeId-update').find('option').attr('selected',false);
+        $('.fromDateEra-update').find('option').attr('selected',false);
+        $('.toDateEra-update').find('option').attr('selected',false);
+        $('.fact-update').find('option').attr('selected',false);
       });
-      $(".edgesTable tbody").featherlight($(".update-form"), {
-        afterOpen: function(event){
-          $(".update-form").eq(1).show();
-        },
-        afterClose: function(event){
-          $('.sourceNodeType-update').find('option').attr('selected',false);
-          $('.sourceNodeId-update').find('option').attr('selected',false);
-          $('.typeId-update').find('option').attr("selected",false);
-          $('.destinationNodeType-update').find('option').attr('selected',false);
-          $('.destinationNodeId-update').find('option').attr('selected',false);
-          $('.fromDateEra-update').find('option').attr('selected',false);
-          $('.toDateEra-update').find('option').attr('selected',false);
-          $('.fact-update').find('option').attr('selected',false);
-        }
-      });
-
       var table = $(".edgesTable").DataTable();
       $(".edgesTable tbody").on( 'click', 'tr', function () {
         var data = table.row( this ).data();
@@ -100,22 +73,36 @@
         {{#ifCond req.user.role '==' 'admin'}}
         $('.checked-update').prop('checked', (data[13] == 'true'));
         {{/ifCond}}
+        $('.update-form').modal('show')
+      });
+      $('.discard-add').click(function(){
+        $('.sourceNodeType-add').prop('selectedIndex',0);
+        $('.sourceNodeId-add').empty();
+        $('.sourceNodeId-add').append($("<option hidden selected>").val('').text('Select Node'));
+        $('.sourceNodeId-add').attr('disabled',true);
+        $('.typeId-add').prop('selectedIndex',0);
+        $('.destinationNodeType-add').prop('selectedIndex',0);
+        $('.destinationNodeId-add').empty();
+        $('.destinationNodeId-add').append($("<option hidden selected>").val('').text('Select Node'));
+        $('.destinationNodeId-add').attr('disabled',true);
+        $('.fromDate-add').val('');
+        $('.fromDateEra-add').prop('selectedIndex',0);
+        $('.toDate-add').val('');
+        $('.toDateEra-add').prop('selectedIndex',0);
+        $('.fact-add').prop('selectedIndex',0);
+        $('.add-form').modal('hide')
       });
       $('.sourceNodeType-add').change(function(){
-        var selectedTypeid = $(this).val();
-        updateDropDown('.sourceNodeType-add', '.sourceNodeId-add', selectedTypeid);
+        updateDropDown('.sourceNodeType-add', '.sourceNodeId-add', $(this).val());
       });
       $('.sourceNodeType-update').change(function(){
-        var selectedTypeid = $(this).val();
-        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', selectedTypeid);
+        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', $(this).val());
       });
       $('.destinationNodeType-add').change(function(){
-        var selectedTypeid = $(this).val();
-        updateDropDown('.destinationNodeType-add', '.destinationNodeId-add', selectedTypeid);
+        updateDropDown('.destinationNodeType-add', '.destinationNodeId-add', $(this).val());
       });
       $('.destinationNodeType-update').change(function(){
-        var selectedTypeid = $(this).val();
-        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update', selectedTypeid);
+        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update',  $(this).val());
       });
       {{/if}}
     });
@@ -131,7 +118,6 @@
             $(ddropdown).append($("<option>").val(result[row].nodeId).text(result[row].name));
           }
           $(ddropdown).attr("disabled", false);
-          $(sdropdown  + ' option[value=""]').remove();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR + ":" + textStatus + ":" + errorThrown);
