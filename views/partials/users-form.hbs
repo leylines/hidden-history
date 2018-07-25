@@ -1,34 +1,48 @@
-  <div class="{{mode}}-form display-none">
-    <form method="post" action="/users/{{mode}}">
-      {{#ifCond mode '==' 'update'}}
-      <input type="hidden" name="id" class="id-{{mode}}">
-      {{/ifCond}}
-      <fieldset class="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" name="firstname" class="form-control firstname-{{mode}}">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="lastname">Last Name</label>
-        <input type="text" name="lastname" class="form-control lastname-{{mode}}">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="email">Last Name</label>
-        <input type="text" name="email" class="form-control email-{{mode}}">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="role">Role</label>
-        <select type="string" name="role" class="form-control role-{{mode}}">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-      </fieldset>
-      {{#ifCond mode '==' 'update'}}
-      <button type="submit" class="btn btn-primary btn-block">Update</button>
-      {{/ifCond}}
-    </form>
-    {{#ifCond mode '==' 'update'}}
-      {{#ifCond req.user.role '==' 'admin'}}
-      <a class="delete-{{mode}}" href="/users/delete?id=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
-      {{/ifCond}}
-    {{/ifCond}}
+<div class="{{mode}}-form modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{mode}} User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="post" action="/users/{{mode}}">
+          {{#ifCond mode '==' 'update'}}
+          <input type="hidden" name="id" class="id-{{mode}}">
+          {{/ifCond}}
+          <fieldset class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" class="form-control firstname-{{mode}}">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" class="form-control lastname-{{mode}}">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="email">Last Name</label>
+            <input type="text" name="email" class="form-control email-{{mode}}">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="role">Role</label>
+            <select type="string" name="role" class="form-control role-{{mode}}">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </fieldset>
+          {{#ifCond mode '==' 'update'}}
+          <button type="submit" class="btn btn-primary btn-block">Update</button>
+          {{/ifCond}}
+        </form>
+        {{#ifCond mode '==' 'update'}}
+          {{#ifCond req.user.role '==' 'admin'}}
+          <a class="delete-{{mode}}" href="/users/delete?id=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
+          {{/ifCond}}
+        {{/ifCond}}
+      </div>
+
+    </div>
   </div>
+</div>
