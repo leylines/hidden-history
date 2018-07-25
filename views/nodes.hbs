@@ -32,25 +32,13 @@
         ]
       });
       {{#if req.user}}
-      $(".add").featherlight($(".add-form"), {
-        afterOpen: function(event){
-          $(".add-form").eq(1).show();
-        },
-        afterClose: function(event){
-          $('.typeId-add').find('option').attr('selected',false);
-          $('.fromDateEra-add').find('option').attr('selected',false);
-          $('.toDateEra-add').find('option').attr('selected',false);
-        }
-      });
-      $(".nodesTable tbody").featherlight($(".update-form"), {
-        afterOpen: function(event){
-          $(".update-form").eq(1).show();
-        },
-        afterClose: function(event){
-          $('.typeId-update').find('option').attr('selected',false);
-          $('.fromDateEra-update').find('option').attr('selected',false);
-          $('.toDateEra-update').find('option').attr('selected',false);
-        }
+      $('.update-form').on('hidden.bs.modal', function(event) {
+        $('.name-update').val('');
+        $('.otherName-update').val('');
+        $('.fromDateEra-update').find('option').attr('selected',false);
+        $('.toDateEra-update').find('option').attr('selected',false);
+        $('.typeId-update').find('option').attr('selected',false);
+        $('.link-update').val('');
       });
       var table = $(".nodesTable").DataTable();
       $(".nodesTable tbody").on( 'click', 'tr', function () {
@@ -78,6 +66,18 @@
         {{#ifCond req.user.role '==' 'admin'}}
         $(".checked-update").prop("checked", (data[10] == 'true'));
         {{/ifCond}}
+        $('.update-form').modal('show')
+      });
+      $('.discard-add').click(function(){
+        $('.name-add').val('');
+        $('.otherName-add').val('');
+        $('.fromDate-add').val('');
+        $('.fromDateEra-add').prop('selectedIndex',0);
+        $('.toDate-add').val('');
+        $('.toDateEra-add').prop('selectedIndex',0);
+        $('.typeId-add').prop('selectedIndex',0);
+        $('.link-add').val('');
+        $('.add-form').modal('hide')
       });
       {{/if}}
     });

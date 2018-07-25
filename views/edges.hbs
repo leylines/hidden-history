@@ -41,6 +41,7 @@
         $('.fromDateEra-update').find('option').attr('selected',false);
         $('.toDateEra-update').find('option').attr('selected',false);
         $('.fact-update').find('option').attr('selected',false);
+        $('.link-update').val('');
       });
       var table = $(".edgesTable").DataTable();
       $(".edgesTable tbody").on( 'click', 'tr', function () {
@@ -69,6 +70,7 @@
           $('.toDateEra-update').find('option:contains(' + data[9] + ')').attr('selected',true);
         };
         $('.fact-update').find('option[value=' + data[10] + ']').attr("selected",true);
+        $('.link-update').find('option[value=' + data[11] + ']').attr("selected",true);
         $('.contributor-update').val(data[12]);
         {{#ifCond req.user.role '==' 'admin'}}
         $('.checked-update').prop('checked', (data[13] == 'true'));
@@ -90,6 +92,7 @@
         $('.toDate-add').val('');
         $('.toDateEra-add').prop('selectedIndex',0);
         $('.fact-add').prop('selectedIndex',0);
+        $('.link-add').val('');
         $('.add-form').modal('hide')
       });
       $('.sourceNodeType-add').change(function(){
