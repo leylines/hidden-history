@@ -75,7 +75,7 @@
         {{#ifCond req.user.role '==' 'admin'}}
         $('.checked-update').prop('checked', (data[13] == 'true'));
         {{/ifCond}}
-        $('.update-form').modal('show')
+        $('.update-form').modal('show');
       });
       $('.discard-add').click(function(){
         $('.sourceNodeType-add').prop('selectedIndex',0);
@@ -93,7 +93,7 @@
         $('.toDateEra-add').prop('selectedIndex',0);
         $('.fact-add').prop('selectedIndex',0);
         $('.link-add').val('');
-        $('.add-form').modal('hide')
+        $('.add-form').modal('hide');
       });
       $('.sourceNodeType-add').change(function(){
         updateDropDown('.sourceNodeType-add', '.sourceNodeId-add', $(this).val());
