@@ -77,14 +77,51 @@ label {
 
 .config {
   margin: 1rem;
-  width: 550px;
+  width: 500px;
   height: 600px;
 }
 
 .vis-configuration {
-  float: right;
 }
 
-.vis-configuration-wrapper {
-  width: 200px;
+.vis-config-item {
+  display: flex;
+  flex-flow: row wrap;
 }
+
+.vis-config-header { 
+  flex: 1;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-shadow: 1px 1px grey;
+  font-weight: bold;
+}
+
+.vis-config-label { 
+  font-size: 0.7rem;
+  width: 130px;
+  text-align: left;
+}
+
+.vis-config-select {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.vis-config-checkbox {
+  margin-bottom: 10px;
+}
+
+.vis-config-range {
+  width: 200px;
+  flex: 1;
+}
+.vis-config-rangeinput {
+  margin-left: 5px;
+  width: 60px;
+}
+
+.vis-config-button {
+  display: none;
+}
+
