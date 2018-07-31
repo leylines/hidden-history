@@ -12,12 +12,6 @@ label {
   margin-bottom: .3rem;
 }
 
-.abs-center-x {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .page-footer {
   /*position: absolute;*/
   bottom: 0;

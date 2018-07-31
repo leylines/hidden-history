@@ -1,9 +1,9 @@
-  <nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-between">
+  <nav class="navbar navbar-dark navbar-expand-md bg-dark fixed-top justify-content-between">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-nav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
+      <div class="navbar-collapse collapse dual-nav w-100 order-1 order-md-0">
         <ul class="navbar-nav">
           <li class="nav-item{{#ifCond req.url '==' '/'}} active{{/ifCond}}">
             {{#if req.user}}
@@ -36,8 +36,8 @@
           {{/ifCond}}
         </ul>
       </div>
-      <span class="navbar-brand mx-auto d-block text-warning text-center order-0 order-md-1 w-25">{{context.title}}</span>
-      <div class="navbar-collapse collapse dual-nav w-50 order-2">
+      <span class="navbar-brand mx-auto d-block text-warning text-center order-0 order-md-1 w-50"><small>{{context.title}}</small></span>
+      <div class="navbar-collapse collapse dual-nav w-100 order-2">
         <ul class="nav navbar-nav ml-auto">
           {{#if req.user}}
           <li class="nav-item navbar-text px-2">Logged in as {{req.user.email}}</li>
