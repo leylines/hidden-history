@@ -16,7 +16,6 @@
       $(".edgeTypesTable").DataTable({
         pageLength: 20,
         paging: true,
-        responsive: true,
         dom: 'frtip'
       });
       {{#ifCond req.user.role '==' 'admin'}}
