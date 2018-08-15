@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
 		}
 	}, {
 		freezeTableName: true,
-		schema: 'hidden_forms'
+		schema: sequelize.config.schema
 	});
 
 

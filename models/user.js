@@ -39,7 +39,7 @@ module.exports = function(sequelize, Sequelize) {
             defaultValue: 'active'
         }
     }, {
-		schema: 'hidden_forms'
-	});
+	schema: sequelize.config.schema
+    });
     return user;
 }
