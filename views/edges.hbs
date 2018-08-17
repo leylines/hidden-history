@@ -61,18 +61,20 @@
         $(document).ajaxStop(function() {
           $('.destinationNodeId-update').find('option:contains(' + data[5] + ')').attr('selected',true);
         });
-        $('.fromDate-update').val(data[6]);
+        var [year, month, day] = data[6].split('-');
+        $(".fromDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
         if (data[7] != "") {
           $('.fromDateEra-update').find('option:contains(' + data[7] + ')').attr('selected',true);
         };
-        $('.toDate-update').val(data[8]);
+        var [year, month, day] = data[8].split('-');
+        $(".toDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
         if (data[9] != "") {
           $('.toDateEra-update').find('option:contains(' + data[9] + ')').attr('selected',true);
         };
         $('.fact-update').find('option[value=' + data[10] + ']').attr("selected",true);
         $('.link-update').val(data[11]);
         $('.contributor-update').val(data[12]);
-        {{#ifCond req.user.role '==' 'admin'}}
+        {{ifCond req.user.role '==' 'admin'}}
         $('.checked-update').prop('checked', (data[13] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');

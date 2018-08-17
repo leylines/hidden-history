@@ -28,10 +28,8 @@ module.exports = function(app, nodes, nodetypes) {
       nodes.update({
         name: req.body.name,
         otherName: req.body.otherName,
-        fromDate: (req.body.fromDate == '' ? null : req.body.fromDate),
-        fromDateEra: (req.body.fromDateEra == 'AD' ? null : req.body.fromDateEra),
-        toDate: (req.body.toDate == '' ? null : req.body.toDate),
-        toDateEra: (req.body.toDateEra == 'AD' ? null : req.body.toDateEra),
+        fromDate: (req.body.fromDate == '' ? null : req.body.fromDate + "|" + req.body.fromDateEra),
+        toDate: (req.body.toDate == '' ? null : req.body.toDate + "|" + req.body.toDateEra),
         typeId: req.body.typeId,
         link: req.body.link,
         contributor: (req.body.checked == 'on' ? req.body.contributor : req.user.email),

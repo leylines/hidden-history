@@ -49,12 +49,14 @@
         });
         $(".name-update").val(data[1]);
         $(".otherName-update").val(data[2]);
-        $(".fromDate-update").val(data[3]);
+        var [year, month, day] = data[3].split('-');
+        $(".fromDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
         $(".fromDateEra-update").find('option').attr("selected",false) ;
         if (data[4] != "") {
           $(".fromDateEra-update").find('option:contains(' + data[4] + ')').attr("selected",true);
         }
-        $(".toDate-update").val(data[5]);
+        var [year, month, day] = data[5].split('-');
+        $(".toDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
         $(".toDateEra-update").find('option').attr("selected",false) ;
         if (data[6] != "") {
           $(".toDateEra-update").find('option:contains(' + data[6] + ')').attr("selected",true);
@@ -63,7 +65,7 @@
         $(".typeId-update").find('option:contains(' + data[7] + ')').attr("selected",true);
         $(".link-update").val(data[8]);
         $(".contributor-update").val(data[9]);
-        {{#ifCond req.user.role '==' 'admin'}}
+        {{ifCond req.user.role '==' 'admin'}}
         $(".checked-update").prop("checked", (data[10] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');

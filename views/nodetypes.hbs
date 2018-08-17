@@ -1,13 +1,13 @@
 
   {{>nodetypes-table}}
 
-  {{#ifCond req.user.role '==' 'admin'}}
+  {{ifCond req.user.role '==' 'admin'}}
   <button class="btn btn-primary" data-toggle="modal" data-target=".add-form">Add Node-Type</button>
   {{/ifCond}}
 
 
 
-  {{#ifCond req.user.role '==' 'admin'}}
+  {{ifCond req.user.role '==' 'admin'}}
   {{>nodetypes-form mode='update'}}
   {{>nodetypes-form mode='add'}}
   {{/ifCond}}
@@ -20,7 +20,7 @@
         paging: true,
         dom: 'frtip'
       });
-      {{#ifCond req.user.role '==' 'admin'}}
+      {{ifCond req.user.role '==' 'admin'}}
       $('.update-form').on('hidden.bs.modal', function(event) {
         $('.name-update').val('');
         $('.description-update').val('');
