@@ -74,7 +74,7 @@
         $('.fact-update').find('option[value=' + data[10] + ']').attr("selected",true);
         $('.link-update').val(data[11]);
         $('.contributor-update').val(data[12]);
-        {{ifCond req.user.role '==' 'admin'}}
+        {{#ifCond req.user.role '==' 'admin'}}
         $('.checked-update').prop('checked', (data[13] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');

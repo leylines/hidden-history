@@ -10,7 +10,7 @@
       <div class="modal-body">
 
         <form method="post" action="/users/{{mode}}">
-          {{ifCond mode '==' 'update'}}
+          {{#ifCond mode '==' 'update'}}
           <input type="hidden" name="id" class="id-{{mode}}">
           {{/ifCond}}
           <fieldset class="form-group">
@@ -32,12 +32,12 @@
               <option value="admin">Admin</option>
             </select>
           </fieldset>
-          {{ifCond mode '==' 'update'}}
+          {{#ifCond mode '==' 'update'}}
           <button type="submit" class="btn btn-primary btn-block">Update</button>
           {{/ifCond}}
         </form>
-        {{ifCond mode '==' 'update'}}
-          {{ifCond req.user.role '==' 'admin'}}
+        {{#ifCond mode '==' 'update'}}
+          {{#ifCond req.user.role '==' 'admin'}}
           <a class="delete-{{mode}}" href="/users/delete?id=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
           {{/ifCond}}
         {{/ifCond}}

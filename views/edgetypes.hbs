@@ -1,11 +1,11 @@
 
   {{>edgetypes-table}}
 
-  {{ifCond req.user.role '==' 'admin'}}
+  {{#ifCond req.user.role '==' 'admin'}}
   <button class="btn btn-primary" data-toggle="modal" data-target=".add-form">Add Edge-Type</button>
   {{/ifCond}}
 
-  {{ifCond req.user.role '==' 'admin'}}
+  {{#ifCond req.user.role '==' 'admin'}}
   {{>edgetypes-form mode='update'}}
   {{>edgetypes-form mode='add'}}
   {{/ifCond}}
@@ -18,7 +18,7 @@
         paging: true,
         dom: 'frtip'
       });
-      {{ifCond req.user.role '==' 'admin'}}
+      {{#ifCond req.user.role '==' 'admin'}}
       $('.update-form').on('hidden.bs.modal', function(event) {
         $('.name-update').val('');
         $('.description-update').val('');

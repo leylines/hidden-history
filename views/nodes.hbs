@@ -65,7 +65,7 @@
         $(".typeId-update").find('option:contains(' + data[7] + ')').attr("selected",true);
         $(".link-update").val(data[8]);
         $(".contributor-update").val(data[9]);
-        {{ifCond req.user.role '==' 'admin'}}
+        {{#ifCond req.user.role '==' 'admin'}}
         $(".checked-update").prop("checked", (data[10] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');

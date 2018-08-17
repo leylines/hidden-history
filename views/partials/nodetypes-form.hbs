@@ -10,7 +10,7 @@
 
       <div class="modal-body">
         <form method="post" action="/nodetypes/{{mode}}">
-          {{ifCond mode '==' 'update'}}
+          {{#ifCond mode '==' 'update'}}
           <input type="hidden" name="nodeTypeId" class="nodeTypeId-{{mode}}">
           {{/ifCond}}
           <fieldset class="form-group">
@@ -21,18 +21,18 @@
             <label for="description">Description</label>
             <textarea type="text" name="description" class="form-control description-{{mode}}"></textarea>
           </fieldset>
-          {{ifCond mode '==' 'update'}}
+          {{#ifCond mode '==' 'update'}}
           <button type="submit" class="btn btn-success btn-block">Update</button>
           {{/ifCond}}
-          {{ifCond mode '==' 'add'}}
+          {{#ifCond mode '==' 'add'}}
           <button type="submit" class="btn btn-success btn-block">Add</button>
           {{/ifCond}}
         </form>
-        {{ifCond mode '==' 'add'}}
+        {{#ifCond mode '==' 'add'}}
         <button class="discard-{{mode}} btn btn-secondary btn-block btn-discard">Discard</button>
         {{/ifCond}}
-        {{ifCond mode '==' 'update'}}
-          {{ifCond req.user.role '==' 'admin'}}
+        {{#ifCond mode '==' 'update'}}
+          {{#ifCond req.user.role '==' 'admin'}}
           <a class="delete-{{mode}}" href="/nodetypes/delete?nodeTypeId=#"><button class="btn btn-danger btn-block btn-delete">Delete</button></a>
           {{/ifCond}}
         {{/ifCond}}
