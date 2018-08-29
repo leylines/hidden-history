@@ -1,0 +1,33 @@
+<div class="d-flex flex-wrap flex-md-nowrap">
+  <div id="3d-graph" class="mynetwork flex-fill"></div>
+</div>
+
+<script>
+  const elem = document.getElementById('3d-graph');
+  const Graph = ForceGraph3D()
+    (document.getElementById('3d-graph'))
+      .forceEngine('d3')
+      .jsonUrl('/download/json')
+      .linkLabel('label')
+      .linkWidth(1)
+      .linkAutoColorBy('label')
+      .linkDirectionalArrowLength(3.5)
+      .linkDirectionalArrowRelPos(1)
+      .linkCurvature(0.95)
+      .linkOpacity(0.5)
+      .linkSource('from')
+      .linkTarget('to')
+      .nodeLabel('label')
+      .nodeAutoColorBy('group')
+      .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+      .onNodeClick(node => {
+        // Aim at node from outside it
+        const distance = 40;
+        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+        Graph.cameraPosition(
+          { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+          node, // lookAt ({ x, y, z })
+          3000  // ms transition duration
+        );
+      });
+</script>

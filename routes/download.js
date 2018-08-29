@@ -125,7 +125,7 @@ module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
           res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\"},");
         }
       }
-      res.write("], \"edges\":[");
+      res.write("], \"links\":[");
       for(var i=0; i < Edges.length; i++){
         if (i == Edges.length - 1) {
           res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\"}");

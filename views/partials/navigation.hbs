@@ -12,8 +12,11 @@
             <a class="nav-link" href="/">Home</a>
             {{/if}}
           </li>
-          <li class="nav-item{{#ifCond req.url '==' '/vis'}} active{{/ifCond}}">
-            <a class="nav-link" href="/vis">Graph</a>
+          <li class="nav-item{{#ifCond req.url '==' '/graph'}} active{{/ifCond}}">
+            <a class="nav-link" href="/graph">Graph</a>
+          </li>
+          <li class="nav-item{{#ifCond req.url '==' '/graph3d'}} active{{/ifCond}}">
+            <a class="nav-link" href="/graph3d">Graph3D</a>
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/nodes'}} active{{/ifCond}}">
             <a class="nav-link" href="/nodes">Nodes</a>

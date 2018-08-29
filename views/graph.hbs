@@ -119,7 +119,7 @@ var json = $.getJSON("/download/json")
   .done(function(data){
     var data = {
       nodes: data.nodes,
-      edges: data.edges
+      edges: data.links
     };
     var network = new vis.Network(container, data, options);
   });

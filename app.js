@@ -55,7 +55,8 @@ var nodesRoute = require('./routes/nodes')(app, models.nodes, models.nodetype);
 var edgetypesRoute = require('./routes/edgetypes')(app, models.edgetype);
 var edgesRoute = require('./routes/edges')(app, models.edges, models.edgetype, models.nodes, models.nodetype);
 var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.edges, models.edgetype);
-var visualisationRoute = require('./routes/visualisation')(app);
+var graphRoute = require('./routes/graph')(app);
+var graph3dRoute = require('./routes/graph3d')(app);
 var selectRoute = require('./routes/select')(app, models.nodes, models.nodetype, models.edges);
 
 //load passport strategies
