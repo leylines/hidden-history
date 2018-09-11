@@ -6,7 +6,6 @@
   {{/ifCond}}
 
   {{#ifCond req.user.role '==' 'admin'}}
-  {{>edge2node-form mode='update'}}
   {{>edge2node-form mode='add'}}
   {{/ifCond}}
 
