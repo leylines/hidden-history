@@ -17,7 +17,7 @@
             <td>{{this.nodetype.name}}</td>
             <td>{{dateToLocale this.createdAt}}</td>
             <td>{{dateToLocale this.updatedAt}}</td>
-            {{#ifCond req.user.role '==' 'admin'}}<td><a href="/edge2node/delete?nodeTypeId={{this.nodetypeNodeTypeId}}&edgeTypeId={{this.edgetypeEdgeTypeId}}"><button class="btn-sm btn-danger">Delete</button></a></td>{{/ifCond}}
+            {{#ifCond ../req.user.role '==' 'admin'}}<td><a href="/edge2node/delete?nodeTypeId={{this.nodetypeNodeTypeId}}&edgeTypeId={{this.edgetypeEdgeTypeId}}"><button class="btn-sm btn-danger">Delete</button></a></td>{{/ifCond}}
           </tr>
         {{/each}}
         </tbody>
