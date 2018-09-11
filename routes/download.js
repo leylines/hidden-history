@@ -103,34 +103,49 @@ module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
           ['nodeId', 'ASC']
         ]
       });
-      NodeTypes = await nodetypes.findAll({
-        limit: 100
-      });
       Edges = await edges.findAll({
         limit: 10000,
         include: [
           { model: edgetypes, required: true }
         ],
       });
-      EdgeTypes = await edgetypes.findAll({
-        limit: 100
+      NodeCount = await edges.findAll({
+        group: ['destinationNodeId'],
+        attributes: ['destinationNodeId', [edges.sequelize.fn('COUNT', edges.sequelize.col('destinationNodeId')), 'nodeValue']]
       });
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.write("{\"nodes\":[");
+      const nodeImportance = {};
+      for(var i=0; i < NodeCount.length; i++){
+	nodeImportance[NodeCount[i].dataValues.destinationNodeId] = NodeCount[i].dataValues.nodeValue;
+      }
       for(var i=0; i < Nodes.length; i++){
+        var value;
+        if (nodeImportance[Nodes[i].nodeId]) {
+          value = nodeImportance[Nodes[i].nodeId] * 2;
+        } else {
+          value = 1;
+        }
         if (i == Nodes.length - 1) {
-          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\"}");
+	  if (nodeImportance[Nodes[i].nodeId]) { console.log(Nodes[i].name + " has value " + nodeImportance[Nodes[i].nodeId]) };
+          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\",\"value\":\"" + value + "\"}");
         } else { 
-          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\"},");
+          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\",\"value\":\"" + value + "\"},");
         }
       }
       res.write("], \"links\":[");
       for(var i=0; i < Edges.length; i++){
+        var value;
+        if (nodeImportance[Edges[i].sourceNodeId]) {
+          value = nodeImportance[Edges[i].sourceNodeId] * 0.5;
+        } else {
+          value = 0.5;
+        }
         if (i == Edges.length - 1) {
-          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\"}");
+          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\",\"val\":\"" + value + "\"}");
         } else { 
-          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\"},");
+          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\",\"val\":\"" + value + "\"},");
         }
       }
       res.write("]}");
