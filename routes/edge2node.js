@@ -30,8 +30,7 @@ module.exports = function(app, edge2node, nodetypes, edgetypes) {
     }
   });
 
-  //app.post('/edge2node/add', isAdmin, function(req, res) {
-  app.post('/edge2node/add', function(req, res) {
+  app.post('/edge2node/add', isAdmin, function(req, res) {
 
     try {
       edge2node.create({
@@ -45,8 +44,7 @@ module.exports = function(app, edge2node, nodetypes, edgetypes) {
     res.redirect('/edge2node');
   });
 
-  //app.get('/edge2node/delete', isAdmin, function(req, res) {
-  app.get('/edge2node/delete', function(req, res) {
+  app.get('/edge2node/delete', isAdmin, function(req, res) {
     try {
       edge2node.destroy({
         where: {
