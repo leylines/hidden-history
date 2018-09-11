@@ -1,6 +1,6 @@
 var edgeController = require('../controllers/edgecontroller.js');
 
-module.exports = function(app, edges, edgetypes, nodes, nodetypes) {
+module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
 
   app.get('/edges', async function(req, res) {
 
@@ -12,24 +12,17 @@ module.exports = function(app, edges, edgetypes, nodes, nodetypes) {
           { model: nodes, as: 'destinationId', required: true, include: [{ model: nodetypes, required: true }] }
         ]
       });
-      EdgeTypes = await edgetypes.findAll({
-        limit: 100,
-        order: [
-          ['name', 'ASC']
-        ]
-      });
-      Nodes = await nodes.findAll({
+      Node2Edge = await node2edge.findAll({
+	attributes: ['nodetypeNodeTypeId'],
+	group: ['nodetypeNodeTypeId', 'nodetype.nodeTypeId'],
         include: [
-          { model: nodetypes, required: true}
-        ]
-      });
-      NodeTypes = await nodetypes.findAll({
-        limit: 100,
+          { model: nodetypes }
+        ],
         order: [
-          ['name', 'ASC']
+          [ { model: nodetypes }, 'name', 'ASC' ]
         ]
       });
-      edgeController.list(req, res, Edges, EdgeTypes, Nodes, NodeTypes);
+      edgeController.list(req, res, Edges, Node2Edge);
     }
     catch(e){
       console.log(e.toString());

@@ -4,10 +4,15 @@
         <thead class="thead-dark">
           <tr>
             <th>id</th>
+            <th>Source-Type-ID</th>
             <th>Source-Type</th>
+            <th>Source-ID</th>
             <th>Source</th>
+            <th>Relation-ID</th>
             <th>Relation-Type</th>
+            <th>Destination-Type-ID</th>
             <th>Destination-Type</th>
+            <th>Destination-ID</th>
             <th>Destination</th>
             <th>From</th>
             <th>Era</th>
@@ -25,10 +30,15 @@
         {{#each edges}}
           <tr>
             <td>{{this.edgeId}}</td>
+            <td>{{this.sourceId.nodetype.nodeTypeId}}</td>
             <td>{{this.sourceId.nodetype.name}}</td>
+            <td>{{this.sourceId.nodeId}}</td>
             <td>{{this.sourceId.name}}</td>
+            <td>{{this.edgetype.edgeTypeId}}</td>
             <td>{{this.edgetype.name}}</td>
+            <td>{{this.destinationId.nodetype.nodeTypeId}}</td>
             <td>{{this.destinationId.nodetype.name}}</td>
+            <td>{{this.destinationId.nodeId}}</td>
             <td>{{this.destinationId.name}}</td>
             <td>{{dateToLocale this.fromDate}}</td>
             <td>{{this.fromDateEra}}</td>

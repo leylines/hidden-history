@@ -18,8 +18,8 @@
             <label for="sourceNodeType">Node-Type</label>
             <select name="sourceNodeType" class="form-control sourceNodeType-{{mode}}" required>
               <option value="" selected hidden>Select Node-Type</option>
-              {{#each nodetypes}}
-                <option value="{{this.nodeTypeId}}">{{this.name}}</option>
+              {{#each node2edge}}
+                <option value="{{this.nodetypeNodeTypeId}}">{{this.nodetype.name}}</option>
               {{/each}}
             </select>
           </fieldset>
@@ -36,20 +36,24 @@
           </fieldset>
           <fieldset class="form-group">
             <label for="typeId">Relation</label>
+            {{#ifCond mode '==' 'update'}}
             <select name="typeId" class="form-control typeId-{{mode}}" required>
+            {{/ifCond}}
+            {{#ifCond mode '==' 'add'}}
+            <select name="typeId" class="form-control typeId-{{mode}}" required disabled=true>
+            {{/ifCond}}
               <option value="" selected hidden>Select Relation</option>
-              {{#each edgetypes}}
-                <option value="{{this.edgeTypeId}}">{{this.name}}</option>
-              {{/each}}
             </select>
           </fieldset>
           <fieldset class="form-group">
             <label for="destinationNodeType">Node-Type</label>
+            {{#ifCond mode '==' 'update'}}
             <select name="destinationNodeType" class="form-control destinationNodeType-{{mode}}" required>
+            {{/ifCond}}
+            {{#ifCond mode '==' 'add'}}
+            <select name="destinationNodeType" class="form-control destinationNodeType-{{mode}}" required disabled=true>
+            {{/ifCond}}
               <option value="" selected hidden>Select Node-Type</option>
-              {{#each nodetypes}}
-                <option value="{{this.nodeTypeId}}">{{this.name}}</option>
-              {{/each}}
             </select>
           </fieldset>
           <fieldset class="form-group">

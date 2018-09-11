@@ -46,18 +46,22 @@ app.use('/dbdesign', express.static(__dirname + 'public/dbdesign'));
 
 // Models and Relations
 var models = require("./models");
+models.nodetype.belongsToMany(models.edgetype, {through: models.node2edge});
+models.edgetype.belongsToMany(models.nodetype, {through: models.edge2node});
 
 // Routes
 var authRoute = require('./routes/auth.js')(app, passport, models.nodes, models.nodetype, models.edges, models.edgetype);
 var userRoute = require('./routes/users.js')(app, models.user);
-var nodetypesRoute = require('./routes/nodetypes')(app, models.nodetype);
 var nodesRoute = require('./routes/nodes')(app, models.nodes, models.nodetype);
+var nodetypesRoute = require('./routes/nodetypes')(app, models.nodetype);
+var node2edgeRoute = require('./routes/node2edge')(app, models.node2edge, models.nodetype, models.edgetype);
+var edgesRoute = require('./routes/edges')(app, models.edges, models.node2edge, models.edgetype, models.nodes, models.nodetype);
 var edgetypesRoute = require('./routes/edgetypes')(app, models.edgetype);
-var edgesRoute = require('./routes/edges')(app, models.edges, models.edgetype, models.nodes, models.nodetype);
+var edge2nodeRoute = require('./routes/edge2node')(app, models.edge2node, models.nodetype, models.edgetype);
 var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.edges, models.edgetype);
 var graphRoute = require('./routes/graph')(app);
 var graph3dRoute = require('./routes/graph3d')(app);
-var selectRoute = require('./routes/select')(app, models.nodes, models.nodetype, models.edges);
+var selectRoute = require('./routes/select')(app, models.nodes, models.node2edge, models.edgetype, models.edge2node, models.nodetype);
 
 //load passport strategies
 require('./helpers/passport.js')(passport, models.user);

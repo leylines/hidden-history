@@ -1,0 +1,30 @@
+
+  {{>edge2node-table}}
+
+  {{#ifCond req.user.role '==' 'admin'}}
+  <button class="btn btn-primary" data-toggle="modal" data-target=".add-form">Add Edge-Node-Relation</button>
+  {{/ifCond}}
+
+  {{#ifCond req.user.role '==' 'admin'}}
+  {{>edge2node-form mode='update'}}
+  {{>edge2node-form mode='add'}}
+  {{/ifCond}}
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href;
+      $(".edge2nodeTable").DataTable({
+        pageLength: 20,
+        paging: true,
+        dom: 'frtip'
+      });
+      {{#ifCond req.user.role '==' 'admin'}}
+      var table = $(".edge2nodeTable").DataTable();
+      $('.discard-add').click(function(){
+        $('.nodeTypeId-add').prop('selectedIndex',0);
+        $('.edgeTypeId-add').prop('selectedIndex',0);
+        $('.add-form').modal('hide');
+      });
+      {{/ifCond}}
+    });
+  </script>

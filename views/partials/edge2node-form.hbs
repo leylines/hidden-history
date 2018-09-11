@@ -1,0 +1,42 @@
+<div class="{{mode}}-form modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{mode}} Edge-Node-Relation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form method="post" action="/edge2node/{{mode}}">
+          <fieldset class="form-group">
+            <label for="edgeTypeId">Relations</label>
+            <select name="edgeTypeId" class="form-control edgeTypeId-{{mode}}" required>
+              <option value="" selected hidden>Select Edge-Type</option>
+              {{#each edgetypes}}
+                <option value="{{this.edgeTypeId}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="typeId">Nodes</label>
+            <select name="nodeTypeId" class="form-control nodeTypeId-{{mode}}" required>
+              <option value="" selected hidden>Select Node-Type</option>
+              {{#each nodetypes}}
+                <option value="{{this.nodeTypeId}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </fieldset>
+          {{#ifCond mode '==' 'add'}}
+          <button type="submit" class="btn btn-success btn-block">Add</button>
+          {{/ifCond}}
+        </form>
+        {{#ifCond mode '==' 'add'}}
+        <button class="discard-{{mode}} btn btn-secondary btn-block btn-discard">Discard</button>
+        {{/ifCond}}
+      </div>
+
+    </div>
+  </div>
+</div>

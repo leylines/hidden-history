@@ -35,7 +35,7 @@
       $('.update-form').on('hidden.bs.modal', function(event) {
         $('.sourceNodeType-update').find('option').attr('selected',false);
         $('.sourceNodeId-update').find('option').attr('selected',false);
-        $('.typeId-update').find('option').attr("selected",false);
+        $('.typeId-update').find('option').attr('selected',false);
         $('.destinationNodeType-update').find('option').attr('selected',false);
         $('.destinationNodeId-update').find('option').attr('selected',false);
         $('.fromDateEra-update').find('option').attr('selected',false);
@@ -50,32 +50,24 @@
         $(".delete-update").attr("href", function(i, origLink) {
           return origLink.replace(/#/, data[0]);
         });
-        $('.sourceNodeType-update').find('option:contains(' + data[1] + ')').attr('selected',true);
-        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', $('.sourceNodeType-update').val());
-        $(document).ajaxStop(function() {
-          $('.sourceNodeId-update').find('option:contains(' + data[2] + ')').attr('selected',true);
-        });
-        $('.typeId-update').find('option:contains(' + data[3] + ')').attr('selected',true);
-        $('.destinationNodeType-update').find('option:contains(' + data[4] + ')').attr('selected',true);
-        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update', $('.destinationNodeType-update').val());
-        $(document).ajaxStop(function() {
-          $('.destinationNodeId-update').find('option:contains(' + data[5] + ')').attr('selected',true);
-        });
-        var [year, month, day] = data[6].split('-');
+        $('.sourceNodeType-update').val(data[1]);
+        updateSourceNodeId(data[1], 'update', data[3]);
+        updateEdgeType(data[1], 'update', data[5], data[7], data[9]);
+        var [year, month, day] = data[11].split('-');
         $(".fromDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
-        if (data[7] != "") {
-          $('.fromDateEra-update').find('option:contains(' + data[7] + ')').attr('selected',true);
+        if (data[12] != "") {
+          $('.fromDateEra-update').find('option:contains(' + data[12] + ')').attr('selected',true);
         };
-        var [year, month, day] = data[8].split('-');
+        var [year, month, day] = data[13].split('-');
         $(".toDate-update").val(year + (month? "-" + month : "-01") + (day? "-" + day : "-01"));
-        if (data[9] != "") {
-          $('.toDateEra-update').find('option:contains(' + data[9] + ')').attr('selected',true);
+        if (data[14] != "") {
+          $('.toDateEra-update').find('option:contains(' + data[14] + ')').attr('selected',true);
         };
-        $('.fact-update').find('option[value=' + data[10] + ']').attr("selected",true);
-        $('.link-update').val(data[11]);
-        $('.contributor-update').val(data[12]);
+        $('.fact-update').find('option[value=' + data[15] + ']').attr("selected",true);
+        $('.link-update').val(data[16]);
+        $('.contributor-update').val(data[17]);
         {{#ifCond req.user.role '==' 'admin'}}
-        $('.checked-update').prop('checked', (data[13] == 'true'));
+        $('.checked-update').prop('checked', (data[18] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');
       });
@@ -84,8 +76,12 @@
         $('.sourceNodeId-add').empty();
         $('.sourceNodeId-add').append($("<option hidden selected>").val('').text('Select Node'));
         $('.sourceNodeId-add').attr('disabled',true);
-        $('.typeId-add').prop('selectedIndex',0);
-        $('.destinationNodeType-add').prop('selectedIndex',0);
+        $('.typeId-add').empty();
+        $('.typeId-add').append($("<option hidden selected>").val('').text('Select Relation'));
+        $('.typeId-add').attr('disabled',true);
+        $('.destinationNodeType-add').empty();
+        $('.destinationNodeType-add').append($("<option hidden selected>").val('').text('Select Node-Type'));
+        $('.destinationNodeType-add').attr('disabled',true);
         $('.destinationNodeId-add').empty();
         $('.destinationNodeId-add').append($("<option hidden selected>").val('').text('Select Node'));
         $('.destinationNodeId-add').attr('disabled',true);
@@ -98,37 +94,99 @@
         $('.add-form').modal('hide');
       });
       $('.sourceNodeType-add').change(function(){
-        updateDropDown('.sourceNodeType-add', '.sourceNodeId-add', $(this).val());
+        updateSourceNodeId($(this).val(), 'add')
+        updateEdgeType($(this).val(), 'add');
       });
-      $('.sourceNodeType-update').change(function(){
-        updateDropDown('.sourceNodeType-update', '.sourceNodeId-update', $(this).val());
+      $('.typeId-add').change(function(){
+        updateDestinationNodeType($(this).val(), 'add');
       });
       $('.destinationNodeType-add').change(function(){
-        updateDropDown('.destinationNodeType-add', '.destinationNodeId-add', $(this).val());
+        updateDestinationNodeId($(this).val(), 'add');
+      });
+      $('.sourceNodeType-update').change(function(){
+        updateSourceNodeId($(this).val(), 'update')
+        updateEdgeType($(this).val(), 'update');
+      });
+      $('.typeId-update').change(function(){
+        updateDestinationNodeType($(this).val(), 'update');
       });
       $('.destinationNodeType-update').change(function(){
-        updateDropDown('.destinationNodeType-update', '.destinationNodeId-update',  $(this).val());
+        updateDestinationNodeId($(this).val(), 'update');
       });
       {{/if}}
     });
 
     {{#if req.user}}
-    function updateDropDown(sdropdown, ddropdown, selection) {
-      $.ajax({
+    function getData(getUrl) {
+      return $.ajax({
         type: 'GET',
-        url : 'select/getnodesbyid/?nodeTypeId=' + selection,
-        success: function(result) {
-          $(ddropdown).empty();
-          for (row in result) {
-            $(ddropdown).append($("<option>").val(result[row].nodeId).text(result[row].name));
-          }
-          $(ddropdown).attr("disabled", false);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR + ":" + textStatus + ":" + errorThrown);
+        url : getUrl
+      });
+    }
+
+    function updateSourceNodeId(selection, type, nodeId) {
+      var sourceNodeUrl = 'select/getnodesbyid/?nodeTypeId=' + selection;
+      getData(sourceNodeUrl).done(function(result) {
+        fillNodeDropdown('.sourceNodeId-' + type, result, nodeId);
+      });
+    }
+    function updateEdgeType(selection, type, edgeType, destinationNodeType, destinationNodeId) {
+      var nodeTypeUrl = 'select/getedgetypes/?nodeTypeId=' + selection;
+      getData(nodeTypeUrl).done(function(result) {
+        if (typeof edgeType !== "undefined") {
+          fillTypeDropdown('.typeId-' + type, result, "edgetypeEdgeTypeId", "edgetype", edgeType);
+          updateDestinationNodeType(edgeType, type, destinationNodeType, destinationNodeId);
+        } else {
+          fillTypeDropdown('.typeId-' + type, result, "edgetypeEdgeTypeId", "edgetype");
+          updateDestinationNodeType(result[0]['edgetypeEdgeTypeId'], type, destinationNodeType, destinationNodeId);
         }
       });
     }
+    function updateDestinationNodeType(selection, type, destinationNodeType, destinationNodeId) {
+      var nodeTypeUrl = 'select/getnodetypes/?edgeTypeId=' + selection;
+      getData(nodeTypeUrl).done(function(result) {
+        fillTypeDropdown('.destinationNodeType-' + type, result, "nodetypeNodeTypeId", "nodetype", destinationNodeType);
+        if (typeof destinationNodeType !== "undefined") {
+          updateDestinationNodeId(destinationNodeType, type, destinationNodeId);
+        } else {
+          updateDestinationNodeId(result[0]['nodetypeNodeTypeId'], type, destinationNodeId);
+        }
+      });
+    }
+    function updateDestinationNodeId(selection, type, destinationNodeId) {
+      var destinationNodeUrl = 'select/getnodesbyid/?nodeTypeId=' + selection;
+      getData(destinationNodeUrl).done(function(result) {
+        if (typeof destinationNodeId !== "undefined") {
+          fillNodeDropdown('.destinationNodeId-' + type, result, destinationNodeId);
+        } else {
+          fillNodeDropdown('.destinationNodeId-' + type, result, destinationNodeId);
+        }
+      });
+    }
+
+    function fillNodeDropdown(dropdown, result, selection) {
+       console.log(dropdown);
+       $(dropdown).empty();
+       for (row in result) {
+         $(dropdown).append($("<option>").val(result[row].nodeId).text(result[row].name));
+       }
+       if (typeof selection !== "undefined") {
+         $(dropdown).val(selection);
+       }
+       $(dropdown).attr("disabled", false);
+    }
+    function fillTypeDropdown(dropdown, result, value, name, selection) {
+       console.log(dropdown);
+       $(dropdown).empty();
+       for (row in result) {
+         $(dropdown).append($("<option>").val(result[row][value]).text(result[row][name]['name']));
+       }
+       if (typeof selection !== "undefined") {
+         $(dropdown).val(selection);
+       }
+       $(dropdown).attr("disabled", false);
+    }
+
     {{/if}}
          
   </script>

@@ -1,0 +1,26 @@
+  <div class="container-fluid">
+    <div class="table-responsive text-left">
+      <table class="edge2nodeTable table table-sm table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Relation</th>
+            <th>Node</th>
+            <th>Created</th>
+            <th>Modified</th>
+            {{#ifCond req.user.role '==' 'admin'}}<th></th>{{/ifCond}}
+          </tr>
+        </thead>
+        <tbody>
+        {{#each edge2node}}
+          <tr>
+            <td>{{this.edgetype.name}}</td>
+            <td>{{this.nodetype.name}}</td>
+            <td>{{dateToLocale this.createdAt}}</td>
+            <td>{{dateToLocale this.updatedAt}}</td>
+            {{#ifCond req.user.role '==' 'admin'}}<td><a href="/edge2node/delete?nodeTypeId={{this.nodetypeNodeTypeId}}&edgeTypeId={{this.edgetypeEdgeTypeId}}"><button class="btn-sm btn-danger">Delete</button></a></td>{{/ifCond}}
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
