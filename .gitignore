@@ -2,6 +2,6 @@ package-lock.json
 node_modules
 config/config.json
 public/javascripts/vis-network.min.js
-public/stylesheets/vis-network.min.css
 public/javascripts/3d-force-graph.min.js
+public/dbdesign
 .env
