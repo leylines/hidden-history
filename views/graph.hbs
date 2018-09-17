@@ -10,76 +10,27 @@
 
   var options = {
     groups: {
-      anomaly: {
-        shape: 'dot',
-        color: '#99004c',
-        size: 15,
-      },
-      artifact: {
-        shape: 'dot',
-        color: '#ff8000',
-        size: 20,
-      },
-      artificial: {
-        shape: 'dot',
-        color: '#cc6600',
-        size: 15,
-      },
-      belief: {
-        shape: 'dot',
-        color: '#ffff33',
-        size: 15,
-      },
-      person: {
-        shape: 'dot',
-        color: '#00ffff',
-        size: 10,
-      },
-      dynasty: {
-        shape: 'dot',
-        color: '#0000ff',
-        size: 15,
-      },
-      tribe: {
-        shape: 'dot',
-        color: '#7f00ff',
-        size: 20,
-      },
-      organization: {
-        shape: 'dot',
-        color: '#ff0000',
-        size: 15,
-      },
       event: {
-        shape: 'diamond',
-        color: '#ff007f',
-        size: 15,
-      },
-      empire: {
-        shape: 'dot',
-        color: '#0080ff',
-        size: 15,
-      },
-      'sovereign entity': {
-        shape: 'dot',
-        color: '#80ff00',
-        size: 20,
-      },
-      knowledge: {
-        shape: 'dot',
-        color: '#ffd700',
-        size: 20,
+        shape: 'box',
+        size: 25,
       },
       place: {
-        shape: 'dot',
+        shape: 'ellipse',
         color: '#eeeeee',
-        size: 8,
+        scaling: {
+          label: {
+            enabled: false
+          }
+        }
       }
     },
     nodes: {
       scaling: {
         min: 1,
         max: 10,
+        label: {
+          enabled: true
+        }
       }
     },
     edges: {
@@ -94,6 +45,7 @@
       },
       arrowStrikethrough: true,
       chosen: true,
+      width: 3,
       color: {
         highlight: 'red',
         hover: '#848484',
