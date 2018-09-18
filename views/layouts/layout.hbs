@@ -22,6 +22,9 @@
     {{#ifCond req.url '==' '/graph'}}
     <script src="/javascripts/vis-network.min.js"></script>
     {{/ifCond}}
+    {{#ifCond req.url '==' '/graph2d'}}
+    <script src="/javascripts/force-graph.min.js"></script>
+    {{/ifCond}}
     {{#ifCond req.url '==' '/graph3d'}}
     <script src="/javascripts/3d-force-graph.min.js"></script>
     {{/ifCond}}

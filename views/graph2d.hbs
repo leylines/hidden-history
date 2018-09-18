@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap flex-md-nowrap">
+  <div id="graph" class="mynetwork flex-fill"></div>
+</div>
+
+<script>
+  fetch('/download/json').then(res => res.json()).then(data => {
+    const Graph = ForceGraph()
+    (document.getElementById('graph'))
+      .graphData(data)
+      .nodeId('id')
+      .nodeVal('value')
+      .nodeLabel('label')
+      .nodeAutoColorBy('group')
+      .linkSource('from')
+      .linkTarget('to')
+      .linkLabel('label')
+      .linkAutoColorBy('label')
+    });
+</script>
