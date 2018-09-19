@@ -199,30 +199,45 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
             value: 2
         });
       }
-      for(var i=0; i < EdgeTypes.length; i++){
-        nodesobj.push({
-            id:    parseInt(EdgeTypes[i].edgeTypeId) + 10000,
-            label: EdgeTypes[i].name,
-            value: 1
-        });
-      }
+      //for(var i=0; i < EdgeTypes.length; i++){
+      //  nodesobj.push({
+      //      id:    parseInt(EdgeTypes[i].edgeTypeId) + 10000,
+      //      label: EdgeTypes[i].name,
+      //      value: 1
+      //  });
+      //}
       networkobj.nodes = nodesobj;
 
       var edgesobj = [];
-      for(var i=0; i < Node2Edge.length; i++){
-        edgesobj.push({
-            id:     i + 1000,
-            source: Node2Edge[i].nodetypeNodeTypeId,
-	    target: parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
-        });
+      for(var i=0; i < EdgeTypes.length; i++){
+        for(var j=0; j < Node2Edge.length; j++){
+	  if (Node2Edge[j].edgetypeEdgeTypeId ==  EdgeTypes[i].edgeTypeId) {
+            for(var k=0; k < Edge2Node.length; k++){
+	      if (Edge2Node[k].edgetypeEdgeTypeId ==  EdgeTypes[i].edgeTypeId) {
+                edgesobj.push({
+                  source: Node2Edge[j].nodetypeNodeTypeId,
+	          target: Edge2Node[k].nodetypeNodeTypeId,
+                  label: EdgeTypes[i].name,
+                });
+              }
+            }
+          }
+        }
       }
-      for(var i=0; i < Edge2Node.length; i++){
-        edgesobj.push({
-            id:     i + 2000,
-	    source: parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
-            target: Edge2Node[i].nodetypeNodeTypeId,
-        });
-      }
+      //for(var i=0; i < Node2Edge.length; i++){
+      //  edgesobj.push({
+      //      id:     i + 1000,
+      //      source: Node2Edge[i].nodetypeNodeTypeId,
+      //      target: parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
+      //  });
+      //}
+      //for(var i=0; i < Edge2Node.length; i++){
+      //  edgesobj.push({
+      //      id:     i + 2000,
+      //      source: parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
+      //      target: Edge2Node[i].nodetypeNodeTypeId,
+      //  });
+      //}
       networkobj.links = edgesobj;
       res.write(JSON.stringify(networkobj));
       res.end();
