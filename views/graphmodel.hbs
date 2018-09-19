@@ -1,0 +1,38 @@
+<div id="graph"></div>
+
+<script>
+  function drawGraph(result) {
+    const Graph = ForceGraph()
+    (document.getElementById('graph'))
+      .graphData(result)
+      .nodeLabel('label')
+      .nodeVal('value')
+      .nodeAutoColorBy('group')
+      .linkSource('from')
+      .linkTarget('to')
+      .linkWidth('val')
+      .linkLabel('label')
+      .linkAutoColorBy('label')
+      .warmupTicks(100)
+  }
+  function logError(error) {
+    console.log('Looks like there was a problem: \n', error);
+  }
+  function validateResponse(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+  function readResponseAsJSON(response) {
+    return response.json();
+  }
+  function fetchJSON(pathToResource) {
+    fetch(pathToResource)
+    .then(validateResponse)
+    .then(readResponseAsJSON)
+    .then(drawGraph)
+    .catch(logError);
+  }
+  fetchJSON('/download/model');
+</script>

@@ -1,4 +1,4 @@
-module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
+module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, edge2node) {
 
   app.get('/download/cypher', async function(req, res) {
 
@@ -113,13 +113,16 @@ module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
         group: ['destinationNodeId'],
         attributes: ['destinationNodeId', [edges.sequelize.fn('COUNT', edges.sequelize.col('destinationNodeId')), 'nodeValue']]
       });
+
+      var nodeImportance = {};
+      var networkobj = {};
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.write("{\"nodes\":[");
-      const nodeImportance = {};
+
       for(var i=0; i < NodeCount.length; i++){
 	nodeImportance[NodeCount[i].dataValues.destinationNodeId] = NodeCount[i].dataValues.nodeValue;
       }
+      var nodesobj = [];
       for(var i=0; i < Nodes.length; i++){
         var value;
         if (nodeImportance[Nodes[i].nodeId]) {
@@ -127,14 +130,16 @@ module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
         } else {
           value = 1;
         }
-        if (i == Nodes.length - 1) {
-	  if (nodeImportance[Nodes[i].nodeId]) { console.log(Nodes[i].name + " has value " + nodeImportance[Nodes[i].nodeId]) };
-          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\",\"value\":\"" + value + "\"}");
-        } else { 
-          res.write("{\"id\":\"" + Nodes[i].nodeId + "\",\"label\":\"" + Nodes[i].name + "\",\"group\":\"" + Nodes[i].nodetype.name + "\",\"value\":\"" + value + "\"},");
-        }
+        nodesobj.push({
+            id:    Nodes[i].nodeId,
+            label: Nodes[i].name,
+	    group: Nodes[i].nodetype.name,
+	    value: value
+        });
       }
-      res.write("], \"links\":[");
+      networkobj.nodes = nodesobj;
+
+      var edgesobj = [];
       for(var i=0; i < Edges.length; i++){
         var value;
         if (nodeImportance[Edges[i].sourceNodeId]) {
@@ -142,13 +147,82 @@ module.exports = function(app, nodes, nodetypes, edges, edgetypes) {
         } else {
           value = 0.5;
         }
-        if (i == Edges.length - 1) {
-          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\",\"val\":\"" + value + "\"}");
-        } else { 
-          res.write("{\"id\":\"" + Edges[i].edgeId + "\",\"from\":\"" + Edges[i].sourceNodeId + "\",\"to\":\"" + Edges[i].destinationNodeId + "\",\"label\":\"" + Edges[i].edgetype.name + "\",\"val\":\"" + value + "\"},");
-        }
+        edgesobj.push({
+            id:    Edges[i].edgeId,
+            from:  Edges[i].sourceNodeId,
+	    to:    Edges[i].destinationNodeId,
+	    label: Edges[i].edgetype.name,
+	    val:   value
+        });
       }
-      res.write("]}");
+      networkobj.links = edgesobj;
+
+      res.write(JSON.stringify(networkobj));
+      res.end();
+    }
+    catch(e){
+      console.log(e.toString());
+    }
+
+  });
+
+  app.get('/download/model', async function(req, res) {
+    try {
+      NodeTypes = await nodetypes.findAll({
+        limit: 10000,
+      });
+      EdgeTypes = await edgetypes.findAll({
+        limit: 10000,
+      });
+      Node2Edge = await node2edge.findAll({
+        include: [
+          { model: nodetypes },
+          { model: edgetypes }
+        ]
+      });
+      Edge2Node = await edge2node.findAll({
+        include: [
+          { model: nodetypes },
+          { model: edgetypes }
+        ]
+      });
+      var networkobj = {};
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+
+      var nodesobj = [];
+      for(var i=0; i < NodeTypes.length; i++){
+        nodesobj.push({
+            id:    NodeTypes[i].nodeTypeId,
+            label: NodeTypes[i].name
+        });
+      }
+      for(var i=0; i < EdgeTypes.length; i++){
+        nodesobj.push({
+            id:    parseInt(EdgeTypes[i].edgeTypeId) + 10000,
+            label: EdgeTypes[i].name
+        });
+      }
+      networkobj.nodes = nodesobj;
+
+      var edgesobj = [];
+      for(var i=0; i < Node2Edge.length; i++){
+        edgesobj.push({
+            id:    i + 1000,
+            from:  Node2Edge[i].nodetypeNodeTypeId,
+	    to:    parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
+        });
+      }
+      for(var i=0; i < Edge2Node.length; i++){
+        edgesobj.push({
+            id:    i + 2000,
+            from:  Edge2Node[i].nodetypeNodeTypeId,
+	    to:    parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
+        });
+      }
+      networkobj.links = edgesobj;
+      res.write(JSON.stringify(networkobj));
       res.end();
     }
     catch(e){

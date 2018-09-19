@@ -58,10 +58,11 @@ var node2edgeRoute = require('./routes/node2edge')(app, models.node2edge, models
 var edgesRoute = require('./routes/edges')(app, models.edges, models.node2edge, models.edgetype, models.nodes, models.nodetype);
 var edgetypesRoute = require('./routes/edgetypes')(app, models.edgetype);
 var edge2nodeRoute = require('./routes/edge2node')(app, models.edge2node, models.nodetype, models.edgetype);
-var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.edges, models.edgetype);
+var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.node2edge, models.edges, models.edgetype, models.edge2node);
 var graphRoute = require('./routes/graph')(app);
 var graph2dRoute = require('./routes/graph2d')(app);
 var graph3dRoute = require('./routes/graph3d')(app);
+var graphModelRoute = require('./routes/graphmodel')(app);
 var selectRoute = require('./routes/select')(app, models.nodes, models.node2edge, models.edgetype, models.edge2node, models.nodetype);
 
 //load passport strategies
