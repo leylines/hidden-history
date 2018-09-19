@@ -195,13 +195,15 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
       for(var i=0; i < NodeTypes.length; i++){
         nodesobj.push({
             id:    NodeTypes[i].nodeTypeId,
-            label: NodeTypes[i].name
+            label: NodeTypes[i].name,
+            value: 2
         });
       }
       for(var i=0; i < EdgeTypes.length; i++){
         nodesobj.push({
             id:    parseInt(EdgeTypes[i].edgeTypeId) + 10000,
-            label: EdgeTypes[i].name
+            label: EdgeTypes[i].name,
+            value: 1
         });
       }
       networkobj.nodes = nodesobj;
@@ -209,16 +211,16 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
       var edgesobj = [];
       for(var i=0; i < Node2Edge.length; i++){
         edgesobj.push({
-            id:    i + 1000,
-            from:  Node2Edge[i].nodetypeNodeTypeId,
-	    to:    parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
+            id:     i + 1000,
+            source: Node2Edge[i].nodetypeNodeTypeId,
+	    target: parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
         });
       }
       for(var i=0; i < Edge2Node.length; i++){
         edgesobj.push({
-            id:    i + 2000,
-            from:  Edge2Node[i].nodetypeNodeTypeId,
-	    to:    parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
+            id:     i + 2000,
+	    source: parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
+            target: Edge2Node[i].nodetypeNodeTypeId,
         });
       }
       networkobj.links = edgesobj;

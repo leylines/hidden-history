@@ -4,16 +4,29 @@
   function drawGraph(result) {
     const Graph = ForceGraph()
     (document.getElementById('graph'))
+      .backgroundColor('rgba(255, 255, 255)')
       .graphData(result)
-      .nodeLabel('label')
-      .nodeVal('value')
-      .nodeAutoColorBy('group')
-      .linkSource('from')
-      .linkTarget('to')
-      .linkWidth('val')
-      .linkLabel('label')
-      .linkAutoColorBy('label')
-      .warmupTicks(100)
+      .nodeAutoColorBy('label')
+      .linkAutoColorBy(d => result.nodes[result.nodes.findIndex(node => node.id == d.source)].label)
+      .linkWidth(2)
+      .linkCurvature(0.05)
+      .linkDirectionalParticles(1)
+      .linkDirectionalParticleWidth(2)
+      .linkDirectionalParticleSpeed(0.005)
+      .nodeCanvasObject((node, ctx, globalScale) => {
+        const label = node.label;
+        const value = node.value;
+        const fontSize = globalScale * value * 0.5;
+        ctx.font = `${fontSize}px Sans-Serif`;
+        const textWidth = ctx.measureText(label).width;
+        const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2); // some padding
+        ctx.fillStyle = 'rgba(255, 255, 255, 0)';
+        ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = node.color;
+        ctx.fillText(label, node.x, node.y);
+      });
   }
   function logError(error) {
     console.log('Looks like there was a problem: \n', error);
