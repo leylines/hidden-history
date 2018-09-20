@@ -14,4 +14,8 @@ module.exports = function(app) {
      graphController.force3d(req, res);
   });
 
+  app.get('/graph/force3dvr', function(req, res) {
+     graphController.force3dvr(req, res);
+  });
+
 }

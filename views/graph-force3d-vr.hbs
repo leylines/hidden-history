@@ -1,0 +1,19 @@
+<div id="3d-graph"></div>
+
+<script>
+  const Graph = ForceGraphVR()
+    (document.getElementById('3d-graph'))
+      .jsonUrl('/download/json')
+      .linkLabel('label')
+      .linkWidth('val')
+      .linkAutoColorBy('label')
+      .linkDirectionalArrowLength(4)
+      .linkDirectionalArrowRelPos(0.5)
+      .linkCurvature(0.95)
+      .linkOpacity(0.5)
+      .linkSource('from')
+      .linkTarget('to')
+      .nodeLabel('label')
+      .nodeAutoColorBy('group')
+      .nodeVal('value')
+</script>
