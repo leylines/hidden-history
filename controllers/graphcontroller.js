@@ -9,11 +9,21 @@ exports.visjs = function(req, res) {
   });
 }
 
-exports.model = function(req, res) {
+exports.model = function(req, res, type) {
   res.render('graph-model', {
     req: req,	  
+    type: type,  
     context: {
       title: 'Hidden-History Relations-Visualisation',
+    }	    
+  });
+}
+
+exports.force2d = function(req, res) {
+  res.render('graph-force2d', {
+    req: req,	  
+    context: {
+      title: 'Hidden-History Visualisation with Force-Graph-2D',
     }	    
   });
 }

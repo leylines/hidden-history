@@ -4,16 +4,15 @@
   function drawGraph(result) {
     const Graph = ForceGraph()
     (document.getElementById('graph'))
+      .backgroundColor('rgba(255, 255, 255)')
       .graphData(result)
-      .nodeLabel('label')
-      .nodeVal('value')
       .nodeAutoColorBy('group')
-      .linkSource('from')
-      .linkTarget('to')
+      .nodeVal('value')
+      .nodeLabel('label')
+      .linkAutoColorBy('label')
       .linkWidth('val')
       .linkLabel('label')
-      .linkAutoColorBy('label')
-      .warmupTicks(100)
+      .linkCurvature(0.1)
   }
   function logError(error) {
     console.log('Looks like there was a problem: \n', error);

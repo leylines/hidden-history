@@ -148,11 +148,11 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
           value = 0.5;
         }
         edgesobj.push({
-            id:    Edges[i].edgeId,
-            from:  Edges[i].sourceNodeId,
-	    to:    Edges[i].destinationNodeId,
-	    label: Edges[i].edgetype.name,
-	    val:   value
+            id:     Edges[i].edgeId,
+            source: Edges[i].sourceNodeId,
+	    target: Edges[i].destinationNodeId,
+	    label:  Edges[i].edgetype.name,
+	    val:    value
         });
       }
       networkobj.links = edgesobj;
@@ -166,7 +166,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 
   });
 
-  app.get('/download/model', async function(req, res) {
+  app.get('/download/model-n2n', async function(req, res) {
     try {
       NodeTypes = await nodetypes.findAll({
         limit: 10000,
@@ -247,6 +247,71 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
     }
 
   });
+
+  app.get('/download/model-nen', async function(req, res) {
+    try {
+      NodeTypes = await nodetypes.findAll({
+        limit: 10000,
+      });
+      EdgeTypes = await edgetypes.findAll({
+        limit: 10000,
+      });
+      Node2Edge = await node2edge.findAll({
+        include: [
+          { model: nodetypes },
+          { model: edgetypes }
+        ]
+      });
+      Edge2Node = await edge2node.findAll({
+        include: [
+          { model: nodetypes },
+          { model: edgetypes }
+        ]
+      });
+      var networkobj = {};
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+
+      var nodesobj = [];
+      for(var i=0; i < NodeTypes.length; i++){
+        nodesobj.push({
+            id:    NodeTypes[i].nodeTypeId,
+            label: NodeTypes[i].name,
+            value: 0.1 
+        });
+      }
+      for(var i=0; i < EdgeTypes.length; i++){
+        nodesobj.push({
+            id:    parseInt(EdgeTypes[i].edgeTypeId) + 10000,
+            label: EdgeTypes[i].name,
+            value: 1
+        });
+      }
+      networkobj.nodes = nodesobj;
+
+      var edgesobj = [];
+      for(var i=0; i < Node2Edge.length; i++){
+        edgesobj.push({
+            id:     i + 1000,
+            source: Node2Edge[i].nodetypeNodeTypeId,
+            target: parseInt(Node2Edge[i].edgetypeEdgeTypeId) + 10000,
+        });
+      }
+      for(var i=0; i < Edge2Node.length; i++){
+        edgesobj.push({
+            id:     i + 2000,
+            source: parseInt(Edge2Node[i].edgetypeEdgeTypeId) + 10000,
+            target: Edge2Node[i].nodetypeNodeTypeId,
+        });
+      }
+      networkobj.links = edgesobj;
+      res.write(JSON.stringify(networkobj));
+      res.end();
+    }
+    catch(e){
+      console.log(e.toString());
+    }
+
+  });
 }
-
-

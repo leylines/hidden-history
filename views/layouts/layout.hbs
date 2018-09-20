@@ -22,10 +22,13 @@
     {{#ifCond req.url '==' '/graph/visjs'}}
     <script src="/javascripts/vis-network.min.js"></script>
     {{/ifCond}}
-    {{#ifCond req.url '==' '/graph2d'}}
+    {{#ifCond req.url '==' '/graph/force2d'}}
     <script src="/javascripts/force-graph.min.js"></script>
     {{/ifCond}}
-    {{#ifCond req.url '==' '/graph/model'}}
+    {{#ifCond req.url '==' '/graph/model-n2n'}}
+    <script src="/javascripts/force-graph.min.js"></script>
+    {{/ifCond}}
+    {{#ifCond req.url '==' '/graph/model-nen'}}
     <script src="/javascripts/force-graph.min.js"></script>
     {{/ifCond}}
     {{!#ifCond req.url '==' '/graph/force3d'}}
