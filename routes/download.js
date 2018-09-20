@@ -196,7 +196,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
         nodesobj.push({
             id:    NodeTypes[i].nodeTypeId,
             label: NodeTypes[i].name,
-            value: 2
+            value: 0.1 
         });
       }
       //for(var i=0; i < EdgeTypes.length; i++){
