@@ -1,8 +1,8 @@
 var userController = require('../controllers/usercontroller.js');
 
-module.exports = function(app, users) {
+module.exports = function(app, auth, users) {
 
-  app.get('/users', isAdmin, function(req, res) {
+  app.get('/users', auth.isAdmin, function(req, res) {
     try {
       users.findAll({
         limit: 1000
@@ -15,7 +15,7 @@ module.exports = function(app, users) {
     }
   });
 
-  app.post('/users/update', isAdmin, function(req, res) {
+  app.post('/users/update', auth.isAdmin, function(req, res) {
     try {
       users.update({
         firstname: req.body.firstname,
@@ -32,7 +32,7 @@ module.exports = function(app, users) {
     res.redirect('/users');
   });
 
-  app.get('/users/delete', isAdmin, function(req, res) {
+  app.get('/users/delete', auth.isAdmin, function(req, res) {
     try {
       users.destroy({
         where: { id : req.query.id }
@@ -43,11 +43,5 @@ module.exports = function(app, users) {
     }
     res.redirect('/users');
   });
-
-  function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role == 'admin')
-      return next();
-    res.redirect('/');
-  }
 
 }

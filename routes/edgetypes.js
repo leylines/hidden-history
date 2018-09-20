@@ -1,6 +1,6 @@
 var edgetypeController = require('../controllers/edgetypecontroller.js');
 
-module.exports = function(app, edgetypes) {
+module.exports = function(app, auth, edgetypes) {
 
   app.get('/edgetypes', function(req, res) {
 
@@ -16,7 +16,7 @@ module.exports = function(app, edgetypes) {
     }
   });
 
-  app.post('/edgetypes/update', isAdmin, function(req, res) {
+  app.post('/edgetypes/update', auth.isAdmin, function(req, res) {
 
     try {
       edgetypes.update({
@@ -32,7 +32,7 @@ module.exports = function(app, edgetypes) {
     res.redirect('/edgetypes');
   });
 
-  app.post('/edgetypes/add', isAdmin, function(req, res) {
+  app.post('/edgetypes/add', auth.isAdmin, function(req, res) {
 
     try {
       edgetypes.create({
@@ -46,7 +46,7 @@ module.exports = function(app, edgetypes) {
     res.redirect('/edgetypes');
   });
 
-  app.get('/edgetypes/delete', isAdmin, function(req, res) {
+  app.get('/edgetypes/delete', auth.isAdmin, function(req, res) {
     try {
       edgetypes.destroy({
         where: { edgeTypeId : req.query.edgeTypeId }
@@ -57,11 +57,5 @@ module.exports = function(app, edgetypes) {
     }
     res.redirect('/edgetypes');
   });
-
-  function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role == 'admin')
-      return next();
-    res.redirect('/');
-  }
 
 }

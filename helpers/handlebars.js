@@ -35,5 +35,10 @@ module.exports = {
         default:
             return eval(""+v1+operator+v2)?options.fn(this):options.inverse(this);
     }
+  },
+  showRoot: function(url) {
+    if (url) {
+      return  url.replace(/\/\w*$/g, '');
+    }
   }
 };

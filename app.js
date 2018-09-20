@@ -44,20 +44,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dbdesign', express.static(__dirname + 'public/dbdesign'));
 
+// load auth-helper
+var auth = require('./helpers/auth.js');
+
 // Models and Relations
 var models = require("./models");
 models.nodetype.belongsToMany(models.edgetype, {through: models.node2edge});
 models.edgetype.belongsToMany(models.nodetype, {through: models.edge2node});
 
 // Routes
-var authRoute = require('./routes/auth.js')(app, passport, models.nodes, models.nodetype, models.edges, models.edgetype);
-var userRoute = require('./routes/users.js')(app, models.user);
-var nodesRoute = require('./routes/nodes')(app, models.nodes, models.nodetype);
-var nodetypesRoute = require('./routes/nodetypes')(app, models.nodetype);
-var node2edgeRoute = require('./routes/node2edge')(app, models.node2edge, models.nodetype, models.edgetype);
-var edgesRoute = require('./routes/edges')(app, models.edges, models.node2edge, models.edgetype, models.nodes, models.nodetype);
-var edgetypesRoute = require('./routes/edgetypes')(app, models.edgetype);
-var edge2nodeRoute = require('./routes/edge2node')(app, models.edge2node, models.nodetype, models.edgetype);
+var authRoute = require('./routes/auth.js')(app, auth, passport, models.nodes, models.nodetype, models.edges, models.edgetype);
+var userRoute = require('./routes/users.js')(app, auth, models.user);
+var nodesRoute = require('./routes/nodes')(app, auth, models.nodes, models.nodetype);
+var nodetypesRoute = require('./routes/nodetypes')(app, auth, models.nodetype);
+var node2edgeRoute = require('./routes/node2edge')(app, auth, models.node2edge, models.nodetype, models.edgetype);
+var edgesRoute = require('./routes/edges')(app, auth, models.edges, models.node2edge, models.edgetype, models.nodes, models.nodetype);
+var edgetypesRoute = require('./routes/edgetypes')(app, auth, models.edgetype);
+var edge2nodeRoute = require('./routes/edge2node')(app, auth, models.edge2node, models.nodetype, models.edgetype);
 var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.node2edge, models.edges, models.edgetype, models.edge2node);
 var graphRoute = require('./routes/graph')(app);
 var graph2dRoute = require('./routes/graph2d')(app);
@@ -65,7 +68,6 @@ var selectRoute = require('./routes/select')(app, models.nodes, models.node2edge
 
 //load passport strategies
 require('./helpers/passport.js')(passport, models.user);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

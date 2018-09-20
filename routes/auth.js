@@ -2,7 +2,7 @@ var authController = require('../controllers/authcontroller.js');
 
 module.exports = function(app, passport, nodes, nodetypes, edges, edgetypes) {
 
-  app.get('/dashboard', isLoggedIn, async function(req, res) {
+  app.get('/dashboard', auth.isLoggedIn, async function(req, res) {
     try {
       Nodes = await nodes.findAll({
         limit: 10,
@@ -79,11 +79,5 @@ module.exports = function(app, passport, nodes, nodetypes, edges, edgetypes) {
       failureFlash: true
     })
   );
-
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-      return next();
-    res.redirect('/');
-  }
 
 }

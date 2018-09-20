@@ -1,6 +1,6 @@
 var nodeController = require('../controllers/nodecontroller.js');
 
-module.exports = function(app, nodes, nodetypes) {
+module.exports = function(app, auth, nodes, nodetypes) {
 
   app.get('/nodes', async function(req, res) {
     try {
@@ -23,7 +23,7 @@ module.exports = function(app, nodes, nodetypes) {
     }
   });
 
-  app.post('/nodes/update', isLoggedIn, function(req, res) {
+  app.post('/nodes/update', auth.isLoggedIn, function(req, res) {
     try {
       nodes.update({
         name: req.body.name,
@@ -44,7 +44,7 @@ module.exports = function(app, nodes, nodetypes) {
     res.redirect('/nodes');
   });
 
-  app.post('/nodes/add', isLoggedIn, function(req, res) {
+  app.post('/nodes/add', auth.isLoggedIn, function(req, res) {
     try {
       nodes.create({
         name: req.body.name,
@@ -64,7 +64,7 @@ module.exports = function(app, nodes, nodetypes) {
     res.redirect('/nodes');
   });
 
-  app.get('/nodes/delete', isLoggedIn, function(req, res) {
+  app.get('/nodes/delete', auth.isLoggedIn, function(req, res) {
     try {
       nodes.destroy({
         where: { nodeId : req.query.nodeId }
@@ -75,11 +75,5 @@ module.exports = function(app, nodes, nodetypes) {
     }
     res.redirect('/nodes');
   });
-
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-      return next();
-    res.redirect('/');
-  }
 
 }

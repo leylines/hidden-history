@@ -12,20 +12,22 @@
             <a class="nav-link" href="/">Home</a>
             {{/if}}
           </li>
-          <li class="nav-item{{#ifCond req.url '==' '/graph'}} active{{/ifCond}}">
-            <a class="nav-link" href="/graph/visjs">Graph</a>
-          </li>
-          <li class="nav-item{{#ifCond req.url '==' '/graph2d'}} active{{/ifCond}}">
-            <a class="nav-link" href="/graph2d">Graph2D</a>
-          </li>
-          <li class="nav-item{{#ifCond req.url '==' '/graph3d'}} active{{/ifCond}}">
-            <a class="nav-link" href="/graph/force3d">Graph3D</a>
-          </li>
           <li class="nav-item{{#ifCond req.url '==' '/nodes'}} active{{/ifCond}}">
             <a class="nav-link" href="/nodes">Nodes</a>
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/edges'}} active{{/ifCond}}">
             <a class="nav-link" href="/edges">Edges</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{#ifCond (showRoot req.url) '==' '/graph'}} active{{/ifCond}}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Graphs
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/graph/visjs">Visjs-Graph</a>
+              <a class="dropdown-item" href="/graph2d">Force-Graph-2D</a>
+              <a class="dropdown-item" href="/graph/force3d">Force-Graph-3D</a>
+              <a class="dropdown-item" href="/graph/model">Graph of Relations</a>
+            </div>
           </li>
           {{#ifCond req.user.role '==' 'admin'}}
           <li class="nav-item dropdown">
@@ -34,7 +36,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/users">Users</a>
-              <a class="dropdown-item" href="/graph/model">Model-Graph</a>
               <a class="dropdown-item" href="/nodetypes">Node-Types</a>
               <a class="dropdown-item" href="/node2edge">Node-Edge-Relations</a>
               <a class="dropdown-item" href="/edgetypes">Edge-Types</a>

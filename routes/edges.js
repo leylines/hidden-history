@@ -1,6 +1,6 @@
 var edgeController = require('../controllers/edgecontroller.js');
 
-module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
+module.exports = function(app, auth, edges, node2edge, edgetypes, nodes, nodetypes) {
 
   app.get('/edges', async function(req, res) {
 
@@ -29,7 +29,7 @@ module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
     }
   });
 
-  app.post('/edges/update', isLoggedIn, function(req, res) {
+  app.post('/edges/update', auth.isLoggedIn, function(req, res) {
     try {
       edges.update({
         sourceNodeId: req.body.sourceNodeId,
@@ -51,7 +51,7 @@ module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
     res.redirect('/edges');
   });
 
-  app.post('/edges/add', isLoggedIn, function(req, res) {
+  app.post('/edges/add', auth.isLoggedIn, function(req, res) {
     try {
       edges.create({
         sourceNodeId: req.body.sourceNodeId,
@@ -72,7 +72,7 @@ module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
     res.redirect('/edges');
   });
 
-  app.get('/edges/delete', isLoggedIn, function(req, res) {
+  app.get('/edges/delete', auth.isLoggedIn, function(req, res) {
     try {
       edges.destroy({
         where: { edgeId : req.query.edgeId }
@@ -83,11 +83,5 @@ module.exports = function(app, edges, node2edge, edgetypes, nodes, nodetypes) {
     }
     res.redirect('/edges');
   });
-
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-      return next();
-    res.redirect('/');
-  }
 
 }

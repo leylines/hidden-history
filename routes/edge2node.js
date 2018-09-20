@@ -1,6 +1,6 @@
 var edge2nodeController = require('../controllers/edge2nodecontroller.js');
 
-module.exports = function(app, edge2node, nodetypes, edgetypes) {
+module.exports = function(app, auth, edge2node, nodetypes, edgetypes) {
 
   app.get('/edge2node', async function(req, res) {
 
@@ -30,7 +30,7 @@ module.exports = function(app, edge2node, nodetypes, edgetypes) {
     }
   });
 
-  app.post('/edge2node/add', isAdmin, function(req, res) {
+  app.post('/edge2node/add', auth.isAdmin, function(req, res) {
 
     try {
       edge2node.create({
@@ -44,7 +44,7 @@ module.exports = function(app, edge2node, nodetypes, edgetypes) {
     res.redirect('/edge2node');
   });
 
-  app.get('/edge2node/delete', isAdmin, function(req, res) {
+  app.get('/edge2node/delete', auth.isAdmin, function(req, res) {
     try {
       edge2node.destroy({
         where: {
@@ -58,11 +58,5 @@ module.exports = function(app, edge2node, nodetypes, edgetypes) {
     }
     res.redirect('/edge2node');
   });
-
-  function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role == 'admin')
-      return next();
-    res.redirect('/');
-  }
 
 }

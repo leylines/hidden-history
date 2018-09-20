@@ -1,6 +1,6 @@
 var nodetypeController = require('../controllers/nodetypecontroller.js');
 
-module.exports = function(app, nodetypes) {
+module.exports = function(app, auth, nodetypes) {
 
   app.get('/nodetypes', function(req, res) {
     try {
@@ -15,7 +15,7 @@ module.exports = function(app, nodetypes) {
     }
   });
 
-  app.post('/nodetypes/update', isAdmin, function(req, res) {
+  app.post('/nodetypes/update', auth.isAdmin, function(req, res) {
     try {
       nodetypes.update({
         name: req.body.name,
@@ -30,7 +30,7 @@ module.exports = function(app, nodetypes) {
     res.redirect('/nodetypes');
   });
 
-  app.post('/nodetypes/add', isAdmin, function(req, res) {
+  app.post('/nodetypes/add', auth.isAdmin, function(req, res) {
     try {
       nodetypes.create({
           name: req.body.name,
@@ -43,7 +43,7 @@ module.exports = function(app, nodetypes) {
     res.redirect('/nodetypes');
   });
 
-  app.get('/nodetypes/delete', isAdmin, function(req, res) {
+  app.get('/nodetypes/delete', auth.isAdmin, function(req, res) {
     try {
       nodetypes.destroy({
         where: { nodeTypeId : req.query.nodeTypeId }
@@ -54,12 +54,5 @@ module.exports = function(app, nodetypes) {
     }
     res.redirect('/nodetypes');
   });
-
-
-  function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role == 'admin')
-      return next();
-    res.redirect('/');
-  }
 
 }
