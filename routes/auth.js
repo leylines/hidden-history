@@ -1,6 +1,6 @@
 var authController = require('../controllers/authcontroller.js');
 
-module.exports = function(app, passport, nodes, nodetypes, edges, edgetypes) {
+module.exports = function(app, auth, passport, nodes, nodetypes, edges, edgetypes) {
 
   app.get('/dashboard', auth.isLoggedIn, async function(req, res) {
     try {
