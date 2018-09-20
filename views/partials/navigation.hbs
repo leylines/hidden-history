@@ -13,13 +13,13 @@
             {{/if}}
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/graph'}} active{{/ifCond}}">
-            <a class="nav-link" href="/graph">Graph</a>
+            <a class="nav-link" href="/graph/visjs">Graph</a>
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/graph2d'}} active{{/ifCond}}">
             <a class="nav-link" href="/graph2d">Graph2D</a>
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/graph3d'}} active{{/ifCond}}">
-            <a class="nav-link" href="/graph3d">Graph3D</a>
+            <a class="nav-link" href="/graph/force3d">Graph3D</a>
           </li>
           <li class="nav-item{{#ifCond req.url '==' '/nodes'}} active{{/ifCond}}">
             <a class="nav-link" href="/nodes">Nodes</a>
@@ -34,7 +34,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/users">Users</a>
-              <a class="dropdown-item" href="/graphmodel">Model-Graph</a>
+              <a class="dropdown-item" href="/graph/model">Model-Graph</a>
               <a class="dropdown-item" href="/nodetypes">Node-Types</a>
               <a class="dropdown-item" href="/node2edge">Node-Edge-Relations</a>
               <a class="dropdown-item" href="/edgetypes">Edge-Types</a>
