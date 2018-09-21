@@ -2,17 +2,27 @@
 
 <script>
   function drawGraph(result) {
+    const elem = document.getElementById('graph');
     const Graph = ForceGraph()
-    (document.getElementById('graph'))
+    (elem)
       .backgroundColor('rgba(255, 255, 255)')
       .graphData(result)
       .nodeAutoColorBy('group')
       .nodeVal('val')
       .nodeLabel('label')
+      //.linkAutoColorBy(d => result.nodes[result.nodes.findIndex(node => node.id == d.source)].group)
       .linkAutoColorBy('label')
       .linkWidth('val')
       .linkLabel('label')
       .linkCurvature(0.1)
+      .linkDirectionalArrowLength(d => d.val * 1.5)
+      .linkDirectionalArrowRelPos(1)
+      .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+      .onNodeClick(node => {
+        // Center/zoom on node
+        Graph.centerAt(node.x, node.y, 1000);
+        Graph.zoom(8, 2000);
+      });
   }
   function logError(error) {
     console.log('Looks like there was a problem: \n', error);

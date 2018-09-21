@@ -122,30 +122,18 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
       for(var i=0; i < NodeCount.length; i++){
 	nodeImportance[NodeCount[i].dataValues.destinationNodeId] = NodeCount[i].dataValues.nodeValue;
       }
-      var nodesobj = [];
-      for(var i=0; i < Nodes.length; i++){
-        var value;
-        if (nodeImportance[Nodes[i].nodeId]) {
-          value = nodeImportance[Nodes[i].nodeId] * 2;
-        } else {
-          value = 1;
-        }
-        nodesobj.push({
-            id:    Nodes[i].nodeId,
-            label: Nodes[i].name,
-	    group: Nodes[i].nodetype.name,
-	    val:   value
-        });
-      }
-      networkobj.nodes = nodesobj;
 
+      //var node = {};
       var edgesobj = [];
       for(var i=0; i < Edges.length; i++){
         var value;
-        if (nodeImportance[Edges[i].sourceNodeId]) {
-          value = nodeImportance[Edges[i].sourceNodeId] * 0.5;
+	if (Edges[i].edgetype.name == "located") {
+          value = 1.0;
+	} else if (nodeImportance[Edges[i].sourceNodeId]) {
+          value = nodeImportance[Edges[i].sourceNodeId];
+	  //node[Edges[i].destinationNodeId]['value'] = value;
         } else {
-          value = 0.5;
+          value = 2.0;
         }
         edgesobj.push({
             id:     Edges[i].edgeId,
@@ -156,6 +144,29 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
         });
       }
       networkobj.links = edgesobj;
+
+      var nodesobj = [];
+      for(var i=0; i < Nodes.length; i++){
+        var value;
+	if (Nodes[i].nodetype.name == "place") {
+          value = 2.0;
+	} else if (nodeImportance[Nodes[i].nodeId]) {
+	  //if (node[Nodes[i].nodeId]['value']) {
+	  //  value = (nodeImportance[Nodes[i].nodeId] + node[Nodes[i].nodeId]['value']) * 3;
+	  //} else {
+            value = nodeImportance[Nodes[i].nodeId] * 3;
+          //}
+        } else {
+          value = 3.0;
+        }
+        nodesobj.push({
+            id:    Nodes[i].nodeId,
+            label: Nodes[i].name,
+	    group: Nodes[i].nodetype.name,
+	    val:   value
+        });
+      }
+      networkobj.nodes = nodesobj;
 
       res.write(JSON.stringify(networkobj));
       res.end();
