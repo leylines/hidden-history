@@ -82,8 +82,10 @@
 var json = $.getJSON("/download/json")
   .done(function(data){
     var str = JSON.stringify(data);
-    str = str.replace(/source/g, 'from');
-    str = str.replace(/target/g, 'to');
+    console.log(str);
+    str = str.replace(/"source":/g, '"from":');
+    str = str.replace(/"target":/g, '"to":');
+    str = str.replace(/"val":/g, '"value":');
     data = JSON.parse(str);
     var data = {
       nodes: data.nodes,
