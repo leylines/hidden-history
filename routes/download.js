@@ -123,7 +123,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	nodeImportance[NodeCount[i].dataValues.destinationNodeId] = NodeCount[i].dataValues.nodeValue;
       }
 
-      //var node = {};
+      var nodeobj = {};
       var edgesobj = [];
       for(var i=0; i < Edges.length; i++){
         var value;
@@ -131,7 +131,8 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
           value = 1.0;
 	} else if (nodeImportance[Edges[i].sourceNodeId]) {
           value = nodeImportance[Edges[i].sourceNodeId];
-	  //node[Edges[i].destinationNodeId]['value'] = value;
+	  nodeobj[Edges[i].destinationNodeId] = {};
+	  nodeobj[Edges[i].destinationNodeId]['value'] = value;
         } else {
           value = 2.0;
         }
@@ -151,11 +152,11 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	if (Nodes[i].nodetype.name == "place") {
           value = 2.0;
 	} else if (nodeImportance[Nodes[i].nodeId]) {
-	  //if (node[Nodes[i].nodeId]['value']) {
-	  //  value = (nodeImportance[Nodes[i].nodeId] + node[Nodes[i].nodeId]['value']) * 3;
-	  //} else {
+	  if (nodeobj[Nodes[i].nodeId] && nodeobj[Nodes[i].nodeId]['value']) {
+	    value = (nodeImportance[Nodes[i].nodeId] + nodeobj[Nodes[i].nodeId]['value'] * 0.25) * 3;
+	  } else {
             value = nodeImportance[Nodes[i].nodeId] * 3;
-          //}
+          }
         } else {
           value = 3.0;
         }
