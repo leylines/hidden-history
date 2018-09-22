@@ -50,6 +50,7 @@ module.exports = function(app, auth, passport, nodes, nodetypes, edges, edgetype
   app.get('/', authController.index);
   app.get('/logout', authController.logout);
   app.get('/impressum', authController.impressum);
+  app.get('/gallery', authController.gallery);
 
   // Facebook
   app.get('/auth/facebook', passport.authenticate('facebook', {

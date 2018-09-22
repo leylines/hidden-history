@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/brands.css" integrity="sha384-nT8r1Kzllf71iZl81CdFzObMsaLOhqBU1JD2+XoAALbdtWaXDOlWOZTR4v1ktjPE" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css" integrity="sha384-HbmWTHay9psM8qyzEKPc8odH4DsOuzdejtnr+OFtDmOcIVnhgReQ4GZBH7uwcjf6" crossorigin="anonymous">
     {{/ifCond}}
+    {{!#ifCond req.url '==' '/gallery'}}
+    <link rel="stylesheet" href="/stylesheets/lightgallery.min.css"/>
+    {{!/ifCond}}
     <link rel="stylesheet" href="/stylesheets/style.css"/>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
@@ -31,9 +34,12 @@
     {{#ifCond req.url '==' '/graph/model-nen'}}
     <script src="/javascripts/force-graph.min.js"></script>
     {{/ifCond}}
-    {{!#ifCond req.url '==' '/graph/force3d'}}
+    {{#ifCond req.url '==' '/graph/force3d'}}
     <script src="/javascripts/3d-force-graph.min.js"></script>
-    {{!/ifCond}}
+    {{/ifCond}}
+    {{#ifCond req.url '==' '/gallery'}}
+    <script src="/javascripts/lightgallery-all.js"></script>
+    {{/ifCond}}
   </head>
   <body class="text-center">
   {{>navigation}} 

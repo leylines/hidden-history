@@ -7,6 +7,13 @@ exports.index = function(req, res) {
     res.render('index', { context, req });
 }
 
+exports.gallery = function(req, res) {
+    var context = {
+        title: "Hidden-History Gallery",
+    };
+    res.render('gallery', { context, req });
+}
+
 exports.signup = function(req, res) {
     var context = {
         title: "Hidden-History Signup",
