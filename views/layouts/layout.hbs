@@ -31,9 +31,9 @@
     {{#ifCond req.url '==' '/graph/model-nen'}}
     <script src="/javascripts/force-graph.min.js"></script>
     {{/ifCond}}
-    {{!#ifCond req.url '==' '/graph/force3d'}}
+    {{#ifCond req.url '==' '/graph/force3d'}}
     <script src="/javascripts/3d-force-graph.min.js"></script>
-    {{!/ifCond}}
+    {{/ifCond}}
   </head>
   <body class="text-center">
   {{>navigation}} 
