@@ -202,10 +202,10 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	}
 	//console.log(Nodes[i].fromDate)
 	if (typeof Nodes[0][i].fromDate == "undefined") {
-	   Nodes[0][i].fromDate = "1900-01-01";
+	   Nodes[0][i].fromDate = "0";
 	}
 	if (typeof Nodes[0][i].toDate == "undefined") {
-	   Nodes[0][i].toDate = "2020-01-01";
+	   Nodes[0][i].toDate = "10000000";
 	}
         groupobj[Nodes[0][i]['nodetype.name']]['data'].push({
             label: Nodes[0][i].name,
