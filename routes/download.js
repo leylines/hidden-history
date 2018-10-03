@@ -200,13 +200,13 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	  groupobj[Nodes[0][i]['nodetype.name']]['group'] = Nodes[0][i]['nodetype.name'];
 	  groupobj[Nodes[0][i]['nodetype.name']]['data'] = [];
 	}
-	//console.log(Nodes[i].fromDate)
-	if (typeof Nodes[0][i].fromDate == "undefined") {
+	if (Nodes[0][i].fromDate == null) {
 	   Nodes[0][i].fromDate = "0";
 	}
-	if (typeof Nodes[0][i].toDate == "undefined") {
+	if (Nodes[0][i].toDate == null) {
 	   Nodes[0][i].toDate = "10000000";
 	}
+	console.log(Nodes[0][i].fromDate)
         groupobj[Nodes[0][i]['nodetype.name']]['data'].push({
             label: Nodes[0][i].name,
 	    data: [{
