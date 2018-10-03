@@ -194,6 +194,8 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 
       var timelineobj = [];
       var groupobj = {};
+      var actualTime = new Date().getTime();
+      
       for(var i=0; i < Nodes[0].length; i++){
 	if (typeof groupobj[Nodes[0][i]['nodetype.name']] == "undefined") {
 	  groupobj[Nodes[0][i]['nodetype.name']] = {};
@@ -204,7 +206,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	   Nodes[0][i].fromDate = "0";
 	}
 	if (Nodes[0][i].toDate == null) {
-	   Nodes[0][i].toDate = "10000000";
+	   Nodes[0][i].toDate = actualTime;
 	}
 	console.log(Nodes[0][i].fromDate)
         groupobj[Nodes[0][i]['nodetype.name']]['data'].push({
