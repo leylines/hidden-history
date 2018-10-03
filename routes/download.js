@@ -183,39 +183,35 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
   app.get('/download/timeline', async function(req, res) {
 
     try {
-      Nodes = await nodes.findAll({
-        limit: 10000,
-        include: [
-          { model: nodetypes, required: true }
-        ],
-        order: [
-          ['nodeId', 'ASC']
-        ]
-      });
+      nodes.sequelize.query('SELECT "nodes"."name", "nodes"."fromDate", "nodes"."toDate", "nodetype"."name" AS "nodetype.name" FROM "hidden_forms"."nodes" AS "nodes" INNER JOIN "hidden_forms"."nodetype" AS "nodetype" ON "nodes"."typeId" = "nodetype"."nodeTypeId"'
+      ).then(Nodes => {
 
+      //for(var i=0; i < Nodes[0].length; i++){
+      //  console.log(Nodes[0][i]);
+      //}
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
 
       var timelineobj = [];
       var groupobj = {};
-      for(var i=0; i < Nodes.length; i++){
-	if (typeof groupobj[Nodes[i].nodetype.name] == "undefined") {
-	  groupobj[Nodes[i].nodetype.name] = {};
-	  groupobj[Nodes[i].nodetype.name]['group'] = Nodes[i].nodetype.name;
-	  groupobj[Nodes[i].nodetype.name]['data'] = [];
+      for(var i=0; i < Nodes[0].length; i++){
+	if (typeof groupobj[Nodes[0][i]['nodetype.name']] == "undefined") {
+	  groupobj[Nodes[0][i]['nodetype.name']] = {};
+	  groupobj[Nodes[0][i]['nodetype.name']]['group'] = Nodes[0][i]['nodetype.name'];
+	  groupobj[Nodes[0][i]['nodetype.name']]['data'] = [];
 	}
 	//console.log(Nodes[i].fromDate)
-	if (typeof Nodes[i].fromDate == "undefined") {
-	   Nodes[i].fromDate = "1900-01-01";
+	if (typeof Nodes[0][i].fromDate == "undefined") {
+	   Nodes[0][i].fromDate = "1900-01-01";
 	}
-	if (typeof Nodes[i].toDate == "undefined") {
-	   Nodes[i].toDate = "2020-01-01";
+	if (typeof Nodes[0][i].toDate == "undefined") {
+	   Nodes[0][i].toDate = "2020-01-01";
 	}
-        groupobj[Nodes[i].nodetype.name]['data'].push({
-            label: Nodes[i].name,
+        groupobj[Nodes[0][i]['nodetype.name']]['data'].push({
+            label: Nodes[0][i].name,
 	    data: [{
-	     timeRange: [Nodes[i].fromDate, Nodes[i].toDate],
-	     val: Nodes[i].name,
+	     timeRange: [Nodes[0][i].fromDate, Nodes[0][i].toDate],
+	     val: Nodes[0][i].name,
 	    }],
         });
       }
@@ -228,11 +224,11 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	    
       res.write(JSON.stringify(timelineobj));
       res.end();
+    });
     }
     catch(e){
       console.log(e.toString());
     }
-
   });
 
   app.get('/download/model-n2n', async function(req, res) {
