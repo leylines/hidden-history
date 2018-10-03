@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css" integrity="sha384-HbmWTHay9psM8qyzEKPc8odH4DsOuzdejtnr+OFtDmOcIVnhgReQ4GZBH7uwcjf6" crossorigin="anonymous">
     {{/ifCond}}
     {{!#ifCond req.url '==' '/gallery'}}
-    <link rel="stylesheet" href="/stylesheets/lightgallery.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="/stylesheets/gallery.css"/>
     {{!/ifCond}}
     <link rel="stylesheet" href="/stylesheets/style.css"/>
 
@@ -38,7 +39,7 @@
     <script src="/javascripts/3d-force-graph.min.js"></script>
     {{/ifCond}}
     {{#ifCond req.url '==' '/gallery'}}
-    <script src="/javascripts/lightgallery-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
     {{/ifCond}}
   </head>
   <body class="text-center">

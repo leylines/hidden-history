@@ -180,6 +180,61 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 
   });
 
+  app.get('/download/timeline', async function(req, res) {
+
+    try {
+      Nodes = await nodes.findAll({
+        limit: 10000,
+        include: [
+          { model: nodetypes, required: true }
+        ],
+        order: [
+          ['nodeId', 'ASC']
+        ]
+      });
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+
+      var timelineobj = [];
+      var groupobj = {};
+      for(var i=0; i < Nodes.length; i++){
+	if (typeof groupobj[Nodes[i].nodetype.name] == "undefined") {
+	  groupobj[Nodes[i].nodetype.name] = {};
+	  groupobj[Nodes[i].nodetype.name]['group'] = Nodes[i].nodetype.name;
+	  groupobj[Nodes[i].nodetype.name]['data'] = [];
+	}
+	//console.log(Nodes[i].fromDate)
+	if (typeof Nodes[i].fromDate == "undefined") {
+	   Nodes[i].fromDate = "1900-01-01";
+	}
+	if (typeof Nodes[i].toDate == "undefined") {
+	   Nodes[i].toDate = "2020-01-01";
+	}
+        groupobj[Nodes[i].nodetype.name]['data'].push({
+            label: Nodes[i].name,
+	    data: [{
+	     timeRange: [Nodes[i].fromDate, Nodes[i].toDate],
+	     val: Nodes[i].name,
+	    }],
+        });
+      }
+
+      for(var key in groupobj) {
+	if (key != "place") {
+	  timelineobj.push(groupobj[key]);
+	}
+      }
+	    
+      res.write(JSON.stringify(timelineobj));
+      res.end();
+    }
+    catch(e){
+      console.log(e.toString());
+    }
+
+  });
+
   app.get('/download/model-n2n', async function(req, res) {
     try {
       NodeTypes = await nodetypes.findAll({
