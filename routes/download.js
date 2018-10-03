@@ -210,7 +210,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
         groupobj[Nodes[0][i]['nodetype.name']]['data'].push({
             label: Nodes[0][i].name,
 	    data: [{
-	     timeRange: [Nodes[0][i].fromDate, Nodes[0][i].toDate],
+	     timeRange: [parseInt(Nodes[0][i].fromDate), parseInt(Nodes[0][i].toDate)],
 	     val: Nodes[0][i].name,
 	    }],
         });
