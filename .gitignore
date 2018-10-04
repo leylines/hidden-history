@@ -7,5 +7,6 @@ public/javascripts/3d-force-graph.min.js
 public/javascripts/3d-force-graph-vr.min.js
 public/javascripts/force-graph.min.js
 public/javascripts/lightgallery-all.js
+public/javascripts/timelines-chart.min.js
 public/dbdesign
 .env

@@ -26,4 +26,8 @@ module.exports = function(app) {
      graphController.force3dvr(req, res);
   });
 
+  app.get('/graph/timeline', function(req, res) {
+     graphController.timeline(req, res);
+  });
+
 }

@@ -43,3 +43,13 @@ exports.force3dvr = function(req, res) {
     layout: 'vr-layout'
   });
 }
+
+exports.timeline = function(req, res) {
+  res.render('graph-timeline', {
+    req: req,	  
+    context: {
+      title: 'Hidden-History Visualisation with Timeline',
+    }	    
+  });
+}
+

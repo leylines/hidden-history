@@ -1,0 +1,31 @@
+<script>
+  function drawTimeline(result) {
+    TimelinesChart()(document.body)
+      .zScaleLabel('Units')
+      .zQualitative(true)
+      //.xTickFormat(n => +n)
+      .data(result)
+      .timeFormat('%Q')
+  }
+
+  function logError(error) {
+    console.log('Looks like there was a problem: \n', error);
+  }
+  function validateResponse(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+  function readResponseAsJSON(response) {
+    return response.json();
+  }
+  function fetchJSON(pathToResource) {
+    fetch(pathToResource)
+    .then(validateResponse)
+    .then(readResponseAsJSON)
+    .then(drawTimeline)
+    .catch(logError);
+  }
+  fetchJSON('/download/timeline');
+</script>

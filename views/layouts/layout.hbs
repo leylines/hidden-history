@@ -38,6 +38,9 @@
     {{#ifCond req.url '==' '/graph/force3d'}}
     <script src="/javascripts/3d-force-graph.min.js"></script>
     {{/ifCond}}
+    {{#ifCond req.url '==' '/graph/timeline'}}
+    <script src="/javascripts/timelines-chart.min.js"></script>
+    {{/ifCond}}
     {{#ifCond req.url '==' '/gallery'}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
     {{/ifCond}}
