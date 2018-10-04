@@ -1,9 +1,12 @@
+<div id="graph"></div>
+
 <script>
+  const elem = document.getElementById('graph');
   function drawTimeline(result) {
-    TimelinesChart()(document.body)
+    TimelinesChart()(elem)
       .zScaleLabel('Units')
       .zQualitative(true)
-      //.xTickFormat(n => +n)
+      .maxHeight(1080)
       .data(result)
       .timeFormat('%Q')
   }
