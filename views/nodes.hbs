@@ -14,6 +14,9 @@
     $(document).ready(function(){
       var url = window.location.href;
       $(".nodesTable").DataTable({
+        search: {
+          regex: true
+        },
         pageLength: 30,
         bStateSave: true,
         paging: true,
