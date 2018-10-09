@@ -12,6 +12,8 @@
             <th>Era</th>
             <th>Type</th>
             <th>Link</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
             {{#if req.user}}
             <th>Contributor</th>
             <th>Approved</th>
@@ -30,6 +32,8 @@
             <td>{{this.toDateEra}}</td>
             <td>{{this.nodetype.name}}</td>
             <td>{{this.link}}</td>
+            <td>{{this.latitude}}</td>
+            <td>{{this.longitude}}</td>
             {{#if ../req.user}}
             <td>{{this.contributor}}</td>
             <td>{{this.checked}}</td>

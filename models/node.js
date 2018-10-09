@@ -27,6 +27,12 @@ module.exports = function(sequelize, DataTypes) {
       contributor: {
          type: DataTypes.STRING
       },
+      latitude: {
+         type: DataTypes.DOUBLE
+      },
+      longitude: {
+         type: DataTypes.DOUBLE
+      },
       checked: {
          type: DataTypes.BOOLEAN,
          defaultValue: false

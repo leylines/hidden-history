@@ -60,6 +60,15 @@
             <label for="link">Link</label>
             <input type="url" name="link" class="form-control link-{{mode}}">
           </fieldset>
+          <fieldset class="form-group">
+            <label for="latInput">Latitude</label>
+            <input type="number" name="latitude" step="any" class="form-control latInput-{{mode}}">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="lngInput">Longitude</label>
+            <input type="number" name="longitude" step="any" class="form-control lngInput-{{mode}}">
+          </fieldset>
+          <div id="map-{{mode}}" class="map"></div>
           <fieldset class="form-check"{{#ifCond req.user.role '==' 'user'}} disabled{{/ifCond}}>
             <input type="checkbox" name="checked" class="form-check-input checked-{{mode}}">
             <label class="form-check-label" for="checked">Approved</label>
@@ -80,7 +89,6 @@
           {{/ifCond}}
         {{/ifCond}}
       </div>
-
     </div>
   </div>
 </div>

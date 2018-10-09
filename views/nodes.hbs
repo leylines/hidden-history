@@ -64,9 +64,13 @@
         $(".typeId-update").find('option').attr("selected",false) ;
         $(".typeId-update").find('option:contains(' + data[7] + ')').attr("selected",true);
         $(".link-update").val(data[8]);
-        $(".contributor-update").val(data[9]);
+        $(".latInput-update").val(data[9]);
+        $(".lngInput-update").val(data[10]);
+        updateMarker.setLatLng([data[9], data[10]]);
+        centerLeafletMapOnMarker(updateMap, updateMarker);
+        $(".contributor-update").val(data[11]);
         {{#ifCond req.user.role '==' 'admin'}}
-        $(".checked-update").prop("checked", (data[10] == 'true'));
+        $(".checked-update").prop("checked", (data[12] == 'true'));
         {{/ifCond}}
         $('.update-form').modal('show');
       });
@@ -81,6 +85,51 @@
         $('.link-add').val('');
         $('.add-form').modal('hide');
       });
+      var [addMap, addMarker] = addMapPicker('add');
+      var [updateMap, updateMarker] = addMapPicker('update');
+      $('.add-form').on('shown.bs.modal', function(){
+        setTimeout(function() {
+          addMap.invalidateSize();
+        }, 10);
+      });
+      $('.update-form').on('shown.bs.modal', function(){
+        setTimeout(function() {
+          updateMap.invalidateSize();
+        }, 10);
+      });
       {{/if}}
     });
+    {{#if req.user}}
+    function addMapPicker(mode) {
+      var map = L.map('map-' + mode, {center : [0,0], zoom: 0});
+      L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg', {
+        maxZoom: 15,
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+        noWrap : true
+      }).addTo(map);
+      var marker = L.marker([0,0]).addTo(map);
+      map.on('click', function(e) {
+        $('.latInput-' + mode).val(e.latlng.lat);
+        $('.lngInput-' + mode).val(e.latlng.lng);
+        marker.setLatLng([e.latlng.lat, e.latlng.lng]);
+      });
+      var updateMarkerByInputs = function() {
+        marker.setLatLng([$('.latInput-' + mode).val(), $('.lngInput-' + mode).val()]);
+      }
+      $('.latInput-' + mode).change(updateMarkerByInputs);
+      $('.lngInput-' + mode).change(updateMarkerByInputs);
+      return [map, marker];
+    };
+    function centerLeafletMapOnMarker(map, marker) {
+      var latLngs = marker.getLatLng();
+      console.log(latLngs.lat);
+      console.log(latLngs.lng);
+      if (latLngs.lat != '0' || latLngs.lng != '0') {
+        var markerBounds = L.latLngBounds([latLngs]);
+        map.fitBounds(markerBounds);
+      } else {
+        map.setView([0,0],0);
+      }
+    }
+    {{/if}}
   </script>

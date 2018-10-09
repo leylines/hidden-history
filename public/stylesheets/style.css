@@ -73,6 +73,10 @@ label {
   text-align: left;	
 }
 
+.map {
+  height: 250px;
+}
+
 .mynetwork {
   background-color: #ffffff;
   height: calc(100vh - 160px);

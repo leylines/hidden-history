@@ -32,6 +32,8 @@ module.exports = function(app, auth, nodes, nodetypes) {
         toDate: (req.body.toDate == '' ? null : req.body.toDate + "|" + req.body.toDateEra),
         typeId: req.body.typeId,
         link: req.body.link,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
         contributor: (req.body.checked == 'on' ? req.body.contributor : req.user.email),
         checked: (req.body.checked == 'on' ? true : false)
       },{
@@ -55,7 +57,9 @@ module.exports = function(app, auth, nodes, nodetypes) {
         toDate: (req.body.toDate == '' ? null : req.body.toDate),
         toDateEra: (req.body.toDateEra == 'AD' ? null : req.body.toDateEra),
         typeId: req.body.typeId,
-        link: req.body.link
+        link: req.body.link,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
       });
     }
     catch(e){
