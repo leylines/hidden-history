@@ -360,4 +360,73 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
     }
 
   });
+
+  app.get('/download/geojson', async function(req, res) {
+
+    try {
+      Nodes = await nodes.findAll({
+        limit: 10000,
+        include: [
+          { model: nodetypes, required: true }
+        ],
+        order: [
+          ['nodeId', 'ASC']
+        ]
+      });
+      Edges = await edges.findAll({
+        limit: 10000,
+        include: [
+          { model: edgetypes, required: true }
+        ],
+      });
+
+      var networkobj = {
+	    type: "FeatureCollection",
+      }
+      var nodeCoordinates = {}  
+      
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+
+      networkobj.features = [];
+      for(var i=0; i < Nodes.length; i++){
+        networkobj.features.push({
+            type:   "Feature",
+	    geometry: {
+	        type: "Point",
+		coordinates: [Nodes[i].longitude, Nodes[i].latitude]
+	    },
+            properties: {
+                id:    Nodes[i].nodeId,
+                label: Nodes[i].name,
+	        group: Nodes[i].nodetype.name,
+	    }
+        });
+	nodeCoordinates[Nodes[i].nodeId] = [Nodes[i].longitude, Nodes[i].latitude]
+      }
+
+      for(var i=0; i < Edges.length; i++){
+        networkobj.features.push({
+            type:   "Feature",
+	    geometry: {
+	        type: "LineString",
+		coordinates: [nodeCoordinates[Edges[i].sourceNodeId], nodeCoordinates[Edges[i].destinationNodeId]]
+	    },
+            properties: {
+                id:    Edges[i].nodeId,
+                label: Edges[i].name,
+	        group: Edges[i].edgetype.name,
+	    }
+        });
+      }
+
+      res.write(JSON.stringify(networkobj));
+      res.end();
+    }
+    catch(e){
+      console.log(e.toString());
+    }
+
+  });
+
 }
