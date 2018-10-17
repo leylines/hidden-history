@@ -362,6 +362,7 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
   });
 
   app.get('/download/geojson', async function(req, res) {
+    var turf = require('@turf/turf');
 
     try {
       Nodes = await nodes.findAll({
@@ -384,25 +385,47 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	    type: "FeatureCollection",
       }
       var nodeCoordinates = {}  
+
+      var NodeByID = {};
+      for(var i=0; i < Nodes.length; i++){
+         NodeByID[Nodes[i].nodeId] = Nodes[i];
+      }
+    
       
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
 
       networkobj.features = [];
       for(var i=0; i < Nodes.length; i++){
-        networkobj.features.push({
-            type:   "Feature",
-	    geometry: {
+	if (Nodes[i].nodetype.name == "special topic") {
+	  points = [];
+	  console.log(Nodes[i].name);
+          for(var j=0; j < Edges.length; j++){
+            if (Edges[j].sourceNodeId == Nodes[i].nodeId) {
+              points.push([NodeByID[Edges[j].destinationNodeId].longitude, NodeByID[Edges[j].destinationNodeId].latitude]);
+	    } else if (Edges[j].destinationNodeId == Nodes[i].nodeId) {
+              points.push([NodeByID[Edges[j].sourceNodeId].longitude, NodeByID[Edges[j].sourceNodeId].latitude]);
+	    }
+	  }
+	  console.log(points);
+	  var line = turf.lineString(points);
+          networkobj.features.push(turf.lineToPolygon(line));
+	//} else {
+	} 
+          networkobj.features.push({
+              type:   "Feature",
+              geometry: {
 	        type: "Point",
-		coordinates: [Nodes[i].longitude, Nodes[i].latitude]
-	    },
-            properties: {
+	        coordinates: [Nodes[i].longitude, Nodes[i].latitude]
+              },
+              properties: {
                 id:    Nodes[i].nodeId,
                 label: Nodes[i].name,
-	        group: Nodes[i].nodetype.name,
-	    }
-        });
-	nodeCoordinates[Nodes[i].nodeId] = [Nodes[i].longitude, Nodes[i].latitude]
+                group: Nodes[i].nodetype.name,
+              }
+          });
+	  nodeCoordinates[Nodes[i].nodeId] = [Nodes[i].longitude, Nodes[i].latitude]
+	//}
       }
 
       for(var i=0; i < Edges.length; i++){
