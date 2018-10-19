@@ -388,57 +388,88 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 
       var NodeByID = {};
       for(var i=0; i < Nodes.length; i++){
-         NodeByID[Nodes[i].nodeId] = Nodes[i];
+         NodeByID[Nodes[i].nodeId] = {
+	   name: Nodes[i].name,
+	   group: Nodes[i].nodetype.name,
+	   longitude: Nodes[i].longitude,
+	   latitude: Nodes[i].latitude
+	 };
       }
-    
-      
+      var EdgeByID = {};
+      for(var i=0; i < Edges.length; i++){
+         EdgeByID[Edges[i].edgeId] = {
+	   name: Edges[i].name,
+	   group: Edges[i].edgetype.name,
+	   sourceNodeId: Edges[i].sourceNodeId,
+	   destinationNodeId: Edges[i].destinationNodeId,
+         };
+      }
+
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-
       networkobj.features = [];
-      for(var i=0; i < Nodes.length; i++){
-	if (Nodes[i].nodetype.name == "special topic") {
+
+      var edgesToDelete = [];
+      for(var nodeId in NodeByID){
+	if (NodeByID[nodeId].group == "special topic") {
 	  points = [];
-	  console.log(Nodes[i].name);
-          for(var j=0; j < Edges.length; j++){
-            if (Edges[j].sourceNodeId == Nodes[i].nodeId) {
-              points.push([NodeByID[Edges[j].destinationNodeId].longitude, NodeByID[Edges[j].destinationNodeId].latitude]);
-	    } else if (Edges[j].destinationNodeId == Nodes[i].nodeId) {
-              points.push([NodeByID[Edges[j].sourceNodeId].longitude, NodeByID[Edges[j].sourceNodeId].latitude]);
+          for(var edgeId in EdgeByID){
+            if (EdgeByID[edgeId].sourceNodeId == parseInt(nodeId)) {
+              points.push(turf.point([NodeByID[EdgeByID[edgeId].destinationNodeId].longitude, NodeByID[EdgeByID[edgeId].destinationNodeId].latitude]));
+	      edgesToDelete.push(edgeId);
+	    } else if (EdgeByID[edgeId].destinationNodeId == parseInt(nodeId)) {
+              points.push(turf.point([NodeByID[EdgeByID[edgeId].sourceNodeId].longitude, NodeByID[EdgeByID[edgeId].sourceNodeId].latitude]));
+	      edgesToDelete.push(edgeId);
 	    }
 	  }
-	  console.log(points);
-	  var line = turf.lineString(points);
-          networkobj.features.push(turf.lineToPolygon(line));
-	//} else {
-	} 
+          var features = turf.featureCollection(points);
+          var center = turf.center(features);
+	  var unOrderedFeatures = {};
+	  var orderedFeatures = [];
+          for (var point of points) {
+	      var bearing = turf.bearing(center, point);
+	      unOrderedFeatures[bearing] = point;
+	  }
+	  var keys = Object.keys(unOrderedFeatures);
+          keys.sort();
+          for (var i = 0, size = keys.length ; i < size; i++) {
+	    orderedFeatures.push(unOrderedFeatures[keys[i]].geometry.coordinates);
+	  }
+	  var line = turf.lineString(orderedFeatures);
+	  networkobj.features.push(turf.lineToPolygon(line));
+
+	  nodeCoordinates[nodeId] = [NodeByID[nodeId].longitude, NodeByID[nodeId].latitude]
+	} else {
           networkobj.features.push({
               type:   "Feature",
               geometry: {
 	        type: "Point",
-	        coordinates: [Nodes[i].longitude, Nodes[i].latitude]
+	        coordinates: [NodeByID[nodeId].longitude, NodeByID[nodeId].latitude]
               },
               properties: {
-                id:    Nodes[i].nodeId,
-                label: Nodes[i].name,
-                group: Nodes[i].nodetype.name,
+                id:    nodeId,
+                label: NodeByID[nodeId].name,
+                group: NodeByID[nodeId].group,
               }
           });
-	  nodeCoordinates[Nodes[i].nodeId] = [Nodes[i].longitude, Nodes[i].latitude]
-	//}
+	  nodeCoordinates[nodeId] = [NodeByID[nodeId].longitude, NodeByID[nodeId].latitude]
+	}
+      }
+      for (var edgeId of edgesToDelete) {
+	  delete EdgeByID[edgeId];
       }
 
-      for(var i=0; i < Edges.length; i++){
+      for(var edgeId in EdgeByID){
         networkobj.features.push({
             type:   "Feature",
 	    geometry: {
 	        type: "LineString",
-		coordinates: [nodeCoordinates[Edges[i].sourceNodeId], nodeCoordinates[Edges[i].destinationNodeId]]
+		coordinates: [nodeCoordinates[EdgeByID[edgeId].sourceNodeId], nodeCoordinates[EdgeByID[edgeId].destinationNodeId]]
 	    },
             properties: {
-                id:    Edges[i].nodeId,
-                label: Edges[i].name,
-	        group: Edges[i].edgetype.name,
+                id:    EdgeByID[edgeId].edgeId,
+                label: EdgeByID[edgeId].name,
+	        group: EdgeByID[edgeId].group,
 	    }
         });
       }
