@@ -436,7 +436,15 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	    orderedFeatures.push(unOrderedFeatures[keys[i]].geometry.coordinates);
 	  }
 	  var line = turf.lineString(orderedFeatures);
-	  networkobj.features.push(turf.lineToPolygon(line));
+	  var polygon = turf.lineToPolygon(line);
+	  var area = turf.area(polygon);
+	  polygon.properties.center = center.geometry.coordinates;
+	  polygon.properties.area = area;
+	  polygon.properties.id = nodeId;
+	  polygon.properties.label = NodeByID[nodeId].name;
+	  polygon.properties.group = NodeByID[nodeId].group;
+	  console.log(polygon);
+	  networkobj.features.push(polygon);
 
 	  nodeCoordinates[nodeId] = [NodeByID[nodeId].longitude, NodeByID[nodeId].latitude]
 	} else {
