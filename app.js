@@ -56,6 +56,7 @@ app.use('/dbdesign', express.static(__dirname + 'public/dbdesign'));
 
 // load auth-helper
 var auth = require('./helpers/auth.js');
+var hull = require('./helpers/hull.js');
 
 // Models and Relations
 var models = require("./models");
@@ -71,7 +72,7 @@ var node2edgeRoute = require('./routes/node2edge')(app, auth, models.node2edge, 
 var edgesRoute = require('./routes/edges')(app, auth, models.edges, models.node2edge, models.edgetype, models.nodes, models.nodetype);
 var edgetypesRoute = require('./routes/edgetypes')(app, auth, models.edgetype);
 var edge2nodeRoute = require('./routes/edge2node')(app, auth, models.edge2node, models.nodetype, models.edgetype);
-var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.node2edge, models.edges, models.edgetype, models.edge2node);
+var downloadRoute = require('./routes/download')(app, hull, models.nodes, models.nodetype, models.node2edge, models.edges, models.edgetype, models.edge2node);
 var graphRoute = require('./routes/graph')(app);
 var cesiumRoute = require('./routes/cesium')(app, models.nodes, models.nodetype);
 var selectRoute = require('./routes/select')(app, models.nodes, models.node2edge, models.edgetype, models.edge2node, models.nodetype);

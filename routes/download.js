@@ -1,4 +1,4 @@
-module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, edge2node) {
+module.exports = function(app, hull, nodes, nodetypes, node2edge, edges, edgetypes, edge2node) {
 
   app.get('/download/cypher', async function(req, res) {
 
@@ -415,37 +415,26 @@ module.exports = function(app, nodes, nodetypes, node2edge, edges, edgetypes, ed
 	  points = [];
           for(var edgeId in EdgeByID){
             if (EdgeByID[edgeId].sourceNodeId == parseInt(nodeId)) {
-              points.push(turf.point([NodeByID[EdgeByID[edgeId].destinationNodeId].longitude, NodeByID[EdgeByID[edgeId].destinationNodeId].latitude]));
+              points.push([NodeByID[EdgeByID[edgeId].destinationNodeId].longitude, NodeByID[EdgeByID[edgeId].destinationNodeId].latitude]);
 	      edgesToDelete.push(edgeId);
 	    } else if (EdgeByID[edgeId].destinationNodeId == parseInt(nodeId)) {
-              points.push(turf.point([NodeByID[EdgeByID[edgeId].sourceNodeId].longitude, NodeByID[EdgeByID[edgeId].sourceNodeId].latitude]));
+              points.push([NodeByID[EdgeByID[edgeId].sourceNodeId].longitude, NodeByID[EdgeByID[edgeId].sourceNodeId].latitude]);
 	      edgesToDelete.push(edgeId);
 	    }
 	  }
-          var features = turf.featureCollection(points);
-          var center = turf.center(features);
-	  var unOrderedFeatures = {};
-	  var orderedFeatures = [];
-          for (var point of points) {
-	      var bearing = turf.bearing(center, point);
-	      unOrderedFeatures[bearing] = point;
-	  }
-	  var keys = Object.keys(unOrderedFeatures);
-          keys.sort();
-          for (var i = 0, size = keys.length ; i < size; i++) {
-	    orderedFeatures.push(unOrderedFeatures[keys[i]].geometry.coordinates);
-	  }
-	  var line = turf.lineString(orderedFeatures);
-	  var polygon = turf.lineToPolygon(line);
-	  var area = turf.area(polygon);
-	  polygon.properties.center = center.geometry.coordinates;
-	  polygon.properties.area = area;
-	  polygon.properties.id = nodeId;
-	  polygon.properties.label = NodeByID[nodeId].name;
-	  polygon.properties.group = NodeByID[nodeId].group;
-	  console.log(polygon);
-	  networkobj.features.push(polygon);
-
+          var polygon = hull.hull(points, 50);
+          networkobj.features.push({
+              type:   "Feature",
+              geometry: {
+	        type: "Polygon",
+	        coordinates: [polygon]
+              },
+              properties: {
+                id:    nodeId,
+                label: NodeByID[nodeId].name,
+                group: NodeByID[nodeId].group,
+              }
+          });
 	  nodeCoordinates[nodeId] = [NodeByID[nodeId].longitude, NodeByID[nodeId].latitude]
 	} else {
           networkobj.features.push({
