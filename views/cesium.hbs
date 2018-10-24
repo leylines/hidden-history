@@ -1,0 +1,31 @@
+    <!-- A container for the Cesium Viewer to live in. -->
+    <div id="cesiumContainer"></div>
+
+    <!-- Some input elements for our app. -->
+    <div class="backdrop" id="menu">
+        <h2>Display Options</h2>
+        <span><strong>Elements</strong></span>
+        <div class="nowrap">
+            <input id="points" type="checkbox" checked/>
+            <label for="points">Nodes</label>
+        </div>
+        <div class="nowrap">
+            <input id="polylines" type="checkbox" checked/>
+            <label for="polylines">Edges</label>
+        </div>
+        <span><strong>Topics</strong></span>
+        {{#each topics}}
+        <div class="nowrap">
+            <input id="{{this.name}}" type="checkbox"/>
+            <label for="{{this.name}}">{{this.name}}</label>
+        </div>
+        {{/each}}
+        <span><strong>{{nodetypes}}</strong></span>
+        <br>
+    </div>
+
+    <div id="loadingIndicator" class="cover">
+        <div id="loadingIcon" class="loadingIndicator"></div>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="vendors~app.js"></script></body>

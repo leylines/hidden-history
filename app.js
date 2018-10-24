@@ -9,6 +9,7 @@ var passport     = require('passport')
 var flash        = require('connect-flash');
 
 var app = express();
+var router = express.Router({ strict: true });
 
 // disable etag for better ajay-behavior
 app.disable('etag');
@@ -49,6 +50,7 @@ app.use(logger('common'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dbdesign', express.static(__dirname + 'public/dbdesign'));
 
@@ -71,6 +73,7 @@ var edgetypesRoute = require('./routes/edgetypes')(app, auth, models.edgetype);
 var edge2nodeRoute = require('./routes/edge2node')(app, auth, models.edge2node, models.nodetype, models.edgetype);
 var downloadRoute = require('./routes/download')(app, models.nodes, models.nodetype, models.node2edge, models.edges, models.edgetype, models.edge2node);
 var graphRoute = require('./routes/graph')(app);
+var cesiumRoute = require('./routes/cesium')(app, models.nodes, models.nodetype);
 var selectRoute = require('./routes/select')(app, models.nodes, models.node2edge, models.edgetype, models.edge2node, models.nodetype);
 
 //load passport strategies

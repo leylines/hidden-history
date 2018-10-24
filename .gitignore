@@ -9,4 +9,5 @@ public/javascripts/force-graph.min.js
 public/javascripts/lightgallery-all.js
 public/javascripts/timelines-chart.min.js
 public/dbdesign
+public/cesium
 .env
