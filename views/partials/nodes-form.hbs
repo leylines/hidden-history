@@ -62,11 +62,11 @@
           </fieldset>
           <fieldset class="form-group">
             <label for="latInput">Latitude</label>
-            <input type="number" name="latitude" step="any" class="form-control latInput-{{mode}}">
+            <input type="number" name="latitude" step="any" value="0" class="form-control latInput-{{mode}}">
           </fieldset>
           <fieldset class="form-group">
             <label for="lngInput">Longitude</label>
-            <input type="number" name="longitude" step="any" class="form-control lngInput-{{mode}}">
+            <input type="number" name="longitude" step="any" value="0" class="form-control lngInput-{{mode}}">
           </fieldset>
           <div id="map-{{mode}}" class="map"></div>
           <fieldset class="form-check"{{#ifCond req.user.role '==' 'user'}} disabled{{/ifCond}}>

@@ -1,9 +1,9 @@
 var exports = module.exports = {}
 
 exports.list = function(req, res, nodetypes) {
-  var context = {
+  res.render('nodetypes', {
     title: "Edit Node-Types",
-  };
-  res.render('nodetypes', { context, nodetypes, req });
+    req: req,
+    nodetypes: nodetypes,
+  });
 }
-

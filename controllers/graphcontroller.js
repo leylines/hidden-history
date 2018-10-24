@@ -2,38 +2,30 @@ var exports = module.exports = {}
 
 exports.visjs = function(req, res) {
   res.render('graph-visjs', {
+    title: 'Hidden-History Visualisation with Vis',
     req: req,	  
-    context: {
-      title: 'Hidden-History Visualisation with Vis',
-    }	    
   });
 }
 
 exports.model = function(req, res, type) {
   res.render('graph-model', {
+    title: 'Hidden-History Relations-Visualisation',
     req: req,	  
     type: type,  
-    context: {
-      title: 'Hidden-History Relations-Visualisation',
-    }	    
   });
 }
 
 exports.force2d = function(req, res) {
   res.render('graph-force2d', {
+    title: 'Hidden-History Visualisation with Force-Graph-2D',
     req: req,	  
-    context: {
-      title: 'Hidden-History Visualisation with Force-Graph-2D',
-    }	    
   });
 }
 
 exports.force3d = function(req, res) {
   res.render('graph-force3d', {
+    title: 'Hidden-History Visualisation with Force-Graph-3D',
     req: req,	  
-    context: {
-      title: 'Hidden-History Visualisation with Force-Graph-3D',
-    }	    
   });
 }
 
@@ -46,10 +38,8 @@ exports.force3dvr = function(req, res) {
 
 exports.timeline = function(req, res) {
   res.render('graph-timeline', {
+    title: 'Hidden-History Visualisation with Timeline',
     req: req,	  
-    context: {
-      title: 'Hidden-History Visualisation with Timeline',
-    }	    
   });
 }
 

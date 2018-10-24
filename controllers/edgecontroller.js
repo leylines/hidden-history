@@ -1,8 +1,11 @@
 var exports = module.exports = {}
 
 exports.list = function(req, res, edges, node2edge) {
-  var context = {
+  res.render('edges', {
     title: "Edit Edges",
-  };
-  res.render('edges', { context, edges, node2edge, req });
+    req: req,
+    res: res,
+    edges: edges,
+    node2edge: node2edge,
+  });
 }

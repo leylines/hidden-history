@@ -1,38 +1,40 @@
 var exports = module.exports = {}
 
 exports.index = function(req, res) {
-    var context = {
-        title: "Hidden-History Database",
-    };
-    res.render('index', { context, req });
+  res.render('index', {
+    title: "Hidden-History Database",
+    req: req,
+  });
 }
 
 exports.gallery = function(req, res) {
-    var context = {
-        title: "Hidden-History Gallery",
-    };
-    res.render('gallery', { context, req });
+  res.render('gallery', {
+    title: "Hidden-History Gallery",
+    req: req,
+  });
 }
 
 exports.signup = function(req, res) {
-    var context = {
-        title: "Hidden-History Signup",
-    };
-    res.render('signup', { context, req });
+  res.render('signup', {
+    title: "Hidden-History Signup",
+    req: req,
+  });
 }
 
 exports.dashboard = function(req, res, nodes, edges) {
-    var context = {
-        title: "Hidden-History Dashboard",
-    };
-    res.render('dashboard', { context, req, nodes, edges });
+  res.render('dashboard', {
+    title: "Hidden-History Dashboard",
+    req: req,
+    nodes: nodes,
+    edges: edges,
+  });
 }
 
 exports.impressum = function(req, res) {
-    var context = {
-        title: "Hidden-History Impressum",
-    };
-    res.render('impressum', { context, req });
+  res.render('impressum', {
+    title: "Hidden-History Impressum",
+    req: req,
+  });
 }
 
 exports.logout = function(req, res) {

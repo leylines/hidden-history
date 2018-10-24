@@ -7,7 +7,7 @@ module.exports = function(app, auth, users) {
       users.findAll({
         limit: 1000
       }).then(function(Users) {
-        userController.users(req, res, Users);
+        userController.list(req, res, Users);
       });
     }
     catch(e){

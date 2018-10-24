@@ -1,8 +1,9 @@
 var exports = module.exports = {}
 
-exports.users = function(req, res, users) {
-    var context = {
-        title: "Hidden-History Users",
-    };
-    res.render('users', { context, users, req });
+exports.list = function(req, res, users) {
+  res.render('users', {
+    title: "Hidden-History Users",
+    req: req,
+    users: users,
+  });
 }

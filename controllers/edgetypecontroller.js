@@ -1,9 +1,10 @@
 var exports = module.exports = {}
 
 exports.list = function(req, res, edgetypes) {
-  var context = {
+  res.render('edgetypes', {
     title: "Edit Edge-Types",
-  };
-  res.render('edgetypes', { context, edgetypes, req });
+    req: req,
+    res: res,
+    edgetypes: edgetypes,
+  });
 }
-
