@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node_modules/.bin/webpack --config webpack.config.js"
+    "build": "node_modules/.bin/webpack --mode production --config webpack.config.js",
+    "test": "node_modules/.bin/webpack --mode development --config webpack.config.js"
   },
   "dependencies": {
     "@turf/turf": "5.1.6",
@@ -27,9 +28,12 @@
     "sequelize-cli": "5.4.0"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.10",
     "cesium": "1.55.0",
     "copy-webpack-plugin": "5.0.0",
     "css-loader": "2.1.1",
+    "cssnano": "^4.1.10",
+    "postcss-loader": "^3.0.0",
     "strip-pragma-loader": "1.0.0",
     "style-loader": "0.23.1",
     "url-loader": "1.1.2",
