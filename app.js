@@ -56,7 +56,7 @@ app.use('/dbdesign', express.static(__dirname + 'public/dbdesign'));
 
 // load auth-helper
 var auth = require('./helpers/auth.js');
-var hull = require('./helpers/hull.js');
+var hull = require('./helpers/convexHull.js');
 
 // Models and Relations
 var models = require("./models");

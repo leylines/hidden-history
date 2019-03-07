@@ -412,26 +412,61 @@ module.exports = function(app, hull, nodes, nodetypes, node2edge, edges, edgetyp
       var edgesToDelete = [];
       for(var nodeId in NodeByID){
 	if (NodeByID[nodeId].group == "special topic") {
-	  points = [];
+	  var points = [];
+	  var revpoints = [];
           for(var edgeId in EdgeByID){
             if (EdgeByID[edgeId].sourceNodeId == parseInt(nodeId)) {
-              points.push([NodeByID[EdgeByID[edgeId].destinationNodeId].longitude, NodeByID[EdgeByID[edgeId].destinationNodeId].latitude]);
+              points.push([Number(NodeByID[EdgeByID[edgeId].destinationNodeId].longitude), Number(NodeByID[EdgeByID[edgeId].destinationNodeId].latitude)]);
 	      edgesToDelete.push(edgeId);
 	    } else if (EdgeByID[edgeId].destinationNodeId == parseInt(nodeId)) {
-              points.push([NodeByID[EdgeByID[edgeId].sourceNodeId].longitude, NodeByID[EdgeByID[edgeId].sourceNodeId].latitude]);
+              points.push([Number(NodeByID[EdgeByID[edgeId].sourceNodeId].longitude), Number(NodeByID[EdgeByID[edgeId].sourceNodeId].latitude)]);
 	      edgesToDelete.push(edgeId);
 	    }
 	  }
-          var polygon = hull.hull(points, 50);
+          var hullPolygon = hull(points, 1);
+	  var turfPolygon = turf.polygon([hullPolygon]);
+
+	  var center = turf.centerOfMass(turfPolygon);
           networkobj.features.push({
               type:   "Feature",
               geometry: {
 	        type: "Polygon",
-	        coordinates: [polygon]
+	        coordinates: [hullPolygon]
               },
               properties: {
                 id:    nodeId,
                 label: NodeByID[nodeId].name,
+                group: NodeByID[nodeId].group,
+                center: center,
+              }
+          });
+	  if (center.geometry.coordinates[0].toFixed(13) != NodeByID[nodeId].longitude) {
+	    console.log("Updating longitude of " + NodeByID[nodeId].name + " from " + NodeByID[nodeId].longitude + " to " + center.geometry.coordinates[0].toFixed(13));
+            nodes.update({
+              longitude: center.geometry.coordinates[0].toFixed(13)
+            },{
+              where: { nodeId : nodeId }
+            });
+//	    NodeByID[nodeId].longitude = center.geometry.coordinates[0].toFixed(13);
+	  }
+	  if (center.geometry.coordinates[1].toFixed(13) != NodeByID[nodeId].latitude) {
+	    console.log("Updating latitude of " + NodeByID[nodeId].name + " from " + NodeByID[nodeId].latitude + " to " + center.geometry.coordinates[1].toFixed(13));
+            nodes.update({
+              latitude: center.geometry.coordinates[1].toFixed(13)
+            },{
+              where: { nodeId : nodeId }
+            });
+//	    NodeByID[nodeId].latitude = center.geometry.coordinates[1].toFixed(13);
+	  }
+          networkobj.features.push({
+              type:   "Feature",
+              geometry: {
+	        type: "Point",
+	        coordinates: center.geometry.coordinates
+              },
+              properties: {
+                id:    nodeId,
+                label: NodeByID[nodeId].name + " Center",
                 group: NodeByID[nodeId].group,
               }
           });

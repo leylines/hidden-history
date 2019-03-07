@@ -65,7 +65,7 @@
     var polygons = new Object();
 
     //var pointsPromise = Cesium.GeoJsonDataSource.load('./Source/data/hidden.json', geojsonOptions);
-    var pointsPromise = Cesium.GeoJsonDataSource.load('https://forms.hidden-history.ch/download/geojson', geojsonOptions);
+    var pointsPromise = Cesium.GeoJsonDataSource.load('https://www.hidden-history.ch/download/geojson', geojsonOptions);
     // Add geocache billboard entities to scene and style them
     pointsPromise.then(function(dataSource) {
          // Add the new data as entities to the viewer
@@ -82,19 +82,6 @@
                  entity.billboard.verticalOrigin = Cesium.VerticalOrigin.BOTTOM;
                  // Disable the labels to reduce clutter
                  entity.label = undefined;
-                 // Add distance display condition
-                 // entity.billboard.distanceDisplayCondition = new Cesium.DistanceDisplayCondition(10.0, 20000.0);
-                 // Compute latitude and longitude in degrees
-                 var cartographicPosition = Cesium.Cartographic.fromCartesian(entity.position.getValue(Cesium.JulianDate.now()));
-                 var latitude = Cesium.Math.toDegrees(cartographicPosition.latitude);
-                 var longitude = Cesium.Math.toDegrees(cartographicPosition.longitude);
-                 // Modify description
-                 var description = '<table class="cesium-infoBox-defaultTable cesium-infoBox-defaultTable-lighter"><tbody>' +
-                     '<tr><th>' + "Name" + '</th><td>' + entity.properties.label + '</td></tr>' +
-                     '<tr><th>' + "Longitude" + '</th><td>' + longitude.toFixed(5) + '</td></tr>' +
-                     '<tr><th>' + "Latitude" + '</th><td>' + latitude.toFixed(5) + '</td></tr>' +
-                     '</tbody></table>';
-                 entity.description = description;
                  viewer.entities.add(entity);
              };
              if (Cesium.defined(entity.polyline)) {
@@ -150,6 +137,8 @@
              if (Cesium.defined(entity.polygon)) {
 
                  var label = entity.properties.getValue().label;
+                 var center = entity.properties.getValue(Cesium.JulianDate.now()).center;
+		 console.log(center);
 
                  polygons[label] = entities.add(new Cesium.Entity());
                  polygons[label].show = false;
@@ -159,12 +148,14 @@
                    alpha : 0.6
                  });
 
-                 //entity.polygon.height = entity.properties.getValue(Cesium.JulianDate.now()).area * 0.00000001;
-
-                 var polyPositions = entity.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions;
+		 var polyPositions = entity.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions;
                  var polyCenter = Cesium.BoundingSphere.fromPoints(polyPositions).center;
-                 polyCenter = Cesium.Ellipsoid.WGS84.scaleToGeodeticSurface(polyCenter);
-                 entity.position = polyCenter;
+		 console.log(polyCenter);
+                 //polyCenter = Cesium.Ellipsoid.WGS84.scaleToGeodeticSurface(polyCenter);
+                 center = Cesium.Ellipsoid.WGS84.scaleToGeodeticSurface(center);
+		 console.log(center);
+                 entity.position = center;
+
                  // Generate labels
                  entity.label = {
                    text : entity.properties.label,
