@@ -1,4 +1,7 @@
 # Hidden History
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/leylines/hidden-history.svg)](https://greenkeeper.io/)
+
 A Graph-Database to visualize the hidden/forbidden history
 
 ![first impression](./hidden_history.png)
