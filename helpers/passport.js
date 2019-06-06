@@ -11,12 +11,12 @@ module.exports = function(passport, user) {
 
   passport.use(new GoogleStrategy({
       clientID: config.google.clientID,
-	  clientSecret: config.google.clientSecret,
-	  callbackURL: config.google.callback,
+      clientSecret: config.google.clientSecret,
+      callbackURL: config.google.callback,
       passReqToCallback: true // allows us to pass back the entire request to the callback
 	},
 
-    function(request, accessToken, refreshToken, profile, done) {
+    function(request, accessToken, refreshToken, email, profile, done) {
 
       console.log(profile);
 
@@ -28,7 +28,6 @@ module.exports = function(passport, user) {
         strategy:  'google',
         role:      'user'
       };
-      console.log(profile);
 
       User.findOne({
         where: {
