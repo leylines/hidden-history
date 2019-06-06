@@ -3,8 +3,8 @@
     "use strict";
 
     var Cesium = require('cesium/Cesium');
-    require('cesium/Widgets/widgets.css');
-    require('./css/main.css');
+    //require('cesium/Widgets/widgets.css');
+    require('sourcepath/css/main.css');
 
     // TODO: Add your ion access token from cesium.com/ion/
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNDhhNGY5MS1iZjMzLTRmZmUtYjE0Ny1kY2NjN2NlNmU0NTEiLCJpZCI6MTA3LCJpYXQiOjE0ODkxNTg0ODB9.b1pvDdm-eKF1QaCOhp_I8v8KCD51dTDcWryUkmp_yfg';

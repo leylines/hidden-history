@@ -3,18 +3,18 @@ const path = require('path');
 const webpack = require('webpack');
 const CopywebpackPlugin = require('copy-webpack-plugin');
 
-const cesiumSource = 'node_modules/cesium/Source';
+const cesiumSource = '../node_modules/cesium/Source';
 const cesiumWorkers = '../Build/Cesium/Workers';
 
 module.exports = {
 	context: __dirname,
    	devtool: 'eval',
 	entry: {
-		app: './source/index.js'
+		app: '../cesium-source/index.js'
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, 'public/cesium'),
+		path: path.resolve(__dirname, '../public/cesium'),
 
         // Needed to compile multiline strings in Cesium
         sourcePrefix: ''
@@ -23,7 +23,8 @@ module.exports = {
         resolve: {
 		alias: {
 			// Cesium module name
-			cesium: path.resolve(__dirname, cesiumSource)
+			cesium: path.resolve(__dirname, cesiumSource),
+			sourcepath: path.resolve(__dirname, '../cesium-source')
 		}
 	},
         module: {
@@ -35,6 +36,9 @@ module.exports = {
 		    { loader: 'postcss-loader',
 			options: {
 				sourceMap: true,
+				config: {
+					path: path.resolve(__dirname, 'postcss.config.js')
+				},
 				ident: 'postcss',
 				plugins: (loader) => [
 					require('autoprefixer')(),
